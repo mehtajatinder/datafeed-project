@@ -1,0 +1,33 @@
+@import '../../constants/constants';
+$mds-button-transition-hover: background $mds-animation-timing-1-x linear, color $mds-animation-timing-1-x linear, border $mds-animation-timing-1-x linear, fill $mds-animation-timing-1-x linear, box-shadow $mds-animation-timing-1-x linear !default;
+
+$mds-button-icon-only-default-on-light: $mds-color-neutral-37 !default;
+$mds-button-icon-only-hover-active-on-light: $mds-color-neutral-12 !default;
+
+$mds-button-icon-only-default-on-dark: $mds-color-neutral-67 !default;
+$mds-button-icon-only-hover-active-on-dark: $mds-color-neutral-95 !default;
+
+$mds-button-icon-only-padding: 4px 0 !default;
+$mds-button-icon-only-small-padding: 2px 0 !default;
+
+//MDS Button theme variables
+$mds-button-border-radius: $mds-border-radius-pill !default;
+
+$mds-button--secondary-background-color: transparent !default;
+$mds-button--secondary-background-color-hover: $mds-interactive-color-secondary-hover !default;
+$mds-button--secondary-background-color-active: $mds-interactive-color-secondary-active-on-light !default;
+$mds-button--secondary-text-color: $mds-text-color-secondary-default !default;
+$mds-button--secondary-text-color-hover: $mds-color-white !default;
+$mds-button--secondary-text-color-active: $mds-color-white !default;
+$mds-button--secondary-box-shadow-focus: $mds-box-shadow-focus !default;
+
+$mds-button--primary-background-color: $mds-interactive-color-primary-default !default;
+$mds-button--primary-background-color-hover: $mds-interactive-color-primary-hover !default;
+$mds-button--primary-background-color-active: $mds-interactive-color-primary-active !default;
+$mds-button--primary-box-shadow-focus: $mds-box-shadow-focus !default;
+$mds-button--primary-text-color: $mds-color-white !default;
+
+$mds-button__icon--secondary-fill-color: $mds-text-color-secondary-default !default;
+$mds-button__icon--primary-fill-color: $mds-color-white !default;
+
+$mds-button--flat-box-shadow-focus: $mds-box-shadow-focus !default;

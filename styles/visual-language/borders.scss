@@ -1,0 +1,90 @@
+@import 'color';
+
+// Usage:
+//  .mds-some-component {
+//      @include mds-border-separator;
+//  }
+
+// OR (border-top and border-left only):
+
+//  .mds-some-component {
+//      @include mds-border-separator(('top', 'left'));
+//  }
+
+@mixin mds-border-selector($sides: false, $constant: $mds-border-separator-on-white) {
+    @if $sides {
+        @each $side in $sides {
+            border-#{$side}: $constant;
+        }
+    } @else {
+        border: $constant;
+    }
+}
+
+@mixin mds-border-separator($sides: false, $enable-dark: true) {
+    &,
+    #{$mds-light-primary-selector} & {
+        @include mds-border-selector($sides, $mds-border-separator-on-white);
+    }
+
+    #{$mds-light-secondary-selector} & {
+        @include mds-border-selector($sides, $mds-border-separator-on-light-gray);
+    }
+
+    @if $enable-dark {
+        @include mds-container-dark-parent-selectors {
+            @include mds-border-selector($sides, $mds-border-separator-on-dark-gray);
+        }
+    }
+}
+
+@mixin mds-border-header-primary($sides: false, $enable-dark: true) {
+    &,
+    #{$mds-light-primary-selector} & {
+        @include mds-border-selector($sides, $mds-border-header-primary-on-white);
+    }
+
+    #{$mds-light-secondary-selector} & {
+        @include mds-border-selector($sides, $mds-border-header-primary-on-light-gray);
+    }
+
+    @if $enable-dark {
+        @include mds-container-dark-parent-selectors {
+            @include mds-border-selector($sides, $mds-border-header-primary-on-dark-gray);
+        }
+    }
+}
+
+@mixin mds-border-header-secondary($sides: false, $enable-dark: true) {
+    &,
+    #{$mds-light-primary-selector} & {
+        @include mds-border-selector($sides, $mds-border-header-secondary-on-white);
+    }
+
+    #{$mds-light-secondary-selector} & {
+        @include mds-border-selector($sides, $mds-border-header-secondary-on-light-gray);
+    }
+
+    @if $enable-dark {
+        @include mds-container-dark-parent-selectors {
+            @include mds-border-selector($sides, $mds-border-header-secondary-on-dark-gray);
+        }
+    }
+}
+
+@mixin mds-border-header-tertiary($sides: false, $enable-dark: true) {
+    &,
+    #{$mds-light-primary-selector} & {
+        @include mds-border-selector($sides, $mds-border-header-tertiary-on-white);
+    }
+
+    #{$mds-light-secondary-selector} & {
+        @include mds-border-selector($sides, $mds-border-header-tertiary-on-light-gray);
+    }
+
+    @if $enable-dark {
+        @include mds-container-dark-parent-selectors {
+            @include mds-border-selector($sides, $mds-border-header-tertiary-on-dark-gray);
+        }
+    }
+}

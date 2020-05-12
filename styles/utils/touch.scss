@@ -1,0 +1,205 @@
+@import '../../constants/constants';
+
+@mixin mds-sticky-hover-reset() {
+    @media (hover: none) {
+        // Buttons
+        .mds-button--secondary:hover {
+            background-color: transparent;
+            box-shadow: inset 0 0 0 1px $mds-border-control-color;
+            color: $mds-text-color-secondary-default;
+            transition: none;
+
+            .mds-button__text {
+                color: $mds-text-color-secondary-default;
+            }
+
+            .mds-button__icon {
+                fill: $mds-text-color-secondary-default;
+            }
+
+            .mds-container--dark-gray &,
+            .mds-container--black & {
+                background-color: transparent;
+                box-shadow: inset 0 0 0 1px $mds-border-control-color;
+                color: $mds-text-color-secondary-on-dark;
+
+                .mds-button__text {
+                    color: $mds-text-color-secondary-on-dark;
+                }
+
+                .mds-button__icon {
+                    fill: $mds-text-color-secondary-on-dark;
+                }
+            }
+        }
+
+        .mds-button--primary:hover {
+            background-color: $mds-interactive-color-primary-default;
+            box-shadow: inset 0 0 0 1px $mds-interactive-color-primary-default;
+            color: $mds-text-color-primary-on-dark;
+
+            .mds-button__icon {
+                fill: $mds-text-color-primary-on-dark;
+            }
+        }
+
+        .mds-button--flat:hover,
+        .mds-container--light-gray .mds-button--flat:hover,
+        .mds-container--white .mds-button--flat:hover {
+            background-color: transparent;
+            color: $mds-text-color-secondary-default;
+            transition: none;
+
+            .mds-button__text {
+                color: $mds-text-color-secondary-default;
+            }
+
+            .mds-button__icon {
+                fill: $mds-text-color-secondary-default;
+            }
+
+            .mds-container--dark-gray &,
+            .mds-container--black & {
+                background-color: transparent;
+                color: $mds-text-color-secondary-on-dark;
+
+                .mds-button__text {
+                    color: $mds-text-color-secondary-on-dark;
+                }
+
+                .mds-button__icon {
+                    fill: $mds-text-color-secondary-on-dark;
+                }
+            }
+        }
+
+        .mds-button--icon-only:hover {
+            .mds-button__icon {
+                fill: $mds-text-color-secondary-default;
+            }
+
+            .mds-container--dark-gray &,
+            .mds-container--black & {
+                .mds-button__icon {
+                    fill: $mds-text-color-secondary-on-dark;
+                }
+            }
+        }
+
+        // Inputs
+        .mds-form__input:hover {
+            box-shadow: inset 0 -1px 0 0 $mds-border-control-color, $mds-box-shadow-focus;
+        }
+
+        // Textareas
+        .mds-form__textarea:hover {
+            box-shadow: inset 0 -1px 0 0 $mds-border-control-color, $mds-box-shadow-focus;
+        }
+
+        // Selects
+        .mds-form__select:hover .mds-form__select-visual-wrap {
+            box-shadow: inset 0 -1px 0 0 $mds-border-control-color, $mds-box-shadow-focus;
+        }
+
+        // Checkboxes
+        .mds-form__checkbox:hover {
+            .mds-form__checkbox-input:checked+.mds-form__checkbox-visible-wrap .mds-form__checkbox-visual {
+                background: $mds-interactive-color-primary-default;
+                border-color: $mds-interactive-color-primary-default;
+            }
+
+            .mds-form__checkbox-visual {
+                border-color: $mds-border-control-color;
+            }
+
+            .mds-form__checkbox-text {
+                color: $mds-text-color-secondary-default;
+
+                .mds-container--dark-gray &,
+                .mds-container--black & {
+                    color: $mds-text-color-secondary-on-dark;
+                }
+            }
+        }
+
+        // Radio Buttons
+        .mds-form__radio-button:hover {
+            .mds-form__radio-button-input:checked+.mds-form__radio-button-visible-wrap .mds-form__radio-button-visual {
+                border-color: $mds-interactive-color-primary-default;
+
+                &:before {
+                    background: $mds-interactive-color-primary-default;
+                }
+            }
+
+            .mds-form__radio-button-visual {
+                border-color: $mds-border-control-color;
+            }
+
+            .mds-form__radio-button-text {
+                color: $mds-text-color-secondary-default;
+
+                .mds-container--dark-gray &,
+                .mds-container--black & {
+                    color: $mds-text-color-secondary-on-dark;
+                }
+            }
+        }
+
+        // List Groups
+        .mds-list-group__link:hover,
+        .mds-container--light-gray .mds-list-group__link:hover,
+        .mds-container--white .mds-list-group__link:hover {
+            color: $mds-text-color-primary-default;
+
+            .mds-container--dark-gray &,
+            .mds-container--black & {
+                color: $mds-text-color-primary-on-dark;
+            }
+        }
+
+        // Search Fields
+        .mds-search-field__input:hover {
+            &:enabled+mds-icon .mds-search-field__search-icon,
+            &:enabled+.mds-search-field__search-icon {
+                fill: $mds-border-control-color;
+
+                .mds-container--dark-gray &,
+                .mds-container--black & {
+                    fill: $mds-border-control-color;
+                }
+            }
+        }
+
+        // Switches
+        .mds-switch__label:hover {
+            .mds-switch__input:not([disabled])~.mds-switch__text {
+                color: $mds-text-color-secondary-default;
+
+                &:before,
+                &:after {
+                    border-color: $mds-border-control-color;
+                }
+
+                .mds-container--dark-gray &,
+                .mds-container--black & {
+                    color: $mds-text-color-secondary-on-dark;
+                }
+            }
+
+            .mds-switch__input:not([disabled]):checked~.mds-switch__text {
+                color: $mds-text-color-primary-default;
+
+                &:before,
+                &:after {
+                    border-color: $mds-interactive-color-primary-default;
+                }
+
+                .mds-container--dark-gray &,
+                .mds-container--black & {
+                    color: $mds-text-color-primary-on-dark;
+                }
+            }
+        }
+    } 
+}

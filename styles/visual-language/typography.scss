@@ -1,0 +1,252 @@
+@import 'color';
+@import '../visual-language/space';
+
+// mds-text-crop mixin
+// Use to eliminate "extra" white space added by text nodes in the DOM. This will crop the top of the text to the Cap height and the bottom of the text to the baseline
+// Use to align text with non text elements (images, icons, etc.) or to eliminate "non-system" space within an element
+@mixin mds-text-crop($line-height: 1.25, $top-adjustment: 0px, $bottom-adjustment: 0px) { // sass-lint:disable-line zero-unit - The px unit needs to be here so the calc() functions work correctly
+    $offset-top: max((13 + ($line-height - 1.2) * (64 / 2)), 0) / 64;
+    $offset-bottom: max((14.5 + ($line-height - 1.2) * (64 / 2)), 0) / 64;
+
+    line-height: $line-height;
+
+    &::before,
+    &::after {
+        content: '';
+        display: block;
+        height: 0;
+        width: 0;
+    }
+
+    &::before {
+        margin-bottom: calc(-#{$offset-top}em + #{$top-adjustment});
+    }
+
+    &::after {
+        margin-top: calc(-#{$offset-bottom}em + #{$bottom-adjustment});
+    }
+}
+
+@mixin mds-font-reset() {
+    font-family: $mds-font-family-sans-serif;
+    font-style: normal;
+    font-weight: $mds-font-weight-regular;
+    line-height: $mds-font-line-height-body;
+}
+
+@mixin mds-heading-reset() {
+    @include mds-font-reset;
+    font-weight: $mds-font-weight-thin;
+    line-height: $mds-font-line-height-headings;
+}
+
+@mixin mds-level-1-heading() {
+    @include mds-heading-reset;
+    font-size: $mds-font-size-heading-level-1;
+}
+
+@mixin mds-level-2-heading() {
+    @include mds-heading-reset;
+    font-size: $mds-font-size-heading-level-2;
+}
+
+@mixin mds-level-3-heading() {
+    @include mds-heading-reset;
+    font-size: $mds-font-size-heading-level-3;
+}
+
+@mixin mds-level-4-heading() {
+    @include mds-heading-reset;
+    font-size: $mds-font-size-heading-level-4;
+    font-weight: $mds-font-weight-light;
+}
+
+@mixin mds-level-5-heading() {
+    @include mds-heading-reset;
+    font-size: $mds-font-size-heading-level-5;
+    font-weight: $mds-font-weight-light;
+}
+
+@mixin mds-level-6-heading() {
+    @include mds-heading-reset;
+    font-size: $mds-font-size-heading-level-6;
+    font-weight: $mds-font-weight-light;
+}
+
+@mixin mds-body-text-l() {
+    @include mds-font-reset;
+    font-size: $mds-font-size-l;
+    font-weight: $mds-font-weight-light;
+}
+
+@mixin mds-body-text-m() {
+    @include mds-font-reset;
+    font-size: $mds-font-size-m;
+    font-weight: $mds-font-weight-light;
+}
+
+@mixin mds-body-text-s() {
+    @include mds-font-reset;
+    font-size: $mds-font-size-s;
+}
+
+@mixin mds-eyebrow-heading() {
+    @include mds-font-reset;
+    font-size: $mds-font-size-xs;
+    font-weight: $mds-font-weight-bold;
+    letter-spacing: 1.67px;
+    line-height: $mds-font-line-height-headings;
+    text-transform: uppercase;
+}
+
+@mixin mds-link($underline: true, $visited-styles: true, $enable-dark: true) {
+    @include mds-font-reset;
+    @include mds-text-color-primary($enable-dark: $enable-dark);
+    box-decoration-break: slice;
+    font-weight: inherit;
+    outline: 0;
+    text-decoration: none;
+    transition: color $mds-animation-timing-1-x linear, border-bottom $mds-animation-timing-1-x linear;
+
+    @if $underline {
+        @include mds-container-light-parent-selectors {
+            border-bottom: 1px solid $mds-color-neutral-67;
+        }
+        @if $enable-dark {
+            @include mds-container-dark-parent-selectors {
+                border-bottom: 1px solid $mds-color-neutral-50;
+            }
+        }
+        border-bottom: 1px solid $mds-color-neutral-67;
+    } @else {
+        @include mds-container-light-parent-selectors {
+            border-bottom: 0;
+        }
+        @if $enable-dark {
+            @include mds-container-dark-parent-selectors {
+                border-bottom: 0;
+            }
+        }
+        border-bottom: 0;
+    }
+
+    @if $visited-styles {
+        &.mds-link--visited,
+        &:visited {
+            @include mds-text-color-secondary;
+        }
+    } @else {
+        &.mds-link--visited,
+        &:visited {
+            @include mds-text-color-primary($enable-dark: $enable-dark);
+        }
+    }
+
+    &.mds-link--hover,
+    &:hover {
+        @include mds-text-color-link($enable-dark: true);
+
+        @if $underline {
+            @include mds-container-light-parent-selectors {
+                border-color: $mds-color-blue-36;
+            }
+            @if $enable-dark {
+                @include mds-container-dark-parent-selectors {
+                    border-color: $mds-color-blue-44;
+                }
+            }
+            border-color: $mds-color-blue-36;
+        } @else {
+            @include mds-container-light-parent-selectors {
+                border-color: 0;
+            }
+            @if $enable-dark {
+                @include mds-container-dark-parent-selectors {
+                    border-color: 0;
+                }
+            }
+        }
+    }
+
+    &:focus,
+    &.mds-link--focus {
+        box-shadow: $mds-box-shadow-focus;
+    }
+}
+
+@mixin mds-unordered-list($size) {
+    $body-text-sizes: ('small': $mds-font-size-s, 'medium': $mds-font-size-m, 'large': $mds-font-size-l);
+    $body-text-weights: ('small': $mds-font-weight-regular, 'medium': $mds-font-weight-light, 'large': $mds-font-weight-light);
+    $marker-text-sizes: ('small': $mds-font-size-xs, 'medium': $mds-font-size-s, 'large': $mds-font-size-m);
+    $marker-line-heights: ('small': 19.25px, 'medium': 22px, 'large': 27.5px);
+    $list-paddings: ('small': $mds-space-1-and-a-half-x, 'medium': $mds-space-2-and-a-half-x, 'large': $mds-space-3-and-a-half-x);
+    
+    @include mds-text-color-primary;
+    font-family: $mds-font-family-sans-serif;
+    font-size: map-get($body-text-sizes, $size);
+    font-style: normal;
+    font-weight: map-get($body-text-weights, $size);
+    line-height: $mds-font-line-height-body;
+    list-style: none;
+    padding-left: map-get($list-paddings, $size);
+    position: relative;
+
+    li::before {
+        color: $mds-color-neutral-67;
+        content: '\2022';
+        font-size: map-get($marker-text-sizes, $size);
+        left: 0;
+        line-height: map-get($marker-line-heights, $size);
+        position: absolute;
+        vertical-align: baseline;
+    }
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding-left: map-get($list-paddings, $size);
+        position: relative;
+        
+    }
+
+    li ul li::before {
+        content: '\25CB'; 
+        font-size: map-get($marker-text-sizes, $size);
+        left: 0;
+        line-height: map-get($marker-line-heights, $size);
+        position: absolute;
+        vertical-align: baseline;
+    }
+}
+
+@mixin mds-ordered-list($size) {
+    $body-text-sizes: ('small': $mds-font-size-s, 'medium': $mds-font-size-m, 'large': $mds-font-size-l);
+    $body-text-weights: ('small': $mds-font-weight-regular, 'medium': $mds-font-weight-light, 'large': $mds-font-weight-light);
+    $marker-text-sizes: ('small': $mds-font-size-xs, 'medium': $mds-font-size-s, 'large': $mds-font-size-m);
+    $list-paddings: ('small': $mds-space-2-and-a-half-x, 'medium': $mds-space-3-x, 'large': $mds-space-3-and-a-half-x);
+    $list-alignments: ('small': -$mds-space-2-and-a-half-x, 'medium': -$mds-space-3-x, 'large': -$mds-space-3-and-a-half-x);
+    
+    @include mds-text-color-primary;
+    font-family: $mds-font-family-sans-serif;
+    font-size: map-get($body-text-sizes, $size);
+    font-style: normal;
+    font-weight: map-get($body-text-weights, $size);
+    line-height: $mds-font-line-height-body;
+    padding-left: map-get($list-paddings, $size);
+
+    li,
+    .mds-article__ol-li {
+        counter-increment: step-counter;
+        list-style-type: none;
+        position: relative;
+
+        &:before {
+            content: counter(step-counter) '.';
+            font-size: map-get($body-text-sizes, $size);
+            font-weight: $mds-font-weight-bold;
+            left: map-get($list-alignments, $size);
+            position: absolute;
+            top: 0;
+        }
+    }
+}

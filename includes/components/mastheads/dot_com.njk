@@ -1,0 +1,12 @@
+{% set masthead_left %}
+    {{ library.button(icon_left="menu-padless", class="mds-button--icon-only mds-masthead--hide-wide mds-page-shell--show-off-canvas-navigation") }}
+    {{ library.button(icon_left="search-padless", class="mds-button--icon-only mds-masthead--hide-wide") }}
+    {{ library.search_field(class="mds-masthead--show-wide") }}
+{% endset %}
+{% set masthead_right %}
+    {{ library.button(text="Subscribe", class="mds-button--primary mds-masthead--show-wide") }}
+    {{ library.button(icon_left="person-padless", class="mds-button--icon-only mds-masthead--hide-wide") }}
+    {{ library.button(class="mds-button--flat mds-button--flat-icon-m mds-masthead--show-wide", icon_left="person-padless", text="Sign In") }}
+
+{% endset %}
+{{ library.masthead(class="mds-masthead--tall", logo="/images/mastheads/logos/Mstar-logo-70px.svg", masthead_left=masthead_left, masthead_right=masthead_right) }}

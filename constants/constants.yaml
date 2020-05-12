@@ -1,0 +1,331 @@
+##--------------------------------------------------
+color :
+  white : &color-white "#ffffff"
+  black : &color-black "#000000"
+  neutral :
+    12 : &color-neutral-12 "#1e1e1e"
+    20 : &color-neutral-20 "#333333"
+    37 : &color-neutral-37 "#5e5e5e"
+    50 : &color-neutral-50 "#808080"
+    67 : &color-neutral-67 "#ababab"
+    80 : &color-neutral-80 "#cccccc"
+    90 : &color-neutral-90 "#e5e5e5"
+    95 : &color-neutral-95 "#f2f2f2"
+  blue :
+    23 : &color-blue-23 "#004376"
+    32 : &color-blue-32 "#005ba1"
+    36 : &color-blue-36 "#006fba"
+    38 : &color-blue-38 "#1f55a5"
+    41 : &color-blue-41 "#0077cf"
+    44 : &color-blue-44 "#008dde"
+  green :
+    34 : &color-green-34 "#00af41"
+  dark-green :
+    25 : &color-dark-green-25 "#008020"
+    34 : &color-dark-green-34 "#518428"
+  teal :
+    19 : &color-teal-19 "#005f5f"
+  violet :
+    46 : &color-violet-46 "#6a4c9e"
+  cyan :
+    44 : &color-cyan-44 "#00a8e1"
+  maroon :
+    32 : &color-maroon-32 "#a50032"
+  red :
+    44 : &color-red-44 "#de0000"
+    50 : &color-red-50 "#ff0000"
+    51 : &color-red-51 "#ff3300"
+  yellow :
+    48 : &color-yellow-48 "#f5c400"
+  orange :
+    54 : &color-orange-54 "#ef7622"
+  light-red :
+    46 : &color-light-red-46 "#e60546"
+  dark-violet :
+    32 : &color-dark-violet-32 "#7d256f"
+  dark-yellow :
+    47 : &color-dark-yellow-47 "#c19c31"
+  aqua :
+    37 : &color-aqua-37 "#00beaf"
+  bright-orange :
+    50 : &color-bright-orange-50 "#ff3c00"
+  light-green :
+    50 : &color-light-green-50 "#89bd40"
+brand :
+  blue : *color-blue-38
+  cyan : *color-cyan-44
+background-color :
+  white : *color-white
+  light-gray : *color-neutral-95
+  dark-gray : *color-neutral-12
+  black : *color-black
+  alternative-row :
+    default: *color-neutral-90
+    on-light: *color-neutral-90
+    on-dark: *color-neutral-20
+text-color :
+  primary :
+    default : *color-neutral-12
+    on-light : *color-neutral-12
+    on-dark : *color-white
+  secondary :
+    default : *color-neutral-37
+    on-light : *color-neutral-37
+    on-dark : *color-neutral-67
+  link :
+    default : *color-blue-36
+    on-light : *color-blue-36
+    on-dark : *color-blue-44
+  error :
+    default : *color-red-44
+    on-light : *color-red-44
+    on-dark : *color-red-51
+  performance :
+    negative-on-light : *color-red-44
+    negative-on-dark : *color-red-51
+    neutral-on-light : *color-neutral-37
+    neutral-on-dark : *color-neutral-67
+    positive-on-light : *color-dark-green-25
+    positive-on-dark : *color-green-34
+interactive-color :
+  primary :
+    default : *color-blue-41
+    hover : *color-blue-32
+    focus : *color-blue-32
+    active : *color-blue-23
+  secondary :
+    primary : transparent
+    hover : *color-neutral-37
+    focus : *color-neutral-37
+    active :
+      on-light : *color-neutral-20
+      on-dark : *color-neutral-90
+  disabled :
+    on-light : *color-neutral-50
+    on-dark : *color-neutral-67
+visualization-color :
+  asset-allocation :
+    equity : *color-blue-38
+    fixed-income : *color-orange-54
+    alternative : *color-maroon-32
+    cash : *color-dark-green-34
+    other : *color-yellow-48
+    not-classified : *color-neutral-90
+  correlation :
+    positive : *color-blue-38
+    negative: *color-orange-54
+  sector :
+    cyclical : *color-orange-54
+    sensitive : *color-blue-38
+    defensive : *color-dark-green-34
+  sustainability : *color-blue-38
+  valuation :
+    under : *color-cyan-44
+    fair : "#e5efef"
+    over : *color-orange-54
+  performance :
+    positive : *color-green-34
+    neutral : *color-neutral-90
+    negative : *color-red-50
+chart-color :
+  1 : *color-blue-38
+  2 : *color-maroon-32
+  3 : *color-yellow-48
+  4 : *color-dark-green-34
+  5 : *color-cyan-44
+  6 : *color-violet-46
+  7 : *color-orange-54
+  8 : *color-teal-19
+  9 : *color-green-34
+  10 : *color-light-red-46
+  11 : *color-dark-violet-32
+  12 : *color-dark-yellow-47
+  13 : *color-aqua-37
+  14 : *color-bright-orange-50
+  15 : *color-light-green-50
+feedback-color :
+  info : *color-neutral-95
+  error : *color-red-50
+  error-background : "#ffe5e5"
+  warning : *color-yellow-48
+  warning-background : "#fef9e5"
+  success : *color-green-34
+  success-background : "#e5f7eb"
+font :
+  family :
+    sans-serif: "'Univers', HelveticaNeue, 'Helvetica Neue', Helvetica, Arial, sans-serif"
+    monospace: "'Lucida Sans Typewriter', 'Lucida Console', monaco, 'Bitstream Vera Sans Mono', monospace"
+  weight :
+    thin : 200
+    light : 300
+    regular : 400
+    bold : 600
+  size :
+    xs : 10px
+    s : 14px
+    m : 16px
+    l : 20px
+    heading-level-1: 45px
+    heading-level-2: 32px
+    heading-level-3: 28px
+    heading-level-4: 23px
+    heading-level-5: 20px
+    heading-level-6: 18px
+    code: 12px
+  line-height:
+    headings: 1.2
+    body: 1.375
+border :
+  header :
+    primary :
+      on-white : "solid 2px !{*color-neutral-20}"
+      on-light-gray : "solid 2px !{*color-neutral-12}"
+      on-dark-gray : "solid 2px !{*color-neutral-90}"
+      on-black : "solid 2px !{*color-neutral-90}"
+      color-on-white : *color-neutral-20
+      color-on-light-gray : *color-neutral-12
+      color-on-dark-gray : *color-neutral-90
+      color-on-black : *color-neutral-90
+    secondary :
+      on-white : "solid 1px !{*color-neutral-50}"
+      on-light-gray : "solid 1px !{*color-neutral-50}"
+      on-dark-gray : "solid 1px !{*color-neutral-50}"
+      on-black : "solid 1px !{*color-neutral-50}"
+      color-on-white : *color-neutral-50
+      color-on-light-gray : *color-neutral-50
+      color-on-dark-gray : *color-neutral-50
+      color-on-black : *color-neutral-50
+    tertiary :
+      on-white : "solid 1px !{*color-neutral-90}"
+      on-light-gray : "solid 1px !{*color-neutral-80}"
+      on-dark-gray : "solid 1px !{*color-neutral-20}"
+      on-black : "solid 1px !{*color-neutral-20}"
+      color-on-white : *color-neutral-90
+      color-on-light-gray : *color-neutral-80
+      color-on-dark-gray : *color-neutral-20
+      color-on-black : *color-neutral-20
+  separator :
+    on-white : "solid 1px !{*color-neutral-90}"
+    on-light-gray : "solid 1px !{*color-neutral-80}"
+    on-dark-gray : "solid 1px !{*color-neutral-20}"
+    on-black : "solid 1px !{*color-neutral-20}"
+    on-title : "solid 2px !{*color-neutral-20}"
+    color-on-white : *color-neutral-90
+    color-on-light-gray : *color-neutral-80
+    color-on-dark-gray : *color-neutral-20
+    color-on-black : *color-neutral-20
+  control :
+    on-all-backgrounds : "solid 1px !{*color-neutral-50}"
+    color : *color-neutral-50
+  container :
+    on-all-backgrounds : "solid 1px !{*color-neutral-80}"
+    color-default : *color-neutral-80
+  disabled : "solid 1px !{*color-neutral-50}"
+  radius :
+    panel : 6px
+    pill : 24px
+    round : 50%
+    s : 2px
+size :
+  icon :
+    s : 15px
+    m : 23px
+  element :
+    height :
+      s : 24px
+      m : 29px
+      l : 40px
+      touch : 48px
+space :
+  quarter-x:          &space-quarter-x        2px
+  half-x:             &space-half-x           4px
+  three-quarter-x:    &space-three-quarter-x  6px
+  1-x:                &space-1-x              8px
+  1-and-a-half-x:     &space-1-and-a-half-x   12px
+  2-x:                &space-2-x              16px
+  2-and-a-half-x:     &space-2-and-a-half-x   20px
+  3-x:                &space-3-x              24px
+  3-and-a-half-x:     &space-3-and-a-half-x   28px
+  4-x:                &space-4-x              32px
+  5-x:                &space-5-x              40px
+  6-x:                &space-6-x              48px
+  7-x:                &space-7-x              56px
+  8-x:                &space-8-x              64px
+  inset :
+    quarter-x:        *space-quarter-x
+    half-x:           *space-half-x
+    three-quarter-x:  *space-three-quarter-x
+    1-x:              *space-1-x
+    1-and-a-half-x:   *space-1-and-a-half-x
+    2-x:              *space-2-x
+    3-x:              *space-3-x
+    4-x:              *space-4-x
+    8-x:              *space-8-x
+    stretch :
+      s : "6px 12px"
+      m : "8px 16px"
+      l : "12px 24px"
+  inline-left :
+    half-x           : "0 4px 0 0"
+    three-quarter-x : "0 6px 0 0"
+    1-x              : "0 8px 0 0"
+    1-and-a-half-x   : "0 12px 0 0"
+    2-x              : "0 16px 0 0"
+  inline-right :
+    half-x           : "0 0 0 4px"
+    three-quarter-x : "0 0 0 6px"
+    1-x              : "0 0 0 8px"
+    1-and-a-half-x   : "0 0 0 12px"
+    2-x              : "0 0 0 16px"
+  stack :
+    quarter-x:        "0 0 2px"
+    half-x:           "0 0 4px"
+    three-quarter-x: "0 0 6px"
+    1-x:              "0 0 8px"
+    1-and-a-half-x:   "0 0 12px"
+    2-x:              "0 0 16px"
+    3-x:              "0 0 24px"
+    4-x:              "0 0 32px"
+    8-x:              "0 0 64px"
+transition :
+  color :
+    link : "color, 200ms" # Deprecated TODO: Remove in 3.0 / Do not use, instead, use animation timing constants
+opacity :
+  disabled : ".4"
+  overlay : ".5"
+box-shadow :
+  drop : "0 2px 4px 0 rgba(0, 0, 0, .2)"
+  focus: "0 0 4px 2px rgba(!{*color-blue-41}, .8)"
+z-index :
+  low: 1
+  sticky: 100
+  modal-overlay: 800
+  modal-content: 810
+  top-of-the-world: 900
+
+# Navigation variables used across page_shell, site_navigation, and masthead components
+breakpoint :
+  navigation :
+    on-canvas-nav: 768px
+    wide: 1024px
+
+masthead:
+  height: 50px
+  height-tall: 70px
+
+site-navigation:
+  height: 50px
+  vertical-width: 230px
+
+animation:
+  timing:
+    quarter-x: 50ms
+    half-x: 100ms
+    1-x: 200ms
+    1-and-a-half-x: 300ms
+    2-x: 400ms
+    2-and-a-half-x: 500ms
+  ease:
+    in: cubic-bezier(.5,0,1,1)
+    out: cubic-bezier(0,0,.5,1)
+    in-out: cubic-bezier(.5,0,.5,1)

@@ -1,0 +1,29 @@
+@import '../../constants/constants';
+@import 'switch_variables';
+
+@mixin mds-switch-touch-properties() {
+    .mds-switch__text {
+        font-size: $mds-font-size-l;
+        height: $mds-size-element-height-touch;
+        padding-bottom: $mds-space-1-and-a-half-x; // Padding to equal ~48px height
+        padding-left: $mds-switch-large-width + $mds-space-three-quarter-x;
+        padding-top: $mds-space-1-and-a-half-x;
+
+        &:before {
+            height: $mds-switch-large-height;
+            top: $mds-switch-touch-border-top;
+            width: $mds-switch-large-width;
+        }
+
+        &:after {
+            height: $mds-switch-large-toggle-height;
+            top: $mds-switch-touch-dot-top;
+            width: $mds-switch-large-toggle-width;
+        }
+
+        .mds-switch--hide-label & {
+            min-height: $mds-size-element-height-touch;
+            width: $mds-switch-large-width;
+        }
+    }
+}

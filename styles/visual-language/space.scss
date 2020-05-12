@@ -1,0 +1,81 @@
+@mixin mds-border-box() {
+    &,
+    &:before,
+    &:after {
+        box-sizing: border-box;
+    }
+
+    *,
+    *:before,
+    *:after {
+        box-sizing: border-box;
+    }
+}
+
+@mixin mds-incremental-spacing($component-name, $spacing-type, $default-size: 'medium', $selector-level: 'element', $property-list: false, $space-adjustment: 0, $text-cropped: true) {
+    $padding-spacing-types: ('inset', 'inset-stretch');
+    $default-space-sizes: ( 'small': $mds-space-three-quarter-x, 'medium': $mds-space-1-x, 'large': $mds-space-1-and-a-half-x);
+    $inset-stretch-sizes: ( 'small': $mds-space-inset-stretch-s, 'medium': $mds-space-inset-stretch-m, 'large': $mds-space-inset-stretch-l);
+    $inset-sizes: ( 'small': $mds-space-inset-three-quarter-x, 'medium': $mds-space-inset-1-x, 'large': $mds-space-inset-1-and-a-half-x);
+    $inline-left-sizes: ( 'small': $mds-space-inline-left-three-quarter-x, 'medium': $mds-space-inline-left-1-x, 'large': $mds-space-inline-left-1-and-a-half-x);
+    $stack-sizes: ( 'small': $mds-space-stack-three-quarter-x, 'medium': $mds-space-stack-1-x, 'large': $mds-space-stack-1-and-a-half-x);
+    $spacing-type-map: ( 'inset-stretch': $inset-stretch-sizes, 'inset': $inset-sizes, 'inline-left': $inline-left-sizes, 'stack': $stack-sizes, 'default': $default-space-sizes);
+    $selector-prefix: '';
+    $selector-postfix: ' &';
+    @if $selector-level !='element' {
+        $selector-prefix: '&';
+        $selector-postfix: '';
+    } // These are used to adjust top and bottom spacing when the text crop mixin cannot be used
+    // The text crop mixin cannot be used on <input> <textarea> and other "replaced" elements
+    $text-cropped-offsets: ( 'small': ( 'bottom': 3px, 'top': 2px), 'medium': ( 'bottom': 4px, 'top': 3px), 'large': ( 'bottom': 5px, 'top': 4px));
+    $desired-space: 0;
+    $space-map: map-get($spacing-type-map, $spacing-type);
+    @each $size, $space-value in $space-map {
+        @if $size != $default-size {
+            #{$selector-prefix}.mds-#{$component-name}--#{$size}#{$selector-postfix} {
+                @if $property-list {
+                    @each $property in $property-list {
+                        #{$property}: $space-value + $space-adjustment;
+                    }
+                } @else if index($padding-spacing-types, $spacing-type) {
+                    padding: $space-value;
+                } @else {
+                    margin: $space-value;
+                } // When the text crop mixin can't be used, there will be too much top and
+                // bottom space unless it's adjusted
+                // This creates a deviation from the spacing constants, but the end result
+                // Is an identical amount of space - padding + text whitespace will equal
+                // the spacing constant
+                @if $text-cropped==false {
+                    $desired-space: map-get($space-map, $size);
+                    padding-bottom: $desired-space - map-get(map-get($text-cropped-offsets, $size), 'bottom');
+                    padding-top: $desired-space - map-get(map-get($text-cropped-offsets, $size), 'top');
+                }
+                @content; // ability to pass in overrides as a block
+            }
+        }
+    }
+    @if $property-list {
+        @each $property in $property-list {
+            #{$property}: map-get($space-map, $default-size) + $space-adjustment;
+        }
+    } @else if index($padding-spacing-types, $spacing-type) {
+        padding: map-get($space-map, $default-size);
+    } @else {
+        margin: map-get($space-map, $default-size);
+    }
+    @if $text-cropped==false {
+        $desired-space: map-get($space-map, $default-size);
+        padding-bottom: $desired-space - map-get(map-get($text-cropped-offsets, $default-size), 'bottom');
+        padding-top: $desired-space - map-get(map-get($text-cropped-offsets, $default-size), 'top');
+    }
+    @content;
+}
+
+// Use this mixin to neutralize the vertical space created by an icon while keeping it vertically centered
+// This allows an icon's height to not influence the overall vertical spacing
+// This is useful when the text-crop mixin is being used to crop text to the cap height and baseline
+@mixin mds-icon-height-removal {
+    margin-bottom: -30px;
+    margin-top: -30px;
+}

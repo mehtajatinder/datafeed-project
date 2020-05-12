@@ -1,0 +1,22 @@
+/// Layout Grid breakpoints
+$mds-layout-grid-breakpoints: (
+    0,
+    600,
+    768,
+    1000,
+    1200
+) !default;
+
+/// The max number of columns that can span the width of a grid row
+$mds-layout-grid-columns: 12 !default;
+
+/// Layout Grid breakpoint padding
+$mds-layout-grid-breakpoint-padding: $mds-space-2-x !default;
+
+/// Layout Grid breakpoint margin
+$mds-layout-grid-breakpoint-margin: $mds-layout-grid-breakpoint-padding * -1 !default;
+
+/// The name of the grid's first breakpoint (will automatically be set to the name of the first breakpoint above)
+$mds-layout-grid-first-breakpoint: nth($mds-layout-grid-breakpoints, 1) !default;
+
+

@@ -1,0 +1,120 @@
+@import 'tag_dependencies';
+$mds-tag-transition-hover: color 300ms, box-shadow 300ms !default;
+
+@include mds-export-once('mds_tag') {
+    .mds-tag {
+        @include mds-border-box;
+        @include mds-text-crop;
+        @include mds-incremental-font-sizes('tag', $default-size: 'small', $selector-level: 'block');
+        background-color: $mds-background-color-light-gray;
+        border: $mds-border-separator-on-white;
+        border-radius: $mds-border-radius-s;
+        color: $mds-text-color-secondary-default;
+        display: inline-block;
+        font-family: $mds-font-family-sans-serif;
+        font-weight: $mds-font-weight-regular;
+        margin: 0;
+        outline: 0;
+        overflow: visible;
+        padding: $mds-space-inset-three-quarter-x;
+        position: relative;
+        text-align: center;
+        transition: $mds-tag-transition-hover;
+
+        .mds-container--light-gray & {
+            background-color: $mds-background-color-white;
+            border-color: $mds-border-separator-color-on-light-gray;
+            color: $mds-text-color-secondary-on-light;
+        }
+
+        .mds-container--dark-gray & {
+            background-color: $mds-background-color-black;
+            border-color: $mds-border-separator-color-on-dark-gray;
+            color: $mds-text-color-secondary-on-dark;
+        }
+
+        .mds-container--black & {
+            background-color: $mds-background-color-dark-gray;
+            border-color: $mds-border-separator-color-on-black;
+            color: $mds-text-color-secondary-on-dark;
+        }
+    }
+
+    .mds-tag--medium {
+        @include mds-text-crop;
+        font-weight: $mds-font-weight-light;
+        padding: $mds-space-inset-1-x;
+    }
+
+    .mds-tag--link {
+        text-decoration: none;
+
+        &:hover,
+        &.mds-tag--link-hover {
+            color: $mds-text-color-link-default;
+
+            .mds-container--light-gray & {
+                color: $mds-text-color-link-on-light;
+            }
+
+            .mds-container--dark-gray & {
+                color: $mds-text-color-link-on-dark;
+            }
+
+            .mds-container--black & {
+                color: $mds-text-color-link-on-dark;
+            }
+        }
+
+        &:focus,
+        &.mds-tag--link-focus {
+            @include mds-box-shadow-border($mds-border-control-color, $with-focus: $mds-box-shadow-focus);
+        }
+    }
+
+    .mds-tag--dismissible__button {
+        padding: 0;
+    }
+
+    .mds-tag--dismissible__button .mds-button__icon {
+        height: $mds-size-icon-s;
+        width: $mds-size-icon-s;
+    }
+
+    @keyframes tagfadeout {
+        0% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+        }
+    }
+
+    .mds-tag--is-dismissed {
+        animation: tagfadeout $mds-animation-timing-1-x linear forwards;
+    }
+
+    .mds-tag-group {
+        display: inline-block;
+        font-size: 0;
+        margin-bottom: -$mds-space-1-x;
+
+        .mds-tag {
+            margin-bottom: $mds-space-1-x;
+        }
+
+        mds-tag,
+        .mds-tag {
+            &:not(:last-child) {
+                margin-right: $mds-space-1-x;
+            }
+        }
+    }
+
+    mds-tag,
+    mds-tag-group {
+        display: inline-block;
+    }
+
+} // End of Export

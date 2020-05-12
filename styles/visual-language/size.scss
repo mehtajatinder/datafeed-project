@@ -1,0 +1,28 @@
+
+@mixin mds-incremental-font-sizes($component-name, $default-size: 'medium', $selector-level: 'element') {
+    $font-sizes: (
+        'small': $mds-font-size-s,
+        'medium': $mds-font-size-m,
+        'large': $mds-font-size-l
+    );
+
+    $selector-prefix: '';
+    $selector-postfix: ' &';
+
+    @if $selector-level != 'element' {
+        $selector-prefix: '&';
+        $selector-postfix: '';
+    }
+
+    // render default size
+    font-size: map-get($font-sizes, $default-size);
+
+    // render t-shirt sizes
+    @each $size, $font-size in $font-sizes {
+        @if $size != $default-size {
+            #{$selector-prefix}.mds-#{$component-name}--#{$size}#{$selector-postfix} {
+                font-size: $font-size;
+            }
+        }
+    }
+}

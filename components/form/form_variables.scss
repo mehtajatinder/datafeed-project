@@ -1,0 +1,64 @@
+@import '../../constants/constants';
+$mds-background-color-form-input: $mds-color-neutral-90 !default;
+$mds-background-color-form-input-on-dark: $mds-color-neutral-20 !default;
+
+$mds-border-color-form-input: $mds-border-control-color !default;
+$mds-border-color-form-input-error: $mds-color-red-50 !default;
+$mds-border-color-form-input-hover: $mds-interactive-color-primary-default !default;
+$mds-border-color-form-input-focus: $mds-interactive-color-primary-focus !default;
+$mds-border-width-form-input: 1px !default;
+$mds-border-width-form-input-error: 2px !default;
+
+$mds-box-shadow-form-element-focus: $mds-box-shadow-focus !default;
+$mds-box-shadow-form-input-border: inset 0 (-$mds-border-width-form-input) 0 0 $mds-border-color-form-input !default;
+$mds-box-shadow-form-input-border-hover: inset 0 (-$mds-border-width-form-input) 0 0 $mds-border-color-form-input-hover !default;
+$mds-box-shadow-form-input-border-focus: inset 0 (-$mds-border-width-form-input) 0 0 $mds-border-color-form-input-focus !default;
+$mds-box-shadow-form-input-border-error: inset 0 (-$mds-border-width-form-input-error) 0 0 $mds-border-color-form-input-error !default;
+$mds-box-shadow-form-element-focus-input-border-error: $mds-box-shadow-form-input-border-error, $mds-box-shadow-form-element-focus !default;
+
+$mds-color-form-label: $mds-text-color-primary-on-light !default;
+$mds-color-form-label-on-dark: $mds-text-color-primary-on-dark !default;
+$mds-color-form-input: $mds-text-color-primary-on-light !default;
+$mds-color-form-input-on-dark: $mds-text-color-primary-on-dark !default;
+$mds-color-form-microcopy: $mds-text-color-primary-on-light !default;
+$mds-color-form-microcopy-on-dark: $mds-text-color-primary-on-dark !default;
+$mds-color-form-radio-label: $mds-text-color-secondary-on-light !default;
+$mds-color-form-radio-label-on-dark: $mds-text-color-secondary-on-dark !default;
+$mds-color-form-radio-label-hover: $mds-text-color-primary-on-light !default;
+$mds-color-form-radio-label-hover-on-dark: $mds-text-color-primary-on-dark !default;
+$mds-color-form-select-on-dark: $mds-text-color-primary-on-dark !default;
+$mds-color-form-input-placeholder: $mds-text-color-secondary-on-light !default;
+$mds-color-form-input-placeholder-on-dark: $mds-text-color-secondary-on-dark !default;
+
+$mds-size-form-checkbox: 17px !default;
+$mds-size-form-radio-button: 16px !default; // Actual size is 17px but reduced by 1px because of border of 1px;
+$mds-size-form-radio-button-fill: 12px !default;
+$mds-size-form-textarea-min-width: 200px !default;
+
+$mds-space-inline-left-form-checkbox-visual: 0 6px 0 0 !default;
+$mds-space-inline-left-form-radio-visual: 0 6px 0 0 !default;
+$mds-space-inset-form-input: 6px !default;
+
+$mds-line-height-form-input: 1.25 !default;
+$mds-line-height-form: 1.2 !default;
+
+// Large Checkbox
+$mds-form-checkbox-large-width: 23px !default;
+$mds-form-checkbox-large-height: 23px !default;
+
+// Large Radio Button
+$mds-form-radio-button-large-width: 23px !default;
+$mds-form-radio-button-large-height: 23px !default;
+$mds-form-radio-button-fill-large-width: 17px !default;
+$mds-form-radio-button-fill-large-height: 17px !default;
+
+// Small Composition Container Spaces
+$mds-form-space-1-and-a-quarter-x: 10px !default;
+$mds-form-space-stack-1-and-a-quarter-x: 0 0 10px 0 !default;
+$mds-form-space-inline-left-1-and-a-quarter-x: 0 10px 0 0 !default;
+$mds-form-space-stack-2-and-a-half-x: 0 0 20px 0 !default;
+
+// Input Box Height
+$mds-form__input--small-height: $mds-size-element-height-s !default;
+$mds-form__input--medium-height: $mds-size-element-height-m !default;
+$mds-form__input--large-height: $mds-size-element-height-l !default;

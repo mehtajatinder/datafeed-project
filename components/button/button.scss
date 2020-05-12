@@ -1,0 +1,930 @@
+@import 'button_dependencies';
+
+@include mds-export-once('mds_button') {
+    .mds-button,
+    .mds-button--secondary,
+    .mds-button__input-outer-wrapper {
+        @include mds-border-box();
+    }
+
+    .mds-button,
+    .mds-button--secondary {
+        @include mds-text-crop($bottom-adjustment: 1px);
+        @include mds-box-shadow-border($mds-border-control-color);
+        @include mds-incremental-font-sizes('button', $selector-level: 'block');
+        background-clip: padding-box;
+        background-color: $mds-button--secondary-background-color;
+        border: 0;
+        border-radius: $mds-button-border-radius;
+        color: $mds-button--secondary-text-color;
+        cursor: pointer;
+        display: inline-block;
+        font-family: $mds-font-family-sans-serif;
+        font-weight: $mds-font-weight-light;
+        margin: 0;
+        outline: 0;
+        overflow: visible;
+        padding: $mds-space-inset-stretch-m;
+        position: relative;
+        text-align: center;
+        transition: $mds-button-transition-hover;
+
+        &::-moz-focus-inner { // sass-lint:disable-line no-vendor-prefixes - FF is adding a 1px border around <button> elements
+            border: 0;
+        }
+
+        &:hover,
+        &.mds-button--hover {
+            @include mds-box-shadow-border($mds-button--secondary-background-color-hover);
+            background-color: $mds-button--secondary-background-color-hover;
+            color: $mds-button--secondary-text-color-hover;
+            text-decoration: none;
+
+            .mds-button__icon {
+                fill: $mds-button--secondary-text-color-hover;
+                transition: $mds-button-transition-hover;
+            }
+        }
+
+        &:focus,
+        &.mds-button--focus {
+            @include mds-box-shadow-border($mds-border-control-color, $with-focus: $mds-button--secondary-box-shadow-focus);
+
+            &:hover,
+            &.mds-button--hover {
+                @include mds-box-shadow-border($mds-interactive-color-secondary-hover, $with-focus: $mds-button--secondary-box-shadow-focus);
+            }
+
+            &:active,
+            &.mds-button--active {
+                @include mds-box-shadow-border($mds-interactive-color-secondary-active-on-light, $with-focus: $mds-button--secondary-box-shadow-focus);
+            }
+        }
+
+        &:active,
+        &.mds-button--active {
+            @include mds-box-shadow-border($mds-button--secondary-background-color-active);
+            background-color: $mds-button--secondary-background-color-active;
+            color: $mds-button--secondary-text-color-active;
+
+            .mds-button__icon {
+                fill: $mds-button--secondary-text-color-active;
+                transition: $mds-button-transition-hover;
+            }
+
+            &:after {
+                box-shadow: none;
+            }
+        }
+
+        &:disabled,
+        &[disabled],
+        &.mds-button--disabled {
+            @include mds-disabled();
+            @include mds-box-shadow-border($mds-border-control-color);
+            background-color: transparent;
+            color: $mds-interactive-color-disabled-on-light;
+
+            .mds-button__input {
+                cursor: not-allowed;
+            }
+
+            .mds-button__icon {
+                fill: $mds-interactive-color-disabled-on-light;
+            }
+
+            &:hover,
+            &.mds-button--hover {
+                .mds-button__icon {
+                    fill: $mds-interactive-color-disabled-on-light;
+                }
+            }
+
+            &:focus,
+            &.mds-button--focus {
+                &:after {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    a {
+        &.mds-button {
+            text-decoration: none;
+        }
+    }
+
+    .mds-button--small {
+        @include mds-text-crop($bottom-adjustment: 1px);
+        line-height: 18px;                      // Space override - without it, there is a 1px rounding diff across browsers
+        padding: $mds-space-inset-stretch-s;
+
+        .mds-button__icon {
+            margin-top: -2px;                   // Space override - 2 sibling inline-blocks will impact one another's spacing, this is the fix
+        }
+
+        .mds-button__text {
+            margin-top: -2px;                    // Space override - 2 sibling inline-blocks will impact one another's spacing, this is the fix
+        }
+    }
+
+    .mds-button--large {
+        padding: $mds-space-inset-stretch-l;
+
+        .mds-button__icon {
+            margin-top: -4px;
+        }
+
+        .mds-button__text {
+            margin-top: -4px;
+        }
+    }
+
+    .mds-button--touch {
+        font-size: $mds-font-size-l;
+        padding: $mds-space-2-x $mds-space-3-x;
+
+        .mds-button__icon {
+            height: $mds-size-icon-m;
+            margin-top: -4px;
+            width: $mds-size-icon-m;
+        }
+
+        &.mds-button--icon-only {
+            height: $mds-size-element-height-touch;
+            padding: 16px 12px;
+            width: $mds-size-element-height-touch;
+        }
+
+        .mds-button__input+&.mds-button--icon-only {
+            padding: 16px 12px;
+        }
+
+        .mds-button__text {
+            margin-top: -4px;
+        }
+    }
+
+    .mds-button__icon {
+        fill: $mds-button__icon--secondary-fill-color;
+        height: $mds-size-icon-s;
+        margin-top: -3px;                                // Space override - 2 sibling inline-blocks will impact one another's spacing, this is the fix
+        transition: $mds-button-transition-hover;
+        vertical-align: middle;                          // Space override - 2 sibling inline-blocks will impact one another's spacing, this is the fix
+        white-space: nowrap;
+        width: $mds-size-icon-s;
+
+        .mds-button--large & {
+            height: $mds-size-icon-m;
+            width: $mds-size-icon-m;
+        }
+
+        .mds-button--flat.mds-button--flat-icon-m & {
+            height: $mds-size-icon-m;
+            white-space: nowrap;
+            width: $mds-size-icon-m;
+
+            .mds-button__text {
+                white-space: normal;
+            }
+        }
+    }
+
+    .mds-button__icon--left + .mds-button__text,
+    .mds-button__text + .mds-button__icon--right  {
+        margin-left: $mds-space-inset-half-x;
+    }
+
+    // MDSWC Support
+    mds-button {
+        display: inline-block;
+
+        .mds-button__icon--left {
+            margin-right: $mds-space-inset-half-x;
+        }
+
+        .mds-button__icon--right {
+            margin-left: $mds-space-inset-half-x;
+        }
+    }
+
+    // Specific rules to account for defects introduced by normalize.css
+    mds-button[type='button'],
+    mds-button[type='reset'],
+    mds-button[type='submit'] {
+        appearance: none;
+    }
+
+    .mds-button__text {
+        display: inline-block;
+        margin-top: -3px;                                // Space override - 2 sibling inline-blocks will impact one another's spacing, this is the fix
+        vertical-align: middle;                          // Space override - 2 sibling inline-blocks will impact one another's spacing, this is the fix
+    }
+
+
+    .mds-button--primary {
+        @include mds-box-shadow-border($mds-button--primary-background-color);
+        background-color: $mds-button--primary-background-color;
+        color: $mds-button--primary-text-color;
+
+        &:hover,
+        &.mds-button--hover {
+            @include mds-box-shadow-border($mds-button--primary-background-color-hover);
+            background-color: $mds-button--primary-background-color-hover;
+
+            &:focus,
+            &.mds-button--focus {
+                @include mds-box-shadow-border($mds-button--primary-background-color-hover, $with-focus: $mds-button--primary-box-shadow-focus);
+            }
+        }
+
+        &:focus,
+        &.mds-button--focus {
+            @include mds-box-shadow-border($mds-button--primary-background-color, $with-focus: $mds-button--primary-box-shadow-focus);
+        }
+
+        &:active,
+        &.mds-button--active {
+            @include mds-box-shadow-border($mds-button--primary-background-color-active);
+            background-color: $mds-button--primary-background-color-active;
+        }
+
+        &:disabled,
+        &[disabled],
+        &.mds-button--disabled {
+            @include mds-box-shadow-border($mds-button--primary-background-color);
+            background-color: $mds-button--primary-background-color;
+            color: $mds-button--primary-text-color;
+
+            .mds-button__input {
+                cursor: not-allowed;
+            }
+
+            .mds-button__icon {
+                fill: $mds-button__icon--primary-fill-color;
+            }
+
+            &:hover,
+            &.mds-button--hover {
+                .mds-button__icon {
+                    fill: $mds-button__icon--primary-fill-color;
+                }
+            }
+
+        }
+
+        .mds-button__icon {
+            fill: $mds-button__icon--primary-fill-color;
+        }
+    }
+
+    .mds-button--secondary {
+        .mds-container--dark-gray &,
+        .mds-container--black & {
+            background-color: transparent;
+            color: $mds-text-color-secondary-on-dark;
+
+            .mds-button__icon {
+                fill: $mds-text-color-secondary-on-dark;
+            }
+
+            &:hover,
+            &.mds-button--hover {
+                background-color: $mds-interactive-color-secondary-hover;
+                color: $mds-text-color-primary-on-dark;
+
+                .mds-button__icon {
+                    fill: $mds-text-color-primary-on-dark;
+                }
+            }
+
+            &:active,
+            &.mds-button--active {
+                @include mds-box-shadow-border($mds-interactive-color-secondary-active-on-dark);
+                background-color: $mds-interactive-color-secondary-active-on-dark;
+                color: $mds-text-color-secondary-default;
+
+                .mds-button__icon {
+                    fill: $mds-text-color-secondary-default;
+                }
+
+                &:focus,
+                &.mds-button--focus {
+                    @include mds-box-shadow-border($mds-interactive-color-secondary-active-on-dark, $with-focus: $mds-box-shadow-focus);
+                }
+            }
+
+            &:disabled,
+            &[disabled],
+            &.mds-button--disabled {
+                &:hover,
+                &.mds-button--hover,
+                &:active,
+                &.mds-button--active,
+                &:focus,
+                &.mds-button--focus {
+                    @include mds-box-shadow-border($mds-border-control-color);
+                    background: transparent;
+                    color: $mds-text-color-secondary-on-dark;
+
+                    .mds-button__icon {
+                        fill: $mds-text-color-secondary-on-dark;
+                    }
+                }
+            }
+        }
+    }
+
+    .mds-button {
+        .mds-container--dark-gray &,
+        .mds-container--black & {
+            &:hover,
+            &.mds-button--hover,
+            &:focus,
+            &.mds-button--focus {
+                &:after {
+                    background-color: transparent;
+                }
+            }
+        }
+    }
+
+
+    .mds-button__input {
+        background: none;
+        border: 0;
+        bottom: 0;
+        cursor: pointer;
+        height: 100%;
+        left: 0;
+        margin: 0;
+        outline: none;
+        padding: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 100%;
+        z-index: 1;
+
+        &:focus {
+            outline: 0;
+        }
+
+        &::-moz-focus-inner { // sass-lint:disable-line no-vendor-prefixes - only way to get rid of dotted border on button focus in FF
+            border: 0;
+        }
+
+        &[type=radio],
+        &[type=checkbox] {
+            opacity: 0;
+        }
+
+        &:disabled,
+        &[disabled] {
+            cursor: not-allowed;
+        }
+    }
+
+    // Input buttons need to be retargeted due to the sibling vs. parent/child structure required to accommodate all of the different states
+    .mds-button__input-outer-wrapper {
+        display: inline-block;
+        position: relative;
+    }
+
+    .mds-button__input:focus + .mds-button {
+        @include mds-box-shadow-border($mds-border-control-color, $with-focus: $mds-box-shadow-focus);
+    }
+
+    // Input Buttons Default and Secondary :hover
+    .mds-button__input:hover + .mds-button,
+    .mds-button__input.mds-button--hover + .mds-button,
+    .mds-button__input:hover + .mds-button--secondary,
+    .mds-button__input.mds-button--hover + .mds-button--secondary,
+    .mds-button__input.mds-button--hover {
+        @include mds-box-shadow-border($mds-button--secondary-background-color-hover);
+        background-color: $mds-button--secondary-background-color-hover;
+        color: $mds-button--secondary-text-color-hover;
+        text-decoration: none;
+
+        .mds-button__icon {
+            fill: $mds-button--secondary-text-color-hover;
+        }
+    }
+
+    .mds-button__input:hover:focus + .mds-button,
+    .mds-button__input:hover:focus + .mds-button--secondary,
+    .mds-button__input:hover + .mds-button--focus {
+        @include mds-box-shadow-border($mds-button--secondary-background-color-hover, $with-focus: $mds-button--secondary-box-shadow-focus);
+    }
+
+
+    // Input Buttons Default and Secondary :disabled
+    .mds-button__input:hover:disabled + .mds-button,
+    .mds-button__input:hover[disabled] + .mds-button,
+    .mds-button__input--disabled:hover {
+        @include mds-box-shadow-border($mds-border-control-color);
+    }
+
+    .mds-button__input:disabled,
+    .mds-button__input[disabled],
+    .mds-button__input.mds-button--disabled {
+        + .mds-button {
+            @include mds-disabled();
+        }
+
+        .mds-container--dark-gray &,
+        .mds-container--black & {
+            &:hover + .mds-button {
+                color: $mds-interactive-color-disabled-on-dark;
+
+                .mds-button__icon {
+                    fill: $mds-interactive-color-disabled-on-dark;
+                }
+            }
+
+            &:hover + .mds-button--primary,
+            + .mds-button--primary {
+                //@include mds-box-shadow-border($mds-interactive-color-primary-default);
+                background-color: $mds-button--primary-background-color;
+                color: $mds-button--primary-text-color;
+
+                .mds-button__icon {
+                    fill: $mds-button__icon--primary-fill-color;
+                }
+            }
+        }
+
+        &:hover + .mds-button {
+            //@include mds-box-shadow-border($mds-border-control-color);
+            background-color: transparent;
+            color: $mds-interactive-color-disabled-on-light;
+            cursor: not-allowed;
+
+            .mds-button__icon {
+                fill: $mds-interactive-color-disabled-on-light;
+            }
+        }
+
+        &:hover + .mds-button--primary,
+        + .mds-button--primary {
+            //@include mds-box-shadow-border($mds-interactive-color-primary-default);
+            background-color: $mds-button--primary-background-color;
+            color: $mds-button--primary-text-color;
+
+            .mds-button__icon {
+                fill: $mds-button__icon--primary-fill-color;
+            }
+        }
+    }
+
+    // Input Buttons Default and Secondary :active
+    .mds-button.mds-button--selected,
+    .mds-button--secondary.mds-button--selected,
+    .mds-button--selected,
+    .mds-button__input:checked + .mds-button,
+    .mds-button__input:active + .mds-button,
+    .mds-button__input.mds-button--active + .mds-button,
+    .mds-button__input:active + .mds-button--secondary,
+    .mds-button__input.mds-button--active + .mds-button--secondary  {
+        @include mds-box-shadow-border($mds-button--secondary-background-color-active);
+        background-color: $mds-button--secondary-background-color-active;
+        color: $mds-button--secondary-text-color-active;
+
+        .mds-button__icon {
+            fill: $mds-button--secondary-text-color-active;
+        }
+
+
+
+        .mds-container--dark-gray &,
+        .mds-container--black & {
+            @include mds-box-shadow-border($mds-interactive-color-secondary-active-on-dark);
+            background-color: $mds-interactive-color-secondary-active-on-dark;
+            color: $mds-text-color-secondary-default;
+
+            .mds-button__icon {
+                fill: $mds-text-color-secondary-default;
+            }
+        }
+    }
+
+    .mds-button.mds-button--selected:focus,
+    .mds-button--secondary.mds-button--selected:focus,
+    .mds-button--selected:focus,
+    .mds-button__input:checked:focus + .mds-button,
+    .mds-button__input:active:focus + .mds-button,
+    .mds-button__input.mds-button--active:focus + .mds-button,
+    .mds-button__input:active:focus + .mds-button--secondary,
+    .mds-button__input.mds-button--active:focus + .mds-button--secondary,
+    .mds-button__input:active:focus,
+    .mds-button__input.mds-button--active:focus {
+        @include mds-box-shadow-border($mds-button--secondary-background-color-active, $with-focus: $mds-button--secondary-box-shadow-focus);
+
+        .mds-container--dark-gray &,
+        .mds-container--black & {
+            @include mds-box-shadow-border($mds-interactive-color-secondary-active-on-dark, $with-focus: $mds-box-shadow-focus);
+        }
+    }
+
+    .mds-button__input:active + .mds-button,
+    .mds-button__input.mds-button--active + .mds-button,
+    .mds-button__input:active + .mds-button--secondary,
+    .mds-button__input.mds-button--active + .mds-button--secondary,
+    .mds-button__input:active,
+    .mds-button__input.mds-button--active  {
+        &:after {
+            box-shadow: none;
+        }
+    }
+
+    .mds-button__input:focus + .mds-button--primary {
+        @include mds-box-shadow-border($mds-button--primary-background-color, $with-focus: $mds-button--primary-box-shadow-focus);
+    }
+
+    // Input Buttons Primary :hover
+    .mds-button__input:hover + .mds-button--primary,
+    .mds-button__input.mds-button--hover + .mds-button--primary {
+        @include mds-box-shadow-border($mds-button--primary-background-color-hover);
+        background-color: $mds-button--primary-background-color-hover;
+    }
+
+    // Input Buttons Primary :focus
+    .mds-button__input:focus:hover + .mds-button--primary,
+    .mds-button__input:hover + .mds-button--primary.mds-button--focus  {
+        @include mds-box-shadow-border($mds-button--primary-background-color-hover, $with-focus: $mds-button--primary-box-shadow-focus);
+        background-color: $mds-button--primary-background-color-hover;
+    }
+
+    .mds-button__input:hover:focus + .mds-button--primary,
+    .mds-button__input.mds-button--hover:focus + .mds-button--primary {
+        @include mds-box-shadow-border($mds-button--primary-background-color-hover, $with-focus: $mds-button--primary-box-shadow-focus);
+    }
+
+    // Input Buttons Primary :active
+    .mds-button--primary.mds-button--selected,
+    .mds-button__input:checked + .mds-button--primary,
+    .mds-button__input:active + .mds-button--primary,
+    .mds-button__input.mds-button--active + .mds-button--primary {
+        @include mds-box-shadow-border($mds-button--primary-background-color-active);
+        background-color: $mds-button--primary-background-color-active;
+        color: $mds-color-white;
+
+        .mds-button__icon {
+            fill: $mds-color-white;
+        }
+
+        .mds-container--dark-gray &,
+        .mds-container--black & {
+            @include mds-box-shadow-border($mds-button--primary-background-color-active);
+            background-color: $mds-button--primary-background-color-active;
+            color: $mds-color-white;
+
+            .mds-button__icon {
+                fill: $mds-color-white;
+            }
+        }
+    }
+
+    .mds-button--primary.mds-button--selected:focus,
+    .mds-button__input:checked:focus + .mds-button--primary,
+    .mds-button__input:checked:focus + .mds-button--primary.mds-button--active,
+    .mds-button__input:focus + .mds-button--primary.mds-button--active,
+    .mds-button__input:active:focus + .mds-button--primary,
+    .mds-button__input.mds-button--active:focus + .mds-button--primary {
+        @include mds-box-shadow-border($mds-button--primary-background-color-active, $with-focus: $mds-button--primary-box-shadow-focus);
+
+        .mds-container--dark-gray &,
+        .mds-container--black & {
+            @include mds-box-shadow-border($mds-button--primary-background-color-active, $with-focus: $mds-button--primary-box-shadow-focus);
+        }
+    }
+
+    .mds-button__input:hover + .mds-button--primary:disabled,
+    .mds-button__input:hover + .mds-button--primary[disabled],
+    .mds-button__input:hover + .mds-button--primary.mds-button--disabled {
+        @include mds-box-shadow-border($mds-button--primary-background-color);
+
+        .mds-container--dark-gray &,
+        .mds-container--black & {
+            @include mds-box-shadow-border($mds-button--primary-background-color);
+        }
+    }
+
+    .mds-button__input:hover + .mds-button--flat:disabled,
+    .mds-button__input:hover + .mds-button--flat[disabled],
+    .mds-button__input:hover + .mds-button--flat.mds-button--disabled {
+        @include mds-box-shadow-border(transparent);
+
+        .mds-container--dark-gray &,
+        .mds-container--black & {
+            @include mds-box-shadow-border(transparent);
+        }
+    }
+
+    .mds-button--icon-only,
+    .mds-button__input + .mds-button--icon-only {
+        background: transparent;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+        padding: $mds-button-icon-only-padding;
+
+        .mds-button__icon {
+            fill: $mds-button-icon-only-default-on-light;
+            height: $mds-size-icon-m;
+            width: $mds-size-icon-m;
+        }
+
+
+        &.mds-button--small {
+            padding: $mds-button-icon-only-small-padding;
+
+            .mds-button__icon {
+                height: $mds-size-icon-s;
+                width: $mds-size-icon-s;
+            }
+        }
+
+        .mds-button__input:checked + &,
+        .mds-button__input:hover:checked + &,
+        .mds-button__input:hover + &,
+        &:hover,
+        &.mds-button--hover,
+        .mds-button__input:active + &,
+        &:active,
+        &.mds-button--active {
+            background: transparent;
+            box-shadow: none;
+
+            .mds-button__icon {
+                fill: $mds-button-icon-only-hover-active-on-light;
+            }
+
+            .mds-container--dark-gray &,
+            .mds-container--black & {
+                background: transparent;
+                box-shadow: none;
+
+                .mds-button__icon {
+                    fill: $mds-button-icon-only-hover-active-on-dark;
+                }
+            }
+        }
+
+        .mds-button__input:focus:checked + &,
+        .mds-button__input:focus:active + &,
+        .mds-button__input:focus:hover + &,
+        .mds-button__input:focus + &,
+        &:focus,
+        &.mds-button--focus {
+            @include mds-box-shadow-border(transparent, $with-focus: $mds-box-shadow-focus);
+            background: transparent;
+
+            &:hover,
+            &.mds-button--hover,
+            &:active,
+            &.mds-button--active {
+                @include mds-box-shadow-border(transparent, $with-focus: $mds-box-shadow-focus);
+            }
+
+            .mds-container--dark-gray &,
+            .mds-container--black & {
+                @include mds-box-shadow-border(transparent, $with-focus: $mds-box-shadow-focus);
+                background: transparent;
+            }
+
+        }
+
+        .mds-button__input:disabled:hover + &,
+        .mds-button__input[disabled]:hover + &,
+        .mds-button__input:disabled + &,
+        .mds-button__input[disabled] + &,
+        &:disabled,
+        &[disabled],
+        &.mds-button--disabled {
+            @include mds-disabled();
+            background: transparent;
+            box-shadow: none;
+
+            &:hover,
+            &.mds-button--hover  {
+                background: transparent;
+                box-shadow: none;
+
+                .mds-button__icon {
+                    fill: $mds-button-icon-only-default-on-light;
+                }
+            }
+
+        }
+
+        .mds-container--dark-gray &,
+        .mds-container--black & {
+            background: transparent;
+            border: 0;
+            border-radius: 0;
+            box-shadow: none;
+
+            .mds-button__icon {
+                fill: $mds-button-icon-only-default-on-dark;
+            }
+
+            &:hover,
+            &.mds-button--hover,
+            &:active,
+            &.mds-button--active {
+                background: transparent;
+                box-shadow: none;
+
+                .mds-button__icon {
+                    fill: $mds-button-icon-only-hover-active-on-dark;
+                }
+            }
+
+            .mds-button__input:focus:active:checked + &,
+            .mds-button__input:focus:active + &,
+            .mds-button__input:focus:hover + &,
+            .mds-button__input:focus + &,
+            &:focus,
+            &.mds-button--focus {
+                @include mds-box-shadow-border(transparent, $with-focus: $mds-box-shadow-focus);
+                background: transparent;
+            }
+
+            &:disabled,
+            &[disabled],
+            &.mds-button--disabled {
+
+                &:hover,
+                &.mds-button--hover  {
+                    background: transparent;
+                    box-shadow: none;
+
+                    .mds-button__icon {
+                        fill: $mds-button-icon-only-default-on-dark;
+                    }
+                }
+
+            }
+        }
+    }
+
+    .mds-button--flat {
+        @include mds-text-color-secondary;
+        border-radius: 0;
+        box-shadow: none; //hide border;
+        padding-left: 4px;  //custom padding for the flat button
+        padding-right: 4px; //custom padding for the flat button
+
+        .mds-button__icon {
+            @include mds-text-color-secondary('fill');
+        }
+
+        .mds-button__input:checked + &,
+        .mds-button__input:hover + &,
+        &.mds-button--hover,
+        &:hover {
+            @include mds-text-color-primary;
+            background: transparent;
+            box-shadow: none;
+
+            .mds-button__icon {
+                @include mds-text-color-primary('fill');
+            }
+        }
+
+        &.mds-button--active,
+        &:active,
+        &.mds-button--hover,
+        &:hover {
+            @include mds-text-color-primary;
+            background: transparent;
+            box-shadow: none;
+
+            .mds-button__icon {
+                @include mds-text-color-primary('fill');
+            }
+        }
+
+        .mds-container--dark-gray .mds-button__input:focus + &,
+        .mds-container--black .mds-button__input:focus + &,
+        &.mds-button--focus,
+        &:focus {
+            &,
+            &.mds-button--hover,
+            &:hover,
+            &.mds-button--active,
+            &:active {
+                box-shadow: $mds-button--flat-box-shadow-focus;
+            }
+        }
+
+        .mds-button__input[disabled]:hover + &,
+        .mds-button__input[disabled],
+        &.mds-button--disabled,
+        &[disabled] {
+            &,
+            &:hover {
+                @include mds-text-color-primary;
+                background: transparent;
+                box-shadow: none;
+            }
+        }
+
+        .mds-container--dark-gray &,
+        .mds-container--black & {
+            &:hover,
+            &:active {
+                background: transparent;
+                box-shadow: none;
+            }
+        }
+
+        .mds-container--dark-gray .mds-button__input:checked + &,
+        .mds-container--black .mds-button__input:checked + &,
+        .mds-container--dark-gray .mds-button__input:active + &,
+        .mds-container--black .mds-button__input:active + &,
+        .mds-container--dark-gray .mds-button__input[disabled] + &,
+        .mds-container--black .mds-button__input[disabled] + & {
+            &,
+            &:hover {
+                background-color: transparent;
+                box-shadow: none;
+            }
+        }
+
+
+        .mds-container--dark-gray .mds-button__input[disabled] + &,
+        .mds-container--black .mds-button__input[disabled] + &,
+        .mds-container--dark-gray &[disabled],
+        .mds-container--black &[disabled] {
+            &,
+            &:hover {
+                color: $mds-text-color-primary-on-dark;
+            }
+
+            .mds-button__icon {
+                &,
+                &:hover {
+                    fill: $mds-text-color-secondary-on-dark;
+                }
+            }
+        }
+    }
+
+
+    // Button Container
+    .mds-button__container {
+        font-size: 0;
+
+        // ------ MDSWC ------
+        // Primary/Secondary/Flat next to Primary/Secondary/Flat
+        mds-button:not([variation='icon-only']) + mds-button:not([variation='icon-only']) {
+            margin-left: $mds-space-1-x;
+
+            &[size='small'] {
+                margin-left: $mds-space-three-quarter-x;
+            }
+        }
+
+        // Icon-Only next to Icon-Only
+        mds-button[variation='icon-only'] + mds-button[variation='icon-only'] {
+            margin-left: $mds-space-2-x;
+
+            &[size='small'] {
+                margin-left: $mds-space-1-and-a-half-x;
+            }
+        }
+
+        // Icon-Only next to Primary/Secondary/Flat
+        mds-button[variation='icon-only'] + mds-button:not([variation='icon-only']) {
+            margin-left: $mds-space-2-x;
+
+            &[size='small'] {
+                margin-left: $mds-space-1-and-a-half-x;
+            }
+        }
+
+        // ------ HTML ------
+        // Primary/Secondary/Flat next to Primary/Secondary/Flat
+        .mds-button + .mds-button {
+            margin-left: $mds-space-1-x;
+
+            &.mds-button--small {
+                margin-left: $mds-space-three-quarter-x;
+            }
+        }
+
+        // Icon-Only next to Icon-Only
+        // Icon-Only next to Primary/Secondary/Flat
+        .mds-button--icon-only + .mds-button--icon-only,
+        .mds-button--icon-only + .mds-button {
+            margin-left: $mds-space-2-x;
+
+            &.mds-button--small {
+                margin-left: $mds-space-1-and-a-half-x;
+            }
+        }
+    }
+} // End of Export

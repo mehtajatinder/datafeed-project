@@ -1,0 +1,288 @@
+$mds-font-asset-path: '../../../fonts/' !default; // This font path is used to render the component-only test page correctly
+@import '../../styles/visual-language/fonts';
+@import '../../constants/constants';
+@import '../../styles/utils/import_once';
+@import '../../styles/visual-language/color';
+@import '../../styles/visual-language/size';
+@import '../../styles/visual-language/typography';
+@import '../../styles/utils/accessibility';
+@import './form_variables';
+@import './form_mixins';
+
+@include mds-export-once('mds_form_radio_button') {
+    .mds-form__radio-button,
+    .mds-form__radio-button-group {
+        @include mds-border-box();
+    }
+
+    .mds-form__radio-button-group-label {
+        @include mds-text-crop();
+        @include mds-incremental-font-sizes($component-name: 'form__radio-button-group');
+        @include mds-container-dark-parent-selectors {
+            color: $mds-color-form-label-on-dark;
+        }
+        
+        color: $mds-color-form-label;
+        display: block;
+        font-family: $mds-font-family-sans-serif;
+        font-weight: $mds-font-weight-bold;
+        line-height: $mds-line-height-form;
+        padding: 0;
+
+        .mds-form__radio-button-group--touch & {
+            font-size: $mds-font-size-l;
+        }
+    }
+
+    .mds-form__radio-button-visible-wrap {
+        align-items: flex-start;
+        border: 0;
+        display: inline-flex;
+
+        .mds-form__radio-button--touch & {
+            padding: 12px 0; // Renders 48px tall
+        }
+    }
+
+    .mds-form__radio-button-visible-wrap {
+        .mds-form__radio-button--focus &,
+        .mds-form__radio-button-input:focus + & {
+            box-shadow: $mds-box-shadow-form-element-focus;
+        }
+    }
+
+    .mds-form__radio-button {
+        align-items: flex-start;
+        cursor: pointer;
+        display: flex;
+        font-family: $mds-font-family-sans-serif;
+        font-weight: $mds-font-weight-light;
+
+        .mds-form__field-group--horizontal & {
+            display: inline-block;
+        }
+    }
+
+    .mds-form__radio-button--disabled {
+        cursor: not-allowed;
+    }
+
+    .mds-form__radio-button-input {
+        @include mds-accessibly-hidden();
+    }
+
+    .mds-form__radio-button-visual {
+        align-items: center;
+        background: transparent;
+        border: $mds-border-control-on-all-backgrounds;
+        border-radius: $mds-border-radius-round;
+        color: $mds-color-form-radio-label;
+        cursor: pointer;
+        display: block;
+        flex: 0 0 auto;
+        height: $mds-size-form-radio-button;
+        justify-content: center;
+        margin: $mds-space-inline-left-form-radio-visual;
+        position: relative;
+        top: 1px;
+        width: $mds-size-form-radio-button;
+
+        .mds-form__radio-button--small & {
+            top: 0;
+        }
+
+        .mds-form__radio-button--touch & {
+            margin-right: $mds-space-1-x;
+        }
+
+        .mds-form__radio-button--large &,
+        .mds-form__radio-button--touch & {
+            height: $mds-form-radio-button-large-height;
+            top: 0;
+            width: $mds-form-radio-button-large-width;
+        }
+
+        &:before {
+            background: $mds-interactive-color-primary-default;
+            border-radius: $mds-border-radius-round;
+            content: '';
+            display: block;
+            height: $mds-size-form-radio-button-fill;
+            left: 50%;
+            margin-left: -($mds-size-form-radio-button-fill / 2);
+            margin-top: -($mds-size-form-radio-button-fill / 2);
+            opacity: 0;
+            position: absolute;
+            top: 50%;
+            transform: scale(.4);
+            transition: $mds-animation-timing-half-x linear;
+            width: $mds-size-form-radio-button-fill;
+
+            .mds-form__radio-button--large &,
+            .mds-form__radio-button--touch & {
+                height: $mds-form-radio-button-fill-large-height;
+                margin-left: -($mds-form-radio-button-fill-large-height / 2);
+                margin-top: -($mds-form-radio-button-fill-large-height / 2);
+                width: $mds-form-radio-button-fill-large-width;
+            }
+        }
+
+        .mds-form__radio-button-input:checked + .mds-form__radio-button-visible-wrap & {
+            background: transparent;
+            border-color: $mds-interactive-color-primary-default;
+
+            &:before {
+                opacity: 1;
+                transform: scale(1);
+
+                .mds-form__radio-button--large &,
+                .mds-form__radio-button--touch & {
+                    transform: scale(1);
+                }
+            }
+        }
+
+        .mds-form__radio-button:active & {
+            transform: scale(.9);
+            transition: transform $mds-animation-timing-quarter-x linear;
+        }
+
+        .mds-form__radio-button--hover &,
+        .mds-form__radio-button:hover & {
+            border-color: $mds-border-color-form-input-hover;
+        }
+
+        .mds-form__radio-button--hover .mds-form__radio-button-input:checked + .mds-form__radio-button-visible-wrap &,
+        .mds-form__radio-button:hover .mds-form__radio-button-input:checked + .mds-form__radio-button-visible-wrap & {
+            border-color: $mds-interactive-color-primary-hover;
+
+            &:before {
+                background: $mds-interactive-color-primary-hover;
+            }
+        }
+
+        .mds-form__radio-button--active .mds-form__radio-button-input:checked + .mds-form__radio-button-visible-wrap &,
+        .mds-form__radio-button:hover .mds-form__radio-button-input:active:checked + .mds-form__radio-button-visible-wrap & {
+            border-color: $mds-interactive-color-primary-active;
+
+            &:before {
+                background: $mds-interactive-color-primary-active;
+            }
+        }
+
+        .mds-form__radio-button--hover .mds-form__radio-button-input:disabled + .mds-form__radio-button-visible-wrap &,
+        .mds-form__radio-button:hover .mds-form__radio-button-input:disabled + .mds-form__radio-button-visible-wrap &,
+        .mds-form__radio-button-input:disabled + .mds-form__radio-button-visible-wrap & {
+            @include mds-disabled();
+            border-color: $mds-border-color-form-input;
+
+            .mds-form__radio-button:active & {
+                transform: scale(1);
+            }
+        }
+
+        .mds-form__radio-button--hover .mds-form__radio-button-input:checked:disabled + .mds-form__radio-button-visible-wrap &,
+        .mds-form__radio-button:hover .mds-form__radio-button-input:checked:disabled + .mds-form__radio-button-visible-wrap &,
+        .mds-form__radio-button-input:checked:disabled + .mds-form__radio-button-visible-wrap & {
+            border-color: $mds-interactive-color-primary-default;
+
+            &:before {
+                background: $mds-interactive-color-primary-default;
+            }
+        }
+    }
+
+    .mds-form__radio-button-text {
+        @include mds-container-dark-parent-selectors {
+            color: $mds-color-form-radio-label-on-dark;
+        }
+        color: $mds-color-form-radio-label;
+        cursor: pointer;
+        line-height: $mds-line-height-form;
+        transition: $mds-animation-timing-1-x linear;
+
+        .mds-form__radio-button--small & {
+            font-size: $mds-font-size-s;
+            font-weight: $mds-font-weight-regular;
+        }
+
+        .mds-form__radio-button--large &,
+        .mds-form__radio-button--touch & {
+            font-size: $mds-font-size-l;
+        }
+
+        .mds-form__radio-button--hover &,
+        .mds-form__radio-button:hover & {
+            @include mds-container-dark-parent-selectors {
+                color: $mds-color-form-radio-label-hover-on-dark;
+            }
+
+            color: $mds-color-form-radio-label-hover;
+        }
+
+        .mds-form__radio-button-input:checked + .mds-form__radio-button-visible-wrap & {
+            @include mds-container-dark-parent-selectors {
+                color: $mds-color-form-radio-label-hover-on-dark;
+            }
+            color: $mds-color-form-radio-label-hover;
+        }
+
+        .mds-form__radio-button--focus &,
+        .mds-form__radio-button-input:focus + .mds-form__radio-button-visible-wrap & {
+            @include mds-container-dark-parent-selectors {
+                color: $mds-color-form-radio-label-hover-on-dark;
+            }
+            color: $mds-color-form-radio-label-hover;
+        }
+
+        .mds-form__radio-button-input:disabled + .mds-form__radio-button-visible-wrap & {
+            @include mds-disabled();
+            @include mds-container-dark-parent-selectors {
+                color: $mds-color-form-radio-label-hover-on-dark;
+            }
+            color: $mds-color-form-radio-label;
+        }
+    }
+
+    .mds-form__radio-button-microcopy {
+        color: $mds-text-color-secondary-on-light;
+        display: block;
+        font-size: $mds-font-size-s;
+        font-weight: $mds-font-weight-regular;
+        line-height: $mds-font-line-height-headings;
+        margin: $mds-space-quarter-x 0 $mds-space-half-x;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        .mds-container--dark-gray &,
+        .mds-container--black & {
+            color: $mds-text-color-secondary-on-dark;
+        }
+
+        .mds-form__radio-button--large &,
+        .mds-form__radio-button--touch & {
+            font-size: $mds-font-size-m;
+            font-weight: $mds-font-weight-light;
+            margin: $mds-space-half-x 0 $mds-space-three-quarter-x;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    .mds-form__radio-button-group {
+        border: 0;
+        margin: 0;
+        padding: 0;
+    }
+
+    mds-radio-button-group .mds-form__radio-button-group {
+        &:focus,
+        &:active {
+            outline: 0 none;
+        }
+    }
+}

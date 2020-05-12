@@ -1,0 +1,100 @@
+@import 'menu_dependencies';
+@include mds-export-once('mds_menu') {
+    .mds-menu {
+        @include mds-border-box();
+
+        .mds-popover {
+            padding: $mds-space-inset-2-x;
+        }
+
+        .mds-popover__header {
+            margin-bottom: 0;
+        }
+
+        .mds-list-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .mds-list-group__link {
+            .mds-container--dark-gray &,
+            .mds-container--black & {
+                @include mds-text-color-primary($enable-dark: false);
+            }
+
+            &:hover {
+                .mds-container--dark-gray &,
+                .mds-container--black & {
+                    @include mds-text-color-link($enable-dark: false);
+                }
+            }
+        }
+
+        .mds-list-group__item--active .mds-list-group__link {
+            .mds-container--dark-gray &,
+            .mds-container--black & {
+                @include mds-text-color-link($enable-dark: false);
+            }
+        }
+
+
+        // If Menu is inside Button Group
+        .mds-button-group & {
+            display: inline-block;
+
+            &:first-child {
+                .mds-button,
+                .mds-button:focus:after {
+                    border-radius: $mds-button-group-border-radius-button 0 0 $mds-button-group-border-radius-button;
+                }
+            }
+
+            &:last-child {
+                .mds-button,
+                .mds-button:focus:after {
+                    border-radius: 0 $mds-button-group-border-radius-button $mds-button-group-border-radius-button 0;
+                }
+            }
+
+            &:not(:first-child) {
+                .mds-button {
+                    border-left: 0;
+                    margin-left: $mds-button-group-default-margin-offset;
+                }
+
+                .mds-button--primary {
+                    margin-left: $mds-button-group-primary-margin-offset;
+                }
+            }
+        }
+
+        // Button Group - Icon Only
+        .mds-button-group.mds-button-group--icon-only & {
+
+            &:first-child {
+                .mds-button,
+                .mds-button:focus:after {
+                    border-radius: 0;
+                }
+            }
+
+            &:last-child {
+                .mds-button,
+                .mds-button:focus:after {
+                    border-radius: 0;
+                }
+            }
+
+            &:not(:first-child) {
+                margin-left: $mds-space-2-x;
+            }
+        }
+
+    }
+
+    .mds-menu--visible {
+        .mds-popover {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+} // End of Export

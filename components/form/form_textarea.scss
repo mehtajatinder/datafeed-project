@@ -1,0 +1,87 @@
+$mds-font-asset-path: '../../../fonts/' !default; // This font path is used to render the component-only test page correctly
+@import '../../styles/visual-language/fonts';
+@import '../../constants/constants';
+@import '../../styles/utils/import_once';
+@import '../../styles/visual-language/color';
+@import '../../styles/visual-language/size';
+@import '../../styles/visual-language/typography';
+@import '../../styles/utils/accessibility';
+@import './form_variables';
+@import './form_mixins';
+
+@include mds-export-once('mds_form_textarea') {
+    .mds-form__textarea {
+        @include mds-border-box();
+        @include mds-incremental-font-sizes('form__textarea', $selector-level: 'block');
+        @include mds-incremental-spacing('form__textarea', 'inset', $selector-level: 'block', $text-cropped: false);
+        background-clip: padding-box;
+        background-color: $mds-background-color-form-input;
+        border: 0;
+        border-radius: 0; // needed to avoid any browsers (e.g. Mobile Safari) adding radius
+        box-shadow: inset 0 (-$mds-border-width-form-input) 0 0 $mds-border-color-form-input;
+        color: $mds-color-form-input;
+        font-family: $mds-font-family-sans-serif;
+        font-weight: $mds-font-weight-light;
+        line-height: $mds-line-height-form-input;
+        min-height: 5em;
+        overflow: auto;
+        width: 100%;
+
+        &.mds-form__textarea--small {
+            font-weight: $mds-font-weight-regular;
+        }
+
+        &.mds-form__textarea--touch {
+            font-size: $mds-font-size-l;
+        }
+
+        &::placeholder {
+            color: $mds-color-form-input-placeholder;
+            opacity: 1;
+        }
+
+        &:hover {
+            @include mds-form-hover-styles();
+        }
+
+        &:focus {
+            @include mds-form-focus-styles();
+        }
+
+        &:disabled {
+            @include mds-disabled(); // This is a global mixin defined in utils.scss
+            box-shadow: inset 0 (-$mds-border-width-form-input) 0 0 $mds-border-color-form-input;
+        }
+
+        .mds-form--error &, // Do not use, will be deprecated in 3.0.0
+        .mds-form__field-group--error & {
+            @include mds-form-error-styles();
+        }
+
+        @include mds-container-dark-parent-selectors {
+            background-color: $mds-background-color-form-input-on-dark;
+            color: $mds-color-form-input-on-dark;
+
+            &::placeholder {
+                color: $mds-color-form-input-placeholder-on-dark;
+            }
+
+        }
+    }
+
+    .mds-form__textarea--hover {
+        @include mds-form-hover-styles();
+    }
+
+    .mds-form__textarea--disabled {
+        @include mds-disabled();
+    }
+
+    .mds-form__textarea--focus {
+        @include mds-form-focus-styles();
+
+        &:hover {
+            box-shadow: $mds-box-shadow-form-input-border, $mds-box-shadow-form-element-focus;
+        }
+    }
+}

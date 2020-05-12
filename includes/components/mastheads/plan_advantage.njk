@@ -1,0 +1,5 @@
+{% set masthead_right %}
+    {{ library.button(icon_left="person-padless", class="mds-button--icon-only mds-masthead--hide-wide") }}
+    {{ library.button(icon_left="person-padless", text="Sign In", class="mds-button--flat mds-masthead--show-wide mds-button--flat-icon-m") }}
+{% endset %}
+{{ library.masthead(logo="/images/mastheads/logos/plan-advantage-lockup.png", masthead_left=false, masthead_right=masthead_right) }}

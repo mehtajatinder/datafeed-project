@@ -1,0 +1,111 @@
+@import 'empty_state_dependencies';
+
+@include mds-export-once('mds_empty_state') {
+    // Empty State Component
+    .mds-empty-state {
+        @include mds-container-dark-parent-selectors {
+            color: $mds-text-color-primary-on-dark;
+        }
+
+        align-items: center;
+        background-color: transparent;
+        max-width: 320px;
+        text-align: center;
+        text-decoration: none;
+        width: 100%;
+
+        &.mds-empty-state--small {
+            max-width: 285px;
+        }
+
+        &.mds-empty-state--large {
+            max-width: 400px;
+        }
+    }
+
+    .mds-empty-state__icon {
+        display: inline-block;
+        height: 85px;
+        margin-bottom: $mds-space-3-x;
+        width: 85px;
+
+        .mds-empty-state--small & {
+            height: 70px;
+            margin-bottom: $mds-space-2-x;
+            width: 70px;
+        }
+
+        .mds-empty-state--large & {
+            height: 100px;
+            margin-bottom: $mds-space-4-x;
+            width: 100px;
+        }
+        
+    }
+
+    .mds-empty-state__title {
+        @include mds-level-4-heading();
+        @include mds-text-crop($bottom-adjustment: -4px);
+        display: block;
+        margin-bottom: $mds-space-2-x;
+
+        .mds-empty-state--small & {
+            @include mds-level-5-heading();
+            @include mds-text-crop($bottom-adjustment: -2px);
+            margin-bottom: $mds-space-1-and-a-half-x;
+        }
+
+        .mds-empty-state--large & {
+            @include mds-level-3-heading();
+            @include mds-text-crop($bottom-adjustment: -6px);
+            margin-bottom: $mds-space-3-x;
+        }
+    }
+
+    .mds-empty-state__message {
+        @include mds-body-text-m();
+        @include mds-text-crop();
+
+        .mds-empty-state--small & {
+            @include mds-body-text-s();
+        }
+
+        .mds-empty-state--large & {
+            @include mds-body-text-l();
+        }
+    }
+
+    .mds-empty-state__list {
+        @include mds-unordered-list(medium);
+        display: inline-block;
+        margin: 0 auto;
+        margin-top: $mds-space-2-x;
+        text-align: left;
+
+        .mds-empty-state--small & {
+            @include mds-unordered-list(small);
+            margin-top: $mds-space-1-and-a-half-x;
+        }
+
+        .mds-empty-state--large & {
+            @include mds-unordered-list(large);
+            margin-top: $mds-space-3-x;
+        }
+    }
+
+    .mds-empty-state__actions {
+        margin-top: $mds-space-3-x;
+
+        .mds-empty-state--small & {
+            margin-top: $mds-space-2-x;
+        }
+
+        .mds-empty-state--large & {
+            margin-top: $mds-space-4-x;
+        }
+    }
+
+    mds-empty-state {
+        display: inline-block;
+    }
+}

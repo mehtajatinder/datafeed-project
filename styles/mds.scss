@@ -1,0 +1,56 @@
+@import '../constants/constants';
+
+@import 'utils/accessibility';
+@import 'utils/import_once';
+@import 'visual-language/borders';
+@import 'visual-language/color';
+@import 'visual-language/fonts';
+@import 'visual-language/layering';
+@import 'visual-language/size';
+@import 'visual-language/shape';
+@import 'visual-language/typography';
+
+@import '../components/accordion/accordion';
+@import '../components/alert/alert';
+@import '../components/article/article';
+@import '../components/button/button';
+@import '../components/button_group/button_group';
+@import '../components/card/card';
+@import '../components/combo_box/combo_box';
+@import '../components/container/container';
+@import '../components/data_table/data_table';
+@import '../components/dialog/dialog';
+@import '../components/empty_state/empty_state';
+@import '../components/exhibit/exhibit';
+@import '../components/form/form';
+@import '../components/header/header';
+@import '../components/icon/icon';
+@import '../components/layout_grid/layout_grid';
+@import '../components/link/link';
+@import '../components/list_group/list_group';
+@import '../components/loader/loader';
+@import '../components/masthead/masthead';
+@import '../components/menu/menu';
+@import '../components/modal/modal';
+@import '../components/module_container/module_container';
+@import '../components/navigation_container/navigation_container';
+@import '../components/notification/notification';
+@import '../components/overlay/overlay';
+@import '../components/page_shell/page_shell';
+@import '../components/pagination/pagination';
+@import '../components/popover/popover';
+@import '../components/profile_image/profile_image';
+@import '../components/range_slider/range_slider';
+@import '../components/search_field/search_field';
+@import '../components/search_results/search_results';
+@import '../components/site_navigation/site_navigation';
+@import '../components/stepper/stepper';
+@import '../components/switch/switch';
+@import '../components/tag/tag';
+@import '../components/tooltip/tooltip';
+@import '../components/top_hat/top_hat';
+
+
+    body{
+        @include mds-body-text-l();
+    }

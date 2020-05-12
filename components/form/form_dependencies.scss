@@ -1,0 +1,18 @@
+$mds-font-asset-path: '../../../fonts/' !default; // This font path is used to render the component-only test page correctly
+@import '../../styles/visual-language/fonts';
+@import '../../constants/constants';
+@import '../../styles/utils/import_once';
+@import '../../styles/visual-language/color';
+@import '../../styles/visual-language/size';
+@import '../../styles/visual-language/typography';
+@import '../../styles/utils/accessibility';
+@import './form_variables';
+@import './form_mixins';
+
+// Include the individual form components
+@import './form_input';
+@import './form_checkbox';
+@import './form_label';
+@import './form_radio_button';
+@import './form_select';
+@import './form_textarea';

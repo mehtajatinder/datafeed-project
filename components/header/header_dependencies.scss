@@ -1,0 +1,10 @@
+$mds-font-asset-path: '../../../fonts/' !default; // This font path is used to render the component-only sink page correctly
+@import '../../constants/constants';
+@import '../../styles/visual-language/borders';
+@import '../../styles/visual-language/fonts';
+@import '../../styles/visual-language/space';
+@import '../../styles/visual-language/typography';
+@import '../../styles/utils/import_once';
+
+// Component Dependencies
+@import '../button/button'; // Used for the action buttons

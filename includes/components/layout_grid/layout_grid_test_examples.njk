@@ -1,0 +1,677 @@
+    <h1 style="margin-top: 0;">Layout Grid</h1>
+    <p>Background of this test page is set to <code>background-color-light</code></p>
+
+    <h2 class="mds-doc-test__header">Basic Example</h2>
+    <div class="mds-doc-layout-grid--example">
+        {{ library.layout_grid() }}
+    </div>
+
+
+    <h2 class="mds-doc-test__header">Equal Width (Default)</h2>
+    <div class="mds-doc-layout-grid--example">
+        {{
+            library.layout_grid(
+                grid_map = [
+                    {
+                        columns: [
+                            {
+                                content: '1 of 3 columns (33.3%)'
+                            },{
+                                content: '1 of 3 columns (33.3%)'
+                            },{
+                                content: '1 of 3 columns (33.3%)'
+                            }
+                        ]
+                    },{
+                        columns: [
+                            {
+                                content: '1 of 2 columns (50%)'
+                            },{
+                                content: '1 of 2 columns (50%)'
+                            }
+                        ]
+                    }
+                ]
+            )
+        }}
+    </div>
+
+
+    <h2 class="mds-doc-test__header">Proportional Width</h2>
+    <div class="mds-doc-layout-grid--example">
+        {{
+            library.layout_grid(
+                grid_map = [
+                    {
+                        columns: [
+                            {
+                            content: '4 of 12 Columns',
+                            class: 'mds-layout-grid__col--4'
+                            },{
+                            content: '6 of 12 Columns',
+                            class: 'mds-layout-grid__col--6'
+                            },{
+                            content: '2 of 12 Columns',
+                            class: 'mds-layout-grid__col--2'
+                            }
+                        ]
+                    }
+                ]
+            )
+        }}
+    </div>
+
+    <h2 class="mds-doc-test__header">Content-based Width</h2>
+    <div class="mds-doc-layout-grid--example">
+        {{
+            library.layout_grid(
+                grid_map = [
+                    {
+                        columns: [
+                            {
+                            content: 'Automatic Column',
+                            class: 'mds-layout-grid__col'
+                            },{
+                            content: '2 Columns',
+                            class: 'mds-layout-grid__col--2'
+                            },{
+                            content: 'This column is defined by the width of it‘s content.',
+                            class: 'mds-layout-grid__col--auto'
+                            }
+                        ]
+                    },
+                    {
+                        class: 'mds-layout-grid__row--justify-content-center',
+                        columns: [
+                            {
+                            content: '2 Columns',
+                            class: 'mds-layout-grid__col--2'
+                            },{
+                            content: 'This column is defined by the width of it‘s content.',
+                            class: 'mds-layout-grid__col--auto'
+                            },{
+                            content: '2 Columns',
+                            class: 'mds-layout-grid__col--2'
+                            }
+                        ]
+                    }
+                ]
+            )
+        }}
+    </div>
+
+    <h2 class="mds-doc-test__header">Offsetting - Pull</h2>
+    <div class="mds-doc-layout-grid--example">
+        {{
+            library.layout_grid(
+                grid_map = [
+                    {
+                        columns: [
+                            {
+                                class: 'mds-layout-grid__col--3 mds-layout-grid__col--pull-9',
+                                content: '3 Columns'
+                            }
+                        ]
+                    },{
+                        columns: [
+                            {
+                                class: 'mds-layout-grid__col--6 mds-layout-grid__col--pull-6',
+                                content: '6 Columns'
+                            }
+                        ]
+                    },{
+                        columns: [
+                            {
+                                class: 'mds-layout-grid__col--9 mds-layout-grid__col--pull-3',
+                                content: '9 Columns'
+                            }
+                        ]
+                    }
+                ]
+            )
+        }}
+    </div>
+
+    <h2 class="mds-doc-test__header">Offsetting - Push</h2>
+    <div class="mds-doc-layout-grid--example">
+        {{
+            library.layout_grid(
+                grid_map = [
+                    {
+                        columns: [
+                            {
+                                class: 'mds-layout-grid__col--3 mds-layout-grid__col--push-9',
+                                content: '3 Columns'
+                            }
+                        ]
+                    },{
+                        columns: [
+                            {
+                                class: 'mds-layout-grid__col--6 mds-layout-grid__col--push-6',
+                                content: '6 Columns'
+                            }
+                        ]
+                    },{
+                        columns: [
+                            {
+                                class: 'mds-layout-grid__col--9 mds-layout-grid__col--push-3',
+                                content: '9 Columns'
+                            }
+                        ]
+                    }
+                ]
+            )
+        }}
+    </div>
+
+    <h2 class="mds-doc-test__header">Offsetting - Push & Pull</h2>
+    <div class="mds-doc-layout-grid--example">
+        {{
+            library.layout_grid(
+                grid_map = [
+                    {
+                        columns: [
+                            {
+                                class: 'mds-layout-grid__col--3 mds-layout-grid__col--pull-8 mds-layout-grid__col--push-1',
+                                content: '3 Columns'
+                            }
+                        ]
+                    },{
+                        columns: [
+                            {
+                                class: 'mds-layout-grid__col--5 mds-layout-grid__col--pull-5 mds-layout-grid__col--push-2',
+                                content: '5 Columns'
+                            }
+                        ]
+                    },{
+                        columns: [
+                            {
+                                class: 'mds-layout-grid__col--7 mds-layout-grid__col--push-3 mds-layout-grid__col--pull-2',
+                                content: '7 Columns'
+                            }
+                        ]
+                    }
+                ]
+            )
+        }}
+    </div>
+
+    <h2 class="mds-doc-test__header">Offsetting - Squeeze</h2>
+    <div class="mds-doc-layout-grid--example">
+        {{
+            library.layout_grid(
+                grid_map = [
+                    {
+                        columns: [
+                            {
+                                class: 'mds-layout-grid__col--4 mds-layout-grid__col--squeeze-4',
+                                content: '4 Columns'
+                            }
+                        ]
+                    },{
+                        columns: [
+                            {
+                                class: 'mds-layout-grid__col--6 mds-layout-grid__col--squeeze-3',
+                                content: '6 Columns'
+                            }
+                        ]
+                    },{
+                        columns: [
+                            {
+                                class: 'mds-layout-grid__col--8 mds-layout-grid__col--squeeze-2',
+                                content: '8 Columns'
+                            }
+                        ]
+                    }
+                ]
+            )
+        }}
+    </div>
+
+    <h2 class="mds-doc-test__header">Wrapping</h2>
+    <div class="mds-doc-layout-grid--example">
+        {{
+            library.layout_grid(
+                grid_map = [
+                    {
+                        columns: [
+                            {
+                                class: 'mds-layout-grid__col--3',
+                                content: '3 Columns'
+                            },
+                            {
+                                class: 'mds-layout-grid__col--5',
+                                content: '5 Columns'
+                            },
+                            {
+                                class: 'mds-layout-grid__col--7',
+                                content: '7 Columns'
+                            },
+                            {
+                                class: 'mds-layout-grid__col--3',
+                                content: '3 Columns'
+                            }
+                        ]
+                    }
+                ]
+            )
+        }}
+    </div>
+
+    <h2 class="mds-doc-test__header">Wrapping - Block Grid</h2>
+    <div class="mds-doc-layout-grid--example">
+        {{
+            library.layout_grid(
+                grid_map = [
+                    {
+                        columns: [
+                            {
+                                class: 'mds-layout-grid__col--3',
+                                content: '3 Columns'
+                            },
+                            {
+                                class: 'mds-layout-grid__col--3',
+                                content: '3 Columns'
+                            },
+                            {
+                                class: 'mds-layout-grid__col--3',
+                                content: '3 Columns'
+                            },
+                            {
+                                class: 'mds-layout-grid__col--3',
+                                content: '3 Columns'
+                            },
+                            {
+                                class: 'mds-layout-grid__col--3',
+                                content: '3 Columns'
+                            },
+                            {
+                                class: 'mds-layout-grid__col--3',
+                                content: '3 Columns'
+                            },
+                            {
+                                class: 'mds-layout-grid__col--3',
+                                content: '3 Columns'
+                            },
+                            {
+                                class: 'mds-layout-grid__col--3',
+                                content: '3 Columns'
+                            },
+                            {
+                                class: 'mds-layout-grid__col--3',
+                                content: '3 Columns'
+                            },
+                            {
+                                class: 'mds-layout-grid__col--3',
+                                content: '3 Columns'
+                            }
+                        ]
+                    }
+                ]
+            )
+        }}
+    </div>
+
+    <h2 class="mds-doc-test__header">No Wrap</h2>
+    <div class="mds-doc-layout-grid--example">
+        {{
+            library.layout_grid(
+                grid_map = [
+                    {
+                        class: 'mds-layout-grid__row--nowrap',
+                        columns: [
+                            {
+                                class: 'mds-layout-grid__col--6',
+                                content: '6 Columns'
+                            },
+                            {
+                                class: 'mds-layout-grid__col--4',
+                                content: '4 Columns'
+                            },
+                            {
+                                class: 'mds-layout-grid__col--4',
+                                content: '4 Columns - Columns beyond the available 12 are not visible'
+                            }
+                        ]
+                    }
+                ]
+            )
+        }}
+    </div>
+
+
+    <h2 class="mds-doc-test__header">Nesting</h2>
+    <div class="mds-doc-layout-grid--example">
+        {{
+            library.layout_grid(
+                grid_map = [
+                    {
+                        columns: [
+                            {
+                                class: 'mds-layout-grid__col--9',
+                                content:library.layout_grid(
+                                            grid_map = [
+                                                {
+                                                    columns: [
+                                                        {
+                                                            class: 'mds-layout-grid__col--4',
+                                                            content: '4 Columns'
+                                                        },
+                                                        {
+                                                            class: 'mds-layout-grid__col--4',
+                                                            content: '4 Columns'
+                                                        },
+                                                        {
+                                                            class: 'mds-layout-grid__col--4',
+                                                            content: '4 Columns'
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            grid_title = '9 Columns',
+                                            grid_nested = true
+                                        )
+                            },
+                            {
+                                class: 'mds-layout-grid__col--3',
+                                content: '3 Columns'
+                            }
+                        ]
+                    }
+                ]
+            )
+        }}
+    </div>
+
+    <h2 class="mds-doc-test__header">Removing Gutters - Remove Margin Only</h2>
+    <div class="mds-doc-layout-grid--example">
+        {{
+            library.layout_grid(
+                grid_map = [
+                    {
+                        class: 'mds-layout-grid__row--zero-margin',
+                        columns: [
+                            {
+                            content: '1 of 2 Columns'
+                            },{
+                            content: '1 of 2 Columns'
+                            }
+                        ]
+                    }
+                ]
+            )
+        }}
+    </div>
+
+    <h2 class="mds-doc-test__header">Removing Gutters - Remove Padding and Margin</h2>
+    <div class="mds-doc-layout-grid--example">
+        {{
+            library.layout_grid(
+                grid_map = [
+                    {
+                        class: 'mds-layout-grid__row--zero-margin',
+                        columns: [
+                            {
+                            class: 'mds-layout-grid__col--zero-padding',
+                            content: '1 of 2 Columns'
+                            },{
+                            class: 'mds-layout-grid__col--zero-padding',
+                            content: '1 of 2 Columns'
+                            }
+                        ]
+                    }
+                ]
+            )
+        }}
+    </div>
+
+
+    <h2 class="mds-doc-test__header">Responsiveness - Fluid Layout</h2>
+    <div class="mds-doc-layout-grid--example">
+        {{
+            library.layout_grid(
+                grid_map = [
+                    {
+                        columns: [
+                            {
+                                class: 'mds-layout-grid__col--2',
+                                content: 'Column'
+                            },
+                            {
+                                class: 'mds-layout-grid__col--8',
+                                content: 'Column'
+                            },
+                            {
+                                class: 'mds-layout-grid__col--2',
+                                content: 'Column'
+                            }
+                        ]
+                    }
+                ]
+            )
+        }}
+    </div>
+
+    <h2 class="mds-doc-test__header">Responsiveness - Breakpoint-based Layout</h2>
+    <div class="mds-doc-layout-grid--example">
+        {{
+            library.layout_grid(
+                grid_map = [
+                    {
+                        columns: [
+                            {
+                                class: 'mds-layout-grid__col--12 mds-layout-grid__col--3-at-600 mds-layout-grid__col--2-at-1000 mds-layout-grid__col--3-at-1200',
+                                content: 'Column'
+                            },
+                            {
+                                class: 'mds-layout-grid__col--12 mds-layout-grid__col--9-at-600 mds-layout-grid__col--8-at-1000 mds-layout-grid__col--6-at-1200',
+                                content: 'Column'
+                            },
+                            {
+                                class: 'mds-layout-grid__col--12 mds-layout-grid__col--2-at-1000 mds-layout-grid__col--3-at-1200',
+                                content: 'Column'
+                            }
+                        ]
+                    },{
+                        columns: [
+                            {
+                                class: 'mds-layout-grid__col--12 mds-layout-grid__col--6-at-768 mds-layout-grid__col--at-1200',
+                                content: 'Column'
+                            },
+                            {
+                                class: 'mds-layout-grid__col--12 mds-layout-grid__col--6-at-768 mds-layout-grid__col--at-1200',
+                                content: 'Column'
+                            },
+                            {
+                                class: 'mds-layout-grid__col--12 mds-layout-grid__col--at-1200',
+                                content: 'Column'
+                            }
+                        ]
+                    }
+                ]
+            )
+        }}
+    </div>
+
+    <h2 class="mds-doc-test__header">Responsiveness - Block Grid</h2>
+    <div class="mds-doc-layout-grid--example">
+        {{
+            library.layout_grid(
+                grid_map = [
+                    {
+                        columns: [
+                            {
+                                class: 'mds-layout-grid__col--12 mds-layout-grid__col--6-at-600 mds-layout-grid__col--4-at-768 mds-layout-grid__col--3-at-1000',
+                                content: 'Column'
+                            },{
+                                class: 'mds-layout-grid__col--12 mds-layout-grid__col--6-at-600 mds-layout-grid__col--4-at-768 mds-layout-grid__col--3-at-1000',
+                                content: 'Column'
+                            },{
+                                class: 'mds-layout-grid__col--12 mds-layout-grid__col--6-at-600 mds-layout-grid__col--4-at-768 mds-layout-grid__col--3-at-1000',
+                                content: 'Column'
+                            },{
+                                class: 'mds-layout-grid__col--12 mds-layout-grid__col--6-at-600 mds-layout-grid__col--4-at-768 mds-layout-grid__col--3-at-1000',
+                                content: 'Column'
+                            },{
+                                class: 'mds-layout-grid__col--12 mds-layout-grid__col--6-at-600 mds-layout-grid__col--4-at-768 mds-layout-grid__col--3-at-1000',
+                                content: 'Column'
+                            },{
+                                class: 'mds-layout-grid__col--12 mds-layout-grid__col--6-at-600 mds-layout-grid__col--4-at-768 mds-layout-grid__col--3-at-1000',
+                                content: 'Column'
+                            },{
+                                class: 'mds-layout-grid__col--12 mds-layout-grid__col--6-at-600 mds-layout-grid__col--4-at-768 mds-layout-grid__col--3-at-1000',
+                                content: 'Column'
+                            },{
+                                class: 'mds-layout-grid__col--12 mds-layout-grid__col--6-at-600 mds-layout-grid__col--4-at-768 mds-layout-grid__col--3-at-1000',
+                                content: 'Column'
+                            },{
+                                class: 'mds-layout-grid__col--12 mds-layout-grid__col--6-at-600 mds-layout-grid__col--4-at-768 mds-layout-grid__col--3-at-1000',
+                                content: 'Column'
+                            },{
+                                class: 'mds-layout-grid__col--12 mds-layout-grid__col--6-at-600 mds-layout-grid__col--4-at-768 mds-layout-grid__col--3-at-1000',
+                                content: 'Column'
+                            }
+                        ]
+                    }
+                ]
+            )
+        }}
+    </div>
+
+    <h2 class="mds-doc-test__header">Alignment - Horizontal</h2>
+    <div class="mds-doc-layout-grid--example">
+        {{
+            library.layout_grid(
+                grid_map = [
+                    {
+                        class: 'mds-layout-grid__row--justify-content-flex-start',
+                        columns: [
+                            {
+                            content: '4 Columns',
+                            class: 'mds-layout-grid__col--4'
+                            },{
+                            content: '4 Columns',
+                            class: 'mds-layout-grid__col--4'
+                            }
+                        ]
+                    },{
+                        class: 'mds-layout-grid__row--justify-content-center',
+                        columns: [
+                            {
+                            content: '4 Columns',
+                            class: 'mds-layout-grid__col--4'
+                            },{
+                            content: '4 Columns',
+                            class: 'mds-layout-grid__col--4'
+                            }
+                        ]
+                    },{
+                        class: 'mds-layout-grid__row--justify-content-flex-end',
+                        columns: [
+                            {
+                            content: '4 Columns',
+                            class: 'mds-layout-grid__col--4'
+                            },{
+                            content: '4 Columns',
+                            class: 'mds-layout-grid__col--4'
+                            }
+                        ]
+                    },{
+                        class: 'mds-layout-grid__row--justify-content-space-around',
+                        columns: [
+                            {
+                            content: '4 Columns',
+                            class: 'mds-layout-grid__col--4'
+                            },{
+                            content: '4 Columns',
+                            class: 'mds-layout-grid__col--4'
+                            }
+                        ]
+                    },{
+                        class: 'mds-layout-grid__row--justify-content-space-between',
+                        columns: [
+                            {
+                            content: '4 Columns',
+                            class: 'mds-layout-grid__col--4'
+                            },{
+                            content: '4 Columns',
+                            class: 'mds-layout-grid__col--4'
+                            }
+                        ]
+                    }
+                ]
+            )
+        }}
+    </div>
+
+
+    <h2 class="mds-doc-test__header">Vertical Alignment</h2>
+    <div class="mds-doc-layout-grid--example mds-doc-layout-grid--align-example">
+        {{
+            library.layout_grid(
+                grid_map = [
+                    {
+                        columns: [
+                            {
+                                content: '1 of 2 Columns'
+                            },{
+                                content: '2 of 2 Columns'
+                            }
+                        ]
+                    },{
+                        class: 'mds-layout-grid__row--align-items-flex-start',
+                        columns: [
+                            {
+                                content: '1 of 2 Columns'
+                            },{
+                                content: '2 of 2 Columns'
+                            }
+                        ]
+                    },{
+                        class: 'mds-layout-grid__row--align-items-center',
+                        columns: [
+                            {
+                                content: '1 of 2 Columns'
+                            },{
+                                content: '2 of 2 Columns'
+                            }
+                        ]
+                    },{
+                        class: 'mds-layout-grid__row--align-items-flex-end',
+                        columns: [
+                            {
+                                content: '1 of 2 Columns'
+                            },{
+                                content: '2 of 2 Columns'
+                            }
+                        ]
+                    }
+                ]
+            )
+        }}
+    </div>
+
+    <h2 class="mds-doc-test__header">Align Self</h2>
+    <div class="mds-doc-layout-grid--example mds-doc-layout-grid--align-example">
+        {{
+            library.layout_grid(
+                grid_map = [
+                    {
+                        columns: [
+                            {
+                                class: 'mds-layout-grid__col--align-self-flex-start',
+                                content: '1 of 3 Columns'
+                            },{
+                                class: 'mds-layout-grid__col--align-self-center',
+                                content: '2 of 3 Columns'
+                            },{
+                                class: 'mds-layout-grid__col--align-self-flex-end',
+                                content: '3 of 3 Columns'
+                            }
+                        ]
+                    }
+                ]
+            )
+        }}
+    </div>
+

@@ -1,0 +1,39 @@
+// Import core mds dependencies
+@import 'layout_grid_dependencies';
+
+// Import grid variables
+@import 'layout_grid_variables';
+
+// Import grid functions
+@import 'layout_grid_functions';
+
+// Import grid mixins
+@import 'layout_grid_mixins';
+
+
+.mds-layout-grid {
+    // Row
+    .mds-layout-grid__row {
+        @include mds-layout-grid-row;
+        @include mds-layout-grid-row-flex-wrap-nowrap;
+        @include mds-layout-grid-row-horizontal-justify();
+        @include mds-layout-grid-row-align-items-classes();
+    }
+
+    // Column
+    .mds-layout-grid__col {
+        @include mds-layout-grid-col-align-self-classes();
+    }
+
+    // Breakpoint-specific styles
+    @include mds-layout-grid-each-breakpoint (
+        $generate-column-flex-classes: true,
+        $generate-column-pull-classes: true,
+        $generate-column-push-classes: true,
+        $generate-column-squeeze-classes: true,
+        $generate-column-zero-padding-classes: true,
+        $generate-row-zero-margin-classes: true,
+        $set-column-padding: true,
+        $set-row-margin: true);
+
+}

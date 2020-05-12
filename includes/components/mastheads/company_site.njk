@@ -1,0 +1,9 @@
+{% set masthead_left %}
+    {{ library.button(icon_left="menu-padless", class="mds-button--icon-only mds-masthead--hide-wide") }}
+    {{ library.button(icon_left="menu-padless", text="Menu", class="mds-button--flat mds-button--flat-icon-m mds-masthead--show-wide") }}
+{% endset %}
+{% set masthead_right %}
+    {{ library.button(icon_left="envelope", class="mds-button--icon-only mds-masthead--hide-wide") }}
+    {{ library.button(text="Contact Sales", class="mds-button--secondary mds-masthead--show-wide") }}
+{% endset %}
+{{ library.masthead(logo="/images/mastheads/logos/Mstar-logo-50px.svg", masthead_left=masthead_left, masthead_right=masthead_right) }}

@@ -1,0 +1,961 @@
+{# Set some complex default values for site_navigation #}
+{% set default_nav_items =[
+    {
+        label: 'Home',
+        children: [
+            {
+                label: 'First List Item',
+                href: "#"
+            },
+            {
+                label: 'Default List Item',
+                href: "#"
+            },
+            {
+                label: 'Default List Item',
+                href: "#"
+            },
+            {
+                label: 'Default List Item',
+                href: "#",
+                active: true
+            }
+        ]
+    },
+    {
+        label: 'Accounts',
+        href: '/path/to/accounts'
+    },
+    {
+        label: 'Application',
+        href: '/path/to/application'
+    },
+    {
+        label: 'Performance',
+        href: '/path/to/performance'
+    },
+    {
+        label: 'Forms',
+        href: '/path/to/forms'
+    },
+    {
+        label: 'Communication',
+        href: '/path/to/communication'
+    },
+    {
+        label: 'Tools',
+        href: '/path/to/tools'
+    },
+    {
+        label: 'Contact Us',
+        href: '/path/to/contact-us'
+    }
+] %}
+
+{% set api_center = [
+    {
+        label: "Home",
+        href:"#",
+        active: true
+    },
+    {
+        label: "API Builder",
+        href:"#"
+    },
+    {
+        label: "Universe Builder",
+        href:"#"
+    },
+    {
+        label: "Feed Builder",
+        href:"#"
+    }
+] %}
+
+{% set api_center_with_ids = [
+    {
+        label: "Home",
+        id: "home",
+        href: "#"
+    },
+    {
+        label: "API Builder",
+        id: "api_builder",
+        href: "#"
+    },
+    {
+        label: "Universe Builder",
+        id: "universe_builder",
+        href: "#"
+    },
+    {
+        label: "Feed Builder",
+        id: "feed_builder",
+        href: "#"
+    }
+] %}
+
+{% set by_all_accounts = [
+    {
+        label: "Who We Help",
+        children: [
+            {
+                label: 'Independent Financial Advisors',
+                href: "#",
+                active: true
+            },
+            {
+                label: 'Asset Managers',
+                href: "#"
+            },
+            {
+                label: 'Wealth Managers/Family Offices',
+                href: "#"
+            },
+            {
+                label: 'Trust Companies',
+                href: "#"
+            },
+            {
+                label: 'Custodians/Product Producers',
+                href: "#"
+            },
+            {
+                label: 'Independent Broker Dealers',
+                href: "#"
+            }
+        ]
+    },
+    {
+        label: "Data and System Connections",
+        children: [
+            {
+                label: 'Resellers',
+                href: "#"
+            },
+            {
+                label: 'Data Connectivity',
+                href: "#"
+            },
+            {
+                label: 'Watch a Demo',
+                href: "#"
+            },
+            {
+                label: 'Become a Reseller',
+                href: "#"
+            }
+        ]
+    },
+    {
+        label: "How to Buy",
+        children: [
+            {
+                label: 'Request Quote',
+                href: "#"
+            },
+            {
+                label: 'Expert Consultant Network',
+                href: "#"
+            }
+        ]
+    },
+    {
+        label: "Resources",
+        href:"#"
+    },
+    {
+        label: "Learn About Us",
+        children: [
+            {
+                label: 'Overview',
+                href: "#"
+            },
+            {
+                label: 'Hear from Industry Experts',
+                href: "#"
+            },
+            {
+                label: 'Contact Us',
+                href: "#"
+            }
+        ]
+    },
+    {
+        label: "Blog",
+        href:"#"
+    }
+] %}
+
+{% set commodity_data_management = [
+    {
+        label: "Company",
+        href:"#",
+        active: true
+    },
+    {
+        label: "Excel Add-In",
+        href:"#"
+    },
+    {
+        label: "Marketplace",
+        href:"#"
+    },
+    {
+        label: "Workflow",
+        href:"#"
+    },
+    {
+        label: "Markets",
+        href:"#"
+    },
+    {
+        label: "Research",
+        href:"#"
+    },
+    {
+        label: "Support",
+        href:"#"
+    }
+] %}
+
+{% set credit_ratings = [
+    {
+        label: "Ratings/Surveillance",
+        children: [
+            {
+                label: 'Ratings Download',
+                href: "#",
+                active: true
+            },
+            {
+                label: 'Structured Finance',
+                href: "#"
+            },
+            {
+                label: 'Corporate/Financial Inst.',
+                href: "#"
+            },
+            {
+                label: 'Ratings Actions',
+                href: "#"
+            },
+            {
+                label: 'Methodologies',
+                href: "#"
+            }
+        ]
+    },
+    {
+        label: "Operational Risk Assessments",
+        children: [
+            {
+                label: 'Rankings',
+                href: "#"
+            },
+            {
+                label: 'Methodologies',
+                href: "#"
+            }
+        ]
+    },
+    {
+        label: "Research",
+        children: [
+            {
+                label: 'Structured Finance',
+                href: "#"
+            },
+            {
+                label: 'Corporate/Financial Inst.',
+                href: "#"
+            },
+            {
+                label: 'Operational Risk Assessments',
+                href: "#"
+            }
+        ]
+    },
+    {
+        label: "Products & Services",
+        children: [
+            {
+                label: 'Structured Finance',
+                href: "#"
+            },
+            {
+                label: 'Corporate/Financial Inst.',
+                href: "#"
+            },
+            {
+                label: 'Operational Risk Assessments',
+                href: "#"
+            }
+        ]
+    },
+    {
+        label: "Regulatory Affairs",
+        href:"#"
+    }
+] %}
+
+{% set developer = [
+    {
+        label: "Home",
+        href:"#",
+        active: true
+    },
+    {
+        label: "Collections",
+        children: [
+            {
+                label: 'Data Aggregation',
+                href: "#"
+            },
+            {
+                label: 'Financial Planning',
+                href: "#"
+            },
+            {
+                label: 'Market Monitoring',
+                href: "#"
+            },
+            {
+                label: 'Portfolio Analysis',
+                href: "#"
+            },
+            {
+                label: 'Investment Data',
+                href: "#"
+            }
+        ]
+    },
+    {
+        label: "APIs",
+        children: [
+            {
+                label: 'Advanced Price Chart JavaScript API',
+                href: "#"
+            },
+            {
+                label: 'Annual Report Fees API',
+                href: "#"
+            },
+            {
+                label: 'Asset Allocation JavaScript API',
+                href: "#"
+            },
+            {
+                label: 'Data Aggregation API',
+                href: "#"
+            },
+            {
+                label: 'Earnings Calendar JavaScript API',
+                href: "#"
+            },
+            {
+                label: 'View All APIs',
+                href: "#"
+            }
+        ]
+    },
+    {
+        label: "Trending Topics",
+        children: [
+            {
+                label: 'Department of Labor Fiduciary Rule',
+                href: "#"
+            },
+            {
+                label: 'Developing for MiFID II',
+                href: "#"
+            }
+        ]
+    },
+    {
+        label: "Support",
+        children: [
+            {
+                label: 'Contact Us',
+                href: "#"
+            }
+        ]
+    },
+    {
+        label: "Blog",
+        href:"#"
+    }
+] %}
+
+{% set direct_cloud = [
+    {
+        label: "Home",
+        href:"#",
+        active: true
+    },
+    {
+        label: "Investment Workbooks",
+        children: [
+            {
+                label: 'View All',
+                href: "#"
+            },
+            {
+                label: 'Create New',
+                href: "#"
+            }
+        ]
+    },
+    {
+        label: "Morningstar Research",
+        children: [
+            {
+                label: 'Featured',
+                href: "#"
+            },
+            {
+                label: 'Latest',
+                href: "#"
+            },
+            {
+                label: 'Videos',
+                href: "#"
+            },
+            {
+                label: 'Topics',
+                href: "#"
+            },
+            {
+                label: 'Publications',
+                href: "#"
+            }
+        ]
+    },
+    {
+        label: "Custom Data Management",
+        href:"#"
+    },
+    {
+        label: "Import",
+        href:"#"
+    },
+    {
+        label: "Notes",
+        href:"#"
+    },
+    {
+        label: "Alerts",
+        href:"#"
+    },
+    {
+        label: "Excel Add-In",
+        href:"#"
+    },
+    {
+        label: "Presentation Studio",
+        href:"#"
+    },
+    {
+        label: "File Management",
+        href:"#"
+    },
+    {
+        label: "Global Settings",
+        href:"#"
+    },
+    {
+        label: "Help",
+        children: [
+            {
+                label: 'Help Center',
+                href: "#"
+            },
+            {
+                label: 'Give Feedback',
+                href: "#"
+            },
+            {
+                label: 'Contact Support',
+                href: "#"
+            }
+        ]
+    },
+    {
+        label: "Logout",
+        href:"#"
+    }
+] %}
+
+{% set dot_com_desktop = [
+    {
+        label: "Today",
+        href:"#",
+        active: true
+    },
+    {
+        label: "Best Investments",
+        children: [
+            {
+                label: 'Featured',
+                href: "#"
+            },
+            {
+                label: 'Investment Type',
+                href: "#"
+            },
+            {
+                label: 'Retirement & Income',
+                href: "#"
+            },
+            {
+                label: 'Undervalued',
+                href: "#"
+            },
+            {
+                label: 'Portfolio Builders',
+                href: "#"
+            }
+        ]
+    },
+    {
+        label: "Your Portfolio",
+        href:"#"
+    },
+    {
+        label: "Markets",
+        href:"#"
+    },
+    {
+        label: "More",
+        children: [
+            {
+                label: 'Investments',
+                href: "#"
+            },
+            {
+                label: 'Tools',
+                href: "#"
+            },
+            {
+                label: 'Personal Finance',
+                href: "#"
+            },
+            {
+                label: 'Investing Specialists',
+                href: "#"
+            },
+            {
+                label: 'Discuss',
+                href: "#"
+            },
+            {
+                label: 'Article Archive',
+                href: "#"
+            },
+            {
+                label: 'Membership',
+                href: "#"
+            },
+            {
+                label: 'About Morningstar',
+                href: "#"
+            }
+        ]
+    }
+] %}
+
+{% set dot_com_mobile = [
+    {
+        label: "Today",
+        href:"#",
+        active: true
+    },
+    {
+        label: "Best Investments",
+        children: [
+            {
+                label: 'Featured',
+                href: "#"
+            },
+            {
+                label: 'Investment Type',
+                href: "#"
+            },
+            {
+                label: 'Retirement & Income',
+                href: "#"
+            },
+            {
+                label: 'Undervalued',
+                href: "#"
+            },
+            {
+                label: 'Portfolio Builders',
+                href: "#"
+            }
+        ]
+    },
+    {
+        label: "Your Portfolio",
+        href:"#"
+    },
+    {
+        label: "Markets",
+        href:"#"
+    },
+    {
+        label: "Investments",
+        children: [
+            {
+                label: 'Stocks',
+                href: "#"
+            },
+            {
+                label: 'Bonds',
+                href: "#"
+            },
+            {
+                label: 'Mutual Funds',
+                href: "#"
+            },
+            {
+                label: 'ETFs',
+                href: "#"
+            },
+            {
+                label: 'CEFs',
+                href: "#"
+            }
+        ]
+    },
+    {
+        label: "Tools",
+        children: [
+            {
+                label: 'Basic Fund Screener',
+                href: "#"
+            },
+            {
+                label: 'Basic Stock Screener',
+                href: "#"
+            },
+            {
+                label: 'Instant X-Ray',
+                href: "#"
+            },
+            {
+                label: 'More Tools',
+                href: "#"
+            }
+        ]
+    },
+    {
+        label: "Personal Finance",
+        children: [
+            {
+                label: 'Family Finances',
+                href: "#"
+            },
+            {
+                label: 'Start Investing',
+                href: "#"
+            },
+            {
+                label: 'Save for College',
+                href: "#"
+            },
+            {
+                label: 'Save for Retirement',
+                href: "#"
+            },
+            {
+                label: 'Invest in Retirement',
+                href: "#"
+            },
+            {
+                label: 'Optimize Your Portfolio',
+                href: "#"
+            },
+            {
+                label: 'Minimize Taxes',
+                href: "#"
+            }
+        ]
+    },
+    {
+        label: "Investing Specialists",
+        children: [
+            {
+                label: 'Christine Benz',
+                href: "#"
+            },
+            {
+                label: 'Russ Kinnel',
+                href: "#"
+            },
+            {
+                label: 'John Rekenthaler',
+                href: "#"
+            },
+            {
+                label: 'Bob Johnson',
+                href: "#"
+            }
+        ]
+    },
+    {
+        label: "Discuss",
+        href:"#"
+    },
+    {
+        label: "Article Archive",
+        href:"#"
+    },
+    {
+        label: "Membership",
+        href:"#"
+    },
+    {
+        label: "About Morningstar",
+        children: [
+            {
+                label: 'Company Site',
+                href: "#"
+            },
+            {
+                label: 'About Us',
+                href: "#"
+            },
+            {
+                label: 'Careers',
+                href: "#"
+            },
+            {
+                label: 'Products',
+                href: "#"
+            }
+        ]
+    }
+] %}
+
+{% set equity_data_api_center = [
+    {
+        label: "Dashboard",
+        href:"#",
+        active: true
+    },
+    {
+        label: "Data Catalog",
+        href:"#"
+    },
+    {
+        label: "Take Tool",
+        href:"#"
+    }
+] %}
+
+{% set essentials = [
+    {
+        label: "Home",
+        href:"#",
+        active: true
+    },
+    {
+        label: "Essentials",
+        href:"#"
+    },
+    {
+        label: "Images",
+        href:"#"
+    },
+    {
+        label: "Competitive Analysis",
+        href:"#"
+    },
+    {
+        label: "Analyst Ratings",
+        href:"#"
+    },
+    {
+        label: "Resources",
+        href:"#"
+    }
+] %}
+
+{% set excel_add_in = [
+    {
+        label: "Home",
+        href:"#",
+        active: true
+    },
+    {
+        label: "Templates",
+        href:"#"
+    },
+    {
+        label: "Data Dictionary",
+        href:"#"
+    },
+    {
+        label: "FAQs",
+        href:"#"
+    }
+] %}
+
+{% set institutional_data_manager = [
+    {
+        label: "Home",
+        href:"#",
+        active: true
+    },
+    {
+        label: "Distibution",
+        href:"#"
+    },
+    {
+        label: "About Morningstar",
+        href:"#"
+    }
+] %}
+
+{% set managed_portfolios = [
+    {
+        label: "Home",
+        href:"#",
+        active: true
+    },
+    {
+        label: "Accounts",
+        href:"#"
+    },
+    {
+        label: "Application / Proposal",
+        href:"#"
+    },
+    {
+        label: "Performance",
+        href:"#"
+    },
+    {
+        label: "Forms",
+        href:"#"
+    },
+    {
+        label: "Communication",
+        href:"#"
+    },
+    {
+        label: "Tools",
+        href:"#"
+    },
+    {
+        label: "Contact Us",
+        href:"#"
+    }
+] %}
+
+{% set next = [
+    {
+        label: "Our Portfolios",
+        href:"#",
+        active: true
+    },
+    {
+        label: "Why Morningstar",
+        href:"#"
+    },
+    {
+        label: "Pricing",
+        href:"#"
+    },
+    {
+        label: "FAQs",
+        href:"#"
+    }
+] %}
+
+{% set presentation_studio = [
+    {
+        label: "Home",
+        href:"#",
+        active: true
+    },
+    {
+        label: "Sample Reports",
+        href:"#"
+    },
+    {
+        label: "Support",
+        href:"#"
+    }
+] %}
+
+{% set direct_research = [
+    {
+        label: "Featured",
+        href:"#",
+        active: true
+    },
+    {
+        label: "Latest",
+        href:"#"
+    },
+    {
+        label: "Videos",
+        href:"#"
+    },
+    {
+        label: "Topics",
+        href:"#"
+    },
+    {
+        label: "Publications",
+        href:"#"
+    },
+    {
+        label: "Bookmarked",
+        href:"#"
+    },
+    {
+        label: "Lists & Screens",
+        children: [
+            {
+                label: 'My List 1',
+                href: "#"
+            },
+            {
+                label: 'My List 2',
+                href: "#"
+            },
+            {
+                label: 'My Screen 1',
+                href: "#"
+            },
+            {
+                label: 'My Screen 2',
+                href: "#"
+            }
+        ]
+    },
+    {
+        label: "Subscriptions",
+        children: [
+            {
+                label: 'Christine Benz',
+                href: "#"
+            },
+            {
+                label: 'Dan Kemp',
+                href: "#"
+            },
+            {
+                label: 'Advisor Practice Management',
+                href: "#"
+            },
+            {
+                label: 'Evolution of Advice',
+                href: "#"
+            }
+        ]
+    }
+] %}

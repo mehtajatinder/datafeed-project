@@ -1,0 +1,232 @@
+@import 'alert_dependencies';
+@include mds-export-once('mds_alert') {
+    .mds-alert {
+        @include mds-border-box();
+        display: flex;
+        position: relative;
+        width: 100%;
+    }
+
+    .mds-alert--success {
+
+        &.mds-alert--tinted {
+
+            .mds-alert__cell-body,
+            .mds-alert__cell-dismiss {
+                background-color: $mds-feedback-color-success-background;
+            }
+        }
+    }
+
+    .mds-alert--warning {
+
+        &.mds-alert--tinted {
+
+            .mds-alert__cell-body,
+            .mds-alert__cell-dismiss {
+                background-color: $mds-feedback-color-warning-background;
+            }
+        }
+    }
+
+    .mds-alert--error {
+
+        &.mds-alert--tinted {
+
+            .mds-alert__cell-body,
+            .mds-alert__cell-dismiss {
+                background-color: $mds-feedback-color-error-background;
+            }
+        }
+    }
+
+    @keyframes alertfadeout {
+        0% {
+            max-height: 500px;
+            opacity: 1;
+        }
+
+        100% {
+            max-height: 0;
+            opacity: 0;
+        }
+    }
+
+    .mds-alert--is-dismissed {
+        animation: alertfadeout $mds-animation-timing-1-x linear forwards;
+        margin: 0;
+        overflow: hidden;
+    }
+
+    .mds-alert__cell-icon {
+        align-items: center;
+        background-color: $mds-feedback-color-info;
+        border: $mds-border-container-on-all-backgrounds;
+        border-bottom-left-radius: $mds-border-radius-panel;
+        border-top-left-radius: $mds-border-radius-panel;
+        display: flex;
+        flex-shrink: 0;
+        padding: $mds-space-inset-2-x;
+
+        .mds-alert--small & {
+            padding: $mds-space-inset-1-and-a-half-x;
+        }
+
+        .mds-alert--success & {
+            background-color: $mds-feedback-color-success;
+            border-color: $mds-feedback-color-success;
+        }
+
+        .mds-alert--warning & {
+            background-color: $mds-feedback-color-warning;
+            border-color: $mds-feedback-color-warning;
+        }
+
+        .mds-alert--error & {
+            background-color: $mds-feedback-color-error;
+            border-color: $mds-feedback-color-error;
+        }
+    }
+
+    .mds-alert__cell-body {
+        align-items: center;
+        background-color: $mds-background-color-white;
+        border-bottom: $mds-border-container-on-all-backgrounds;
+        border-bottom-right-radius: $mds-border-radius-panel;
+        border-right: $mds-border-container-on-all-backgrounds;
+        border-top: $mds-border-container-on-all-backgrounds;
+        border-top-right-radius: $mds-border-radius-panel;
+        display: flex;
+        flex-grow: 1;
+        padding: $mds-space-inset-2-x;
+
+        a {
+            @include mds-link($enable-dark: false);
+        }
+
+        .mds-alert--dismissible & {
+            padding-right: $mds-size-icon-s + $mds-space-2-x + $mds-space-2-x;
+        }
+
+        .mds-alert--small & {
+            padding: $mds-space-inset-1-and-a-half-x;
+        }
+
+        .mds-alert--small.mds-alert--dismissible & {
+            padding-right: $mds-size-icon-s + $mds-space-1-and-a-half-x + $mds-space-1-and-a-half-x;
+        }
+    }
+
+    .mds-alert__icon {
+        fill: $mds-color-neutral-37;
+
+        .mds-alert--small & {
+            height: $mds-size-icon-s;
+            width: $mds-size-icon-s;
+        }
+
+        .mds-alert--success &,
+        .mds-alert--error & {
+            fill: $mds-color-white;
+        }
+
+        .mds-alert--warning & {
+            fill: $mds-color-black;
+        }
+    }
+
+    .mds-alert__title {
+        @include mds-text-crop($bottom-adjustment: -2px);
+        border-bottom: solid 1px transparent; // Don't know why yet, but adding a border changes the overall height of the element and makes the text crop work correctly when stacked against another text-cropped element
+        color: $mds-text-color-primary-on-light;
+        display: block;
+        font-family: $mds-font-family-sans-serif;
+        font-size: $mds-font-size-m;
+        font-weight: $mds-font-weight-bold;
+        margin: $mds-space-stack-2-x;
+        transform: translateY(0);
+
+        .mds-alert--small & {
+            font-size: $mds-font-size-s;
+            margin: $mds-space-stack-1-and-a-half-x;
+        }
+
+        &:last-child {
+            margin: 0;
+        }
+    }
+
+    .mds-alert__message {
+        @include mds-text-crop($bottom-adjustment: -2px);
+        border-bottom: solid 1px transparent; // Don't know why yet, but adding a border changes the overall height of the element and makes the text crop work correctly when stacked against another text-cropped element
+        color: $mds-text-color-primary-on-light;
+        font-family: $mds-font-family-sans-serif;
+        font-size: $mds-font-size-m;
+        font-weight: $mds-font-weight-light;
+        margin: $mds-space-stack-2-x;
+
+        .mds-alert--small & {
+            font-size: $mds-font-size-s;
+            font-weight: $mds-font-weight-regular;
+            margin: $mds-space-stack-1-and-a-half-x;
+        }
+
+        &:last-child {
+            margin: 0;
+        }
+    }
+
+    .mds-alert__list {
+        @include mds-text-crop;
+        list-style-type: square;
+        margin: $mds-space-stack-2-x;
+        padding-left: ($mds-font-size-m * 2);
+
+        .mds-alert--small & {
+            margin: $mds-space-stack-1-and-a-half-x;
+            padding-left: ($mds-font-size-s * 2);
+        }
+
+        &:last-child {
+            margin: 0;
+        }
+    }
+
+    .mds-alert__list-item {
+        color: $mds-text-color-primary-on-light;
+        font-family: $mds-font-family-sans-serif;
+        font-size: $mds-font-size-m;
+        font-weight: $mds-font-weight-light;
+
+        .mds-alert--small & {
+            font-size: $mds-font-size-s;
+            font-weight: $mds-font-weight-regular;
+        }
+    }
+
+    .mds-alert__dismiss-button {
+        position: absolute;
+        right: $mds-space-2-x;
+        top: $mds-space-2-x;
+
+        .mds-alert--small & {
+            right: $mds-space-inset-1-and-a-half-x;
+            top: $mds-space-inset-1-and-a-half-x;
+        }
+    }
+
+    // MDSWC Changes
+    mds-alert {
+        .mds-alert__cell-icon {
+            svg {
+                display: block;
+            }
+        }
+    }
+
+    // MDSWC Changes
+    mds-alert {
+        display: flex;
+    }
+
+} // End of Export

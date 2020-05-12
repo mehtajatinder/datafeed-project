@@ -1,0 +1,34 @@
+@import 'link_dependencies';
+
+@include mds-export-once('mds_link') {
+    .mds-link {
+        @include mds-link;
+    }
+
+    .mds-link--no-underline {
+        @include mds-link($underline: false);
+    }
+
+    .mds-link--no-visited {
+        @include mds-link($visited-styles: false);
+    }
+
+    .mds-link--data-table {
+        @include mds-link($underline: false);
+        @include mds-text-color-link($enable-dark: true);
+
+        &.mds-link--visited,
+        &:visited {
+            @include mds-text-color-secondary;
+        }
+
+        &.mds-link--no-visited {
+            @include mds-text-color-link($enable-dark: true);
+        }
+
+        &.mds-link--hover,
+        &:hover {
+            @include mds-text-color-primary($enable-dark: true);
+        }
+    }
+} // End of Export

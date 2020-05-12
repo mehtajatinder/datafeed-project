@@ -1,0 +1,208 @@
+@import 'range_slider_dependencies';
+$mds-range-slider-handle-size: 18px !default;
+$mds-range-slider-handle-border-radius: $mds-range-slider-handle-size / 2 !default;
+$mds-range-slider-handle-top: -$mds-range-slider-handle-size / 2 !default;
+$mds-range-slider-handle-left: -$mds-range-slider-handle-size / 2 !default;
+
+$mds-range-slider-tooltip-background-color: $mds-color-neutral-90 !default;
+$mds-range-slider-tooltip-padding: 5px !default;
+
+$mds-range-slider-handle-transition: $mds-animation-timing-1-x linear;;
+$mds-range-slider-handle-background: $mds-color-white !default;
+$mds-range-slider-handle-background-on-dark: $mds-color-black !default;
+
+$mds-range-slider-base-background: $mds-color-neutral-80 !default;
+$mds-range-slider-base-background-on-dark: $mds-color-neutral-20 !default;
+
+$mds-range-slider-input-min-width: 45px !default;
+
+$mds-range-slider-wrapper-padding: 0 $mds-space-1-and-a-half-x 0 $mds-space-three-quarter-x !default;
+
+$mds-range-slider-target-background: $mds-color-neutral-50 !default;
+
+@include mds-export-once('mds_range_slider') {
+    .mds-range-slider,
+    .mds-range-slider__group,
+    .mds-range-slider__group--min-max {
+        @include mds-border-box();
+    }
+
+    .mds-range-slider__group,
+    .mds-range-slider__group--min-max {
+        align-items: flex-end;
+        display: flex;
+    }
+
+    .mds-range-slider__target {
+        border: 0;
+        direction: ltr;
+        position: relative;
+    }
+
+    .mds-range-slider__base {
+        background: $mds-range-slider-base-background;
+        height: 100%;
+        position: relative;
+        width: 100%;
+        z-index: 1;
+
+        .mds-container--dark-gray &,
+        .mds-container--black & {
+            background: $mds-range-slider-base-background-on-dark;
+        }
+    }
+
+    .mds-range-slider__connect {
+        background: $mds-interactive-color-primary-default;
+        bottom: 0;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transition: background 450ms;
+    }
+
+    .mds-range-slider__origin {
+        height: 0;
+        position: absolute;
+        width: 0;
+    }
+
+    .mds-range-slider--state-tap .mds-range-slider__connect,
+    .mds-range-slider--state-tap .mds-range-slider__origin {
+        transition: top .3s, right .3s, bottom .3s, left .3s;
+    }
+
+    .mds-range-slider__base,
+    .mds-range-slider__handle {
+        transform: translate3d(0, 0, 0);
+    }
+
+    .mds-range-slider--horizontal {
+        height: 1px;
+    }
+
+    .mds-range-slider--horizontal .mds-range-slider__handle {
+        border-radius: $mds-range-slider-handle-border-radius;
+        height: $mds-range-slider-handle-size;
+        left: $mds-range-slider-handle-left;
+        top: $mds-range-slider-handle-top;
+        width: $mds-range-slider-handle-size;
+    }
+
+    .mds-range-slider--draggable {
+        cursor: ew-resize;
+    }
+
+
+    .mds-range-slider__handle {
+        background: $mds-range-slider-handle-background;
+        border: $mds-border-control-on-all-backgrounds;
+        border-radius: $mds-border-radius-s;
+        cursor: grab;
+        position: relative;
+        transition: $mds-range-slider-handle-transition;
+        z-index: 1;
+
+        &:hover {
+            border-color: $mds-interactive-color-primary-default;
+        }
+
+        &:focus {
+            box-shadow: $mds-box-shadow-focus;
+            outline: none;
+        }
+
+        .mds-container--dark-gray &,
+        .mds-container--black & {
+            background: $mds-range-slider-handle-background-on-dark;
+        }
+    }
+
+    .mds-range-slider__handle.mds-range-slider--active {
+        background: $mds-interactive-color-primary-active;
+        border-color: $mds-interactive-color-primary-active;
+        cursor: grabbing;
+    }
+
+    [disabled] .mds-range-slider__connect {
+        background: $mds-range-slider-base-background;
+
+        .mds-container--dark-gray &,
+        .mds-container--black & {
+            background: $mds-range-slider-base-background-on-dark;
+        }
+    }
+
+    [disabled].mds-range-slider__target {
+        @include mds-disabled();
+    }
+
+    [disabled].mds-range-slider__group,
+    [disabled].mds-range-slider__group--min-max,
+    [disabled].mds-range-slider__handle,
+    [disabled] .mds-range-slider__handle {
+        border: $mds-border-control-on-all-backgrounds;
+        cursor: not-allowed;
+
+    }
+
+    .mds-range-slider__value--horizontal {
+        transform: translate3d(-50%, 50%, 0);
+    }
+
+    .mds-range-slider__tooltip {
+        @include mds-border-separator;
+        background-color: $mds-range-slider-tooltip-background-color;
+        border-radius: $mds-border-radius-s;
+        color: $mds-text-color-primary-default;
+        display: block;
+        font-family: $mds-font-family-sans-serif;
+        font-weight: $mds-font-weight-light;
+        padding: $mds-range-slider-tooltip-padding;
+        position: absolute;
+        text-align: center;
+    }
+
+    .mds-range-slider--horizontal .mds-range-slider__tooltip {
+        bottom: 120%;
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
+
+    .mds-range-slider--hidden {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .mds-range-slider__wrapper {
+        flex: 1 1 auto;
+        padding: $mds-range-slider-wrapper-padding;
+        width: 60%;
+
+        .mds-range-slider__group--min-max &,
+        .mds-range-slider__group & {
+            padding-bottom: 15px; // Padding the bottom of the slider to keep it vertically aligned it with the input both when the label has and does not have a label
+        }
+    }
+
+    .mds-range-slider__wrapper--auto {
+        width: auto; 
+    }
+
+    .mds-range-slider__input-wrapper {
+        flex: 0 0 20%;
+
+        & .mds-form__label {
+            margin: $mds-space-stack-1-and-a-half-x;
+        }
+    }
+
+    .mds-range-slider__input-wrapper--auto {
+        width: auto;
+    }
+
+    .mds-range-slider__input {
+        min-width: $mds-range-slider-input-min-width;
+    }
+} // End of Export

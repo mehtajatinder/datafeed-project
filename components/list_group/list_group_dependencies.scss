@@ -1,0 +1,10 @@
+$mds-font-asset-path: '../../../fonts/' !default; // This font path is used to render the component-only test page correctly
+@import '../../styles/visual-language/fonts';
+@import '../../constants/constants';
+@import '../../styles/utils/import_once';
+@import '../../styles/visual-language/borders';
+@import '../../styles/visual-language/color';
+@import '../../styles/visual-language/size';
+@import '../../styles/visual-language/typography';
+@import '../../styles/utils/accessibility';
+@import '../../styles/visual-language/space';

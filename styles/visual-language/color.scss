@@ -1,0 +1,91 @@
+$mds-light-primary-selector: '.mds-container--white' !default;
+$mds-light-secondary-selector: '.mds-container--light-gray' !default;
+$mds-dark-primary-selector: '.mds-container--dark-gray' !default;
+$mds-dark-secondary-selector: '.mds-container--black' !default;
+
+// Usage:
+//  .mds-some-component {
+//      @include mds-container-light-parent-selectors{
+//          properties that only apply in mds-container--white or mds-container--light-gray
+//      }
+//  }
+@mixin mds-container-light-parent-selectors() {
+    &,
+    #{$mds-light-primary-selector} &,
+    #{$mds-light-secondary-selector} & {
+        @content;
+    }
+}
+
+// Usage:
+//  .mds-some-component {
+//      @include mds-container-dark-parent-selectors{
+//          properties that only apply in mds-container--dark-gray or mds-container--black
+//      }
+//  }
+@mixin mds-container-dark-parent-selectors() {
+    #{$mds-dark-primary-selector} &,
+    #{$mds-dark-secondary-selector} & {
+        @content;
+    }
+}
+
+// Usage:
+//  .mds-some-component {
+//      @include mds-text-color-primary;
+//  }
+@mixin mds-text-color-primary($property: 'color', $enable-dark: true) {
+    @include mds-container-light-parent-selectors {
+        #{$property}: $mds-text-color-primary-on-light;
+    }
+
+    @if $enable-dark {
+        @include mds-container-dark-parent-selectors {
+            #{$property}: $mds-text-color-primary-on-dark;
+        }
+    }
+}
+
+// Usage:
+//  .mds-some-component {
+//      @include mds-text-color-secondary;
+//  }
+@mixin mds-text-color-secondary($property: 'color') {
+    @include mds-container-light-parent-selectors {
+        #{$property}: $mds-text-color-secondary-on-light;
+    }
+
+    @include mds-container-dark-parent-selectors {
+        #{$property}: $mds-text-color-secondary-on-dark;
+    }
+}
+
+// Usage:
+//  .mds-some-component {
+//      @include mds-text-color-link;
+//  }
+@mixin mds-text-color-link($property: 'color', $enable-dark: true) {
+    @include mds-container-light-parent-selectors {
+        #{$property}: $mds-text-color-link-on-light;
+    }
+
+    @if $enable-dark {
+        @include mds-container-dark-parent-selectors {
+            #{$property}: $mds-text-color-link-on-dark;
+        }
+    }
+}
+
+// Usage:
+//  .mds-some-component {
+//      @include mds-text-color-error;
+//  }
+@mixin mds-text-color-error($property: 'color') {
+    @include mds-container-light-parent-selectors {
+        #{$property}: $mds-text-color-error-on-light;
+    }
+
+    @include mds-container-dark-parent-selectors {
+        #{$property}: $mds-text-color-error-on-dark;
+    }
+}

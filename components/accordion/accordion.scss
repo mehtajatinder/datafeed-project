@@ -1,0 +1,280 @@
+@import 'accordion_dependencies';
+
+$mds-accordion-icon-left-large: 23px !default;
+$mds-accordion-icon-left-medium: 18px !default;
+$mds-accordion-icon-left-small: 15px !default;
+
+@include mds-export-once('mds_accordion') {
+    // Accordion Component
+    .mds-accordion {
+        @include mds-border-box();
+    }
+
+    .mds-accordion__label {
+        cursor: pointer;
+    }
+
+    // Input hidden
+    .mds-accordion__trigger {
+        @include mds-accessibly-hidden();
+
+        &:focus + .mds-accordion__label .mds-header {
+            box-shadow: $mds-box-shadow-focus;
+        }
+
+    }
+
+    // Left icon
+    .mds-accordion .mds-header {
+        flex: 1 1 100%;
+        padding: 0;
+
+        &:before { 
+            @include mds-container-dark-parent-selectors {
+                content: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNTAwIDE1MDAiPjxwYXRoIGQ9Ik0zMzAuNSAyOTkuNXY5MDBsODQwLTQ1MC04NDAtNDUweiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==');
+            }; 
+            content: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNTAwIDE1MDAiPjxwYXRoIGQ9Ik0zMzAuNSAyOTkuNXY5MDBsODQwLTQ1MHoiLz48L3N2Zz4=');
+            display: block; // This should make IE11 behave: https://github.com/philipwalton/flexbugs#flexbug-12
+            flex-shrink: 0;
+            height: $mds-accordion-icon-left-medium;
+            margin-right: $mds-space-half-x;
+            width: $mds-accordion-icon-left-medium;
+            
+        }
+
+        // Icon size
+        &.mds-header--level-1,
+        &.mds-header--level-2 {
+            &:before {
+                flex-shrink: 0;
+                height: $mds-accordion-icon-left-large;
+                width:  $mds-accordion-icon-left-large;
+            } 
+        }
+
+        &.mds-header--level-3,
+        &.mds-header--level-4,
+        &.mds-header--level-5,
+        &.mds-header--level-6 {
+            &:before {
+                flex-shrink: 0;
+                height: $mds-accordion-icon-left-medium;
+                width:  $mds-accordion-icon-left-medium;
+            } 
+        }
+
+        &.mds-header--level-7,
+        &.mds-header--level-8,
+        &.mds-header--level-9 {
+            &:before {
+                @include mds-container-dark-parent-selectors {
+                    content: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNTAwIDE1MDAiPjxwYXRoIGQ9Ik00MTkuNSAxMDk5LjVsNjYwLTM1MC02NjAtMzUwdjcwMHoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=');
+                }; 
+                content: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNTAwIDE1MDAiPjxwYXRoIGQ9Ik00MTkuNSAxMDk5LjVsNjYwLTM1MC02NjAtMzUwdjcwMHoiLz48L3N2Zz4=');
+                height: $mds-accordion-icon-left-small;
+                width:  $mds-accordion-icon-left-small;
+            } 
+        }
+    }
+
+    // Left icon margin top for header top border
+    .mds-accordion .mds-header.mds-header--primary,
+    .mds-accordion .mds-header.mds-header--secondary,
+    .mds-accordion .mds-header.mds-header--tertiary {
+        margin-bottom: $mds-space-2-x;
+
+        &.mds-header--level-1 {
+            &:before {
+                margin-top: 14px;
+            } 
+        }
+
+        &.mds-header--level-2 {
+            &:before {
+                margin-top: 8px;
+            } 
+        }
+
+        &.mds-header--level-3 {
+            &:before {
+                margin-top: 9px;
+            } 
+        }
+
+        &.mds-header--level-4 {
+            &:before {
+                margin-top: 8px;
+            } 
+        }
+
+        &.mds-header--level-5 {
+            &:before {
+                margin-top: 6px;
+            } 
+        }
+
+        &.mds-header--level-6 {
+            &:before {
+                margin-top: 4px;
+            } 
+        }
+
+        &.mds-header--level-7 {
+            &:before {
+                margin-top: 4px;
+            } 
+        }
+
+        &.mds-header--level-8 {
+            &:before {
+                margin-top: 3px;
+            } 
+        }
+
+        &.mds-header--level-9 {
+            &:before {
+                margin-top: 1px;
+            } 
+        }
+    }
+
+    // Left icon margin top for header no border
+    .mds-accordion .mds-header {
+        margin-bottom: $mds-space-2-x;
+
+        &.mds-header--level-1 {
+            &:before {
+                margin-top: 7px;
+            } 
+        }
+
+        &.mds-header--level-2 {
+            &:before {
+                margin-top: 1px;
+            } 
+        }
+
+        &.mds-header--level-3 {
+            &:before {
+                margin-top: 0;
+            } 
+        }
+
+        &.mds-header--level-4 {
+            &:before {
+                margin-top: -1px;
+            } 
+        }
+
+        &.mds-header--level-5 {
+            &:before {
+                margin-top: -2px;
+            } 
+        }
+
+        &.mds-header--level-6 {
+            &:before {
+                margin-top: -3px;
+            } 
+        }
+
+        &.mds-header--level-7 {
+            &:before {
+                margin-top: -2px;
+            } 
+        }
+
+        &.mds-header--level-8 {
+            &:before {
+                margin-top: -3px;
+            } 
+        }
+
+        &.mds-header--level-9 {
+            &:before {
+                margin-top: -5px;
+            } 
+        }
+    }
+
+    // Left icon margin top for header border bottom
+    .mds-accordion .mds-header.mds-header--border-bottom {
+        &.mds-header--level-1,
+        &.mds-header--level-2,
+        &.mds-header--level-3,
+        &.mds-header--level-4,
+        &.mds-header--level-5,
+        &.mds-header--level-6 {
+            &:before {
+                margin-top: 0;
+            } 
+        }
+
+        &.mds-header--level-7 {
+            &:before {
+                margin-top: -2px;
+            } 
+        }
+
+        &.mds-header--level-8 {
+            &:before {
+                margin-top: 0;
+            } 
+        }
+
+        &.mds-header--level-9 {
+            &:before {
+                margin-top: -2px;
+            } 
+        }
+    }
+
+    // Header hide border bottom
+    .mds-accordion__label .mds-header.mds-header--border-bottom.mds-header--primary,
+    .mds-accordion__label .mds-header.mds-header--border-bottom.mds-header--secondary,
+    .mds-accordion__label .mds-header.mds-header--border-bottom.mds-header--tertiary {
+        border-style: none;
+        margin-bottom: -$mds-space-2-x;
+        margin-top: -$mds-space-2-x; 
+    }
+
+    // Left icon animation
+    .mds-accordion__header .mds-header:before {
+        transform: rotate(0deg);
+    }
+
+    .mds-accordion__trigger + .mds-accordion__label .mds-header:before {
+        transition: transform $mds-animation-timing-1-x $mds-animation-ease-in-out;
+    }
+
+    .mds-accordion__trigger:checked + .mds-accordion__label .mds-header:before {
+        transform: rotate(90deg);
+        transition: transform $mds-animation-timing-1-x $mds-animation-ease-in-out;
+    }
+
+    // Hide and show content
+    .mds-accordion__content {
+        display: none;
+    }
+
+    .mds-accordion__trigger:checked ~ .mds-accordion__content {
+        display: block;
+    }
+
+    .mds-accordion__trigger:checked + .mds-accordion__label .mds-header.mds-header--border-bottom {
+        margin-bottom: $mds-space-2-x;
+    }
+
+    .mds-accordion__trigger:checked + .mds-accordion__label .mds-header.mds-header--border-bottom.mds-header--primary {
+        @include mds-border-header-primary($sides: bottom, $enable-dark: true);
+    }
+
+    .mds-accordion__trigger:checked + .mds-accordion__label .mds-header.mds-header--border-bottom.mds-header--secondary {
+        @include mds-border-header-secondary($sides: bottom, $enable-dark: true);
+    }
+
+    .mds-accordion__trigger:checked + .mds-accordion__label .mds-header.mds-header--border-bottom.mds-header--tertiary {
+        @include mds-border-header-tertiary($sides: bottom, $enable-dark: true);
+    }
+
+} // End of Export

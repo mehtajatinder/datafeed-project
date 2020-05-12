@@ -1,0 +1,331 @@
+@import 'notification_dependencies';
+
+@include mds-export-once('mds_notification') {
+    @keyframes notificationFadein {
+        0% {
+            display: none;
+            opacity: 0;
+        }
+
+        1% {
+            display: flex;
+            opacity: 0;
+        }
+
+        100% {
+            display: flex;
+            opacity: 1;
+        }
+    }
+
+    @keyframes notificationFadeout {
+        0% {
+            display: flex;
+            opacity: 1;
+        }
+
+        100% {
+            display: none;
+            opacity: 0;
+        }
+    }
+
+    .mds-notification {
+        display: none;
+        left: 0;
+        max-width: 500px;
+        position: fixed;
+        right: 0;
+        top: 0;
+        width: 100%;
+        z-index: $mds-z-index-modal-content;
+
+        &.mds-notification--below-masthead {
+            padding-top: $mds-masthead-height;
+        }
+
+        &.mds-notification--below-masthead-tall {
+            padding-top: $mds-masthead-height-tall + $mds-space-2-x;
+        }
+
+        &.mds-notification--active {
+            display: block;
+        }
+    }
+
+    .mds-notification__item {
+        @include mds-border-box();
+        border-radius: $mds-border-radius-panel;
+        box-shadow: $mds-box-shadow-drop;
+        display: none;
+        margin: 0;
+        position: relative;
+        width: 100%;
+
+        &:not(:first-child) {
+            margin-top: $mds-space-1-x;
+        }
+
+        &:focus {
+            outline: 0 solid transparent;
+        }
+
+        .mds-notification--top-center &,
+        .mds-notification--top-left &,
+        .mds-notification--top-right & {
+            &:first-child {
+                margin-top: $mds-space-2-x;
+            }
+        }
+
+    }
+
+    .mds-notification__item--visible {
+        animation: notificationFadein $mds-animation-timing-1-x linear forwards;
+        display: flex;
+    }
+
+    .mds-notification__item--is-dismissed {
+        animation: notificationFadeout $mds-animation-timing-1-x linear forwards;
+        display: flex;
+        z-index: $mds-z-index-sticky;
+    }
+
+    // Status - Tinted
+    .mds-notification__item--success {
+
+        &.mds-notification__item--tinted {
+
+            .mds-notification__body {
+                background-color: $mds-feedback-color-success-background;
+            }
+        }
+    }
+
+    .mds-notification__item--warning {
+
+        &.mds-notification__item--tinted {
+
+            .mds-notification__body {
+                background-color: $mds-feedback-color-warning-background;
+            }
+        }
+    }
+
+    .mds-notification__item--error {
+
+        &.mds-notification__item--tinted {
+
+            .mds-notification__body {
+                background-color: $mds-feedback-color-error-background;
+            }
+        }
+    }
+
+    // Status
+    .mds-notification__status {
+        align-items: center;
+        background-color: $mds-feedback-color-info;
+        border: $mds-border-container-on-all-backgrounds;
+        border-bottom-left-radius: $mds-border-radius-panel;
+        border-top-left-radius: $mds-border-radius-panel;
+        display: flex;
+        flex-shrink: 0;
+        padding: $mds-space-inset-2-x;
+
+        .mds-notification--small & {
+            padding: $mds-space-inset-1-and-a-half-x;
+        }
+
+        .mds-notification__item--success & {
+            background-color: $mds-feedback-color-success;
+            border-color: $mds-feedback-color-success;
+        }
+
+        .mds-notification__item--warning & {
+            background-color: $mds-feedback-color-warning;
+            border-color: $mds-feedback-color-warning;
+        }
+
+        .mds-notification__item--error & {
+            background-color: $mds-feedback-color-error;
+            border-color: $mds-feedback-color-error;
+        }
+    }
+
+    .mds-notification__icon {
+        fill: $mds-color-neutral-37;
+
+        .mds-notification--small & {
+            height: $mds-size-icon-s;
+            width: $mds-size-icon-s;
+        }
+
+        .mds-notification__item--success &,
+        .mds-notification__item--error & {
+            fill: $mds-color-white;
+        }
+
+        .mds-notification__item--warning & {
+            fill: $mds-color-black;
+        }
+    }
+
+    .mds-notification__body {
+        align-items: center;
+        background-color: $mds-background-color-white;
+        border-bottom: $mds-border-container-on-all-backgrounds;
+        border-bottom-right-radius: $mds-border-radius-panel;
+        border-right: $mds-border-container-on-all-backgrounds;
+        border-top: $mds-border-container-on-all-backgrounds;
+        border-top-right-radius: $mds-border-radius-panel;
+        display: flex;
+        flex-grow: 1;
+        padding: $mds-space-inset-2-x;
+
+        // Style any links
+        a {
+            @include mds-link($enable-dark: false);
+        }
+
+        .mds-notification__item--dismissible & {
+            padding-right: $mds-size-icon-s + $mds-space-2-x + $mds-space-2-x;
+        }
+
+        .mds-notification--small & {
+            padding: $mds-space-inset-1-and-a-half-x;
+        }
+
+        .mds-notification--small.mds-notification__item--dismissible & {
+            padding-right: $mds-size-icon-s + $mds-space-1-and-a-half-x + $mds-space-1-and-a-half-x;
+        }
+    }
+
+
+    .mds-notification__title {
+        @include mds-text-crop($bottom-adjustment: -2px);
+        border-bottom: solid 1px transparent; // Don't know why yet, but adding a border changes the overall height of the element and makes the text crop work correctly when stacked against another text-cropped element
+        color: $mds-text-color-primary-on-light;
+        display: block;
+        font-family: $mds-font-family-sans-serif;
+        font-size: $mds-font-size-m;
+        font-weight: $mds-font-weight-bold;
+        margin: $mds-space-stack-2-x;
+
+        .mds-notification--small & {
+            font-size: $mds-font-size-s;
+            margin: $mds-space-stack-1-and-a-half-x;
+        }
+
+        &:last-child {
+            margin: 0;
+        }
+    }
+
+    .mds-notification__message {
+        @include mds-text-crop($bottom-adjustment: -2px);
+        border-bottom: solid 1px transparent; // Don't know why yet, but adding a border changes the overall height of the element and makes the text crop work correctly when stacked against another text-cropped element
+        color: $mds-text-color-primary-on-light;
+        font-family: $mds-font-family-sans-serif;
+        font-size: $mds-font-size-m;
+        font-weight: $mds-font-weight-light;
+        margin: $mds-space-stack-2-x;
+
+        .mds-notification--small & {
+            font-size: $mds-font-size-s;
+            font-weight: $mds-font-weight-regular;
+            margin: $mds-space-stack-1-and-a-half-x;
+        }
+
+        &:last-child {
+            margin: 0;
+        }
+    }
+
+    // Unordered list
+    .mds-notification__list {
+        @include mds-text-crop;
+        list-style-type: square;
+        margin: $mds-space-stack-2-x;
+        padding-left: ($mds-font-size-m * 2);
+
+        .mds-notification--small & {
+            margin: $mds-space-stack-1-and-a-half-x;
+            padding-left: ($mds-font-size-s * 2);
+        }
+
+        &:last-child {
+            margin: 0;
+        }
+    }
+
+    .mds-notification__list-item {
+        color: $mds-text-color-primary-on-light;
+        font-family: $mds-font-family-sans-serif;
+        font-size: $mds-font-size-m;
+        font-weight: $mds-font-weight-light;
+
+        .mds-notification--small & {
+            font-size: $mds-font-size-s;
+            font-weight: $mds-font-weight-regular;
+        }
+    }
+
+    .mds-notification__dismiss-button {
+        position: absolute;
+        right: $mds-space-2-x;
+        top: $mds-space-2-x;
+
+        .mds-notification--small & {
+            right: $mds-space-inset-1-and-a-half-x;
+            top: $mds-space-inset-1-and-a-half-x;
+        }
+    }
+
+    // Class Modifiers - Dimensions
+    .mds-notification--width-350px {
+        max-width: 350px;
+    }
+
+    // Class Modifiers - Positions
+    .mds-notification--top-center {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .mds-notification--bottom-right {
+        bottom: $mds-space-2-x;
+        left: auto;
+        right: $mds-space-2-x;
+        top: auto;
+    }
+
+    mds-notification-group {
+        display: block;
+
+        .mds-notification {
+            display: block;
+            pointer-events: none;
+
+            .mds-notification__item {
+                pointer-events: all;
+            }
+
+            mds-notification:not(:first-child) .mds-notification__item {
+                margin-top: $mds-space-1-x;
+            }
+
+            &.mds-notification--top-center {
+                mds-notification:first-child .mds-notification__item {
+                    margin-top: $mds-space-2-x;
+                }
+            }
+
+            .mds-notification__status {
+                svg {
+                    display: block;
+                }
+            }
+        }
+    }
+} // End of Export

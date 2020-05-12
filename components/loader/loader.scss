@@ -1,0 +1,104 @@
+@import 'loader_dependencies';
+$max-bars: 8 !default;
+$color: $mds-color-blue-41 !default;
+$mds-loader-bar-start-height: .1em !default;
+$mds-loader-bar-end-height: .35em !default;
+$mds-loader-bar-start-position: .325em !default;
+$mds-loader-bar-middle-position: .75em !default;
+$mds-loader-bar-end-position: 1em !default;
+
+%mds-loader-props {
+    height: $mds-loader-bar-end-position;
+    margin: .5em auto;
+    position: relative;
+    transform: rotate(180deg);
+    width: $mds-loader-bar-end-position;
+}
+
+@include mds-export-once('mds_loader') {
+    .mds-loader {
+        @extend %mds-loader-props;
+        font-size: 40px;
+    }
+
+    .mds-loader--small {
+        @extend %mds-loader-props;
+        font-size: 20px;
+    }
+
+    .mds-loader--large {
+        @extend %mds-loader-props;
+        font-size: 80px;
+    }
+
+    .mds-loader--hidden {
+        display: none;
+    }
+
+    .mds-loader__item {
+        height: .75em;
+        left: 50%;
+        position: absolute;
+        top: 0;
+        width: $mds-loader-bar-start-height;
+        z-index: 0;
+
+        &:after {
+            animation-iteration-count: infinite;
+            animation-name: burstAnimation;
+            animation-timing-function: ease-out;
+            background: $color;
+            border-radius: $mds-loader-bar-start-height;
+            content: '';
+            height: 0;
+            position: absolute;
+            transform-origin: 50% 100%;
+            width: $mds-loader-bar-start-height;
+        }
+    }
+
+    .mds-loader--static .mds-loader__item:after {
+        animation: none;
+        height: $mds-loader-bar-end-height;
+        top: $mds-loader-bar-end-position;
+    }
+
+    @for $i from 0 through $max-bars {
+        .mds-loader__item--#{$i} {
+            transform: rotate($i * 45deg);
+
+            &:after {
+                animation-delay: ($i - 1) * 100ms;
+                animation-duration: $max-bars * 180ms;
+            }
+
+        }
+    }
+
+    @keyframes burstAnimation {
+        0% {
+            height: $mds-loader-bar-start-height;
+            top: $mds-loader-bar-start-position;
+        }
+
+        10% {
+            height: $mds-loader-bar-end-height;
+            top: $mds-loader-bar-start-position;
+        }
+
+        25% {
+            height: $mds-loader-bar-end-height;
+            top: $mds-loader-bar-middle-position;
+        }
+
+        75% {
+            height: $mds-loader-bar-start-height;
+            top: $mds-loader-bar-end-position;
+        }
+
+        100% {
+            height: $mds-loader-bar-start-height;
+            top: $mds-loader-bar-end-position;
+        }
+    }
+} // End of Export

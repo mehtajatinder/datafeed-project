@@ -1,0 +1,29 @@
+@import '../../constants/constants';
+
+$mds-color-switch-group-label: $mds-text-color-primary-on-light !default;
+$mds-color-switch-group-label-on-dark: $mds-text-color-primary-on-dark !default;
+
+$mds-color-switch-label: $mds-text-color-secondary-on-light !default;
+$mds-color-switch-label-on-dark: $mds-text-color-secondary-on-dark !default;
+$mds-color-switch-label-hover: $mds-text-color-primary-on-light !default;
+$mds-color-switch-label-hover-on-dark: $mds-text-color-primary-on-dark !default;
+
+$mds-switch-transition-hover: color 300ms, border-color 300ms !default;
+$mds-switch-transition-click: border-color 300ms, margin-left 300ms, background 300ms !default;
+
+$mds-switch-width: 26px !default;
+$mds-switch-height: 16px !default;
+$mds-switch-toggle-width: 12px !default;
+$mds-switch-toggle-height: 12px !default;
+$mds-switch-toggle-offset: 2px !default;
+$mds-switch-space-grid: 0 8px 8px 0 !default;
+
+// Large
+$mds-switch-large-width: 37px !default;
+$mds-switch-large-height: 23px !default;
+$mds-switch-large-toggle-width: 17px !default;
+$mds-switch-large-toggle-height: 17px !default;
+
+// Touch
+$mds-switch-touch-border-top: 13px !default;
+$mds-switch-touch-dot-top: 16px !default;

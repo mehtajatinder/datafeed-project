@@ -1,0 +1,14 @@
+@import 'icon_dependencies';
+@include mds-export-once('mds_icon') {
+    .mds-icon {
+        @include mds-border-box();
+        height: $mds-size-icon-m;
+        transition: $mds-animation-timing-1-x linear;
+        width: $mds-size-icon-m;
+    }
+
+    .mds-icon--s {
+        height: $mds-size-icon-s;
+        width: $mds-size-icon-s;
+    }
+} // End of Export

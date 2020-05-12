@@ -1,0 +1,278 @@
+/// Generates grid styles for a specific breakpoint
+/// @name mds-layout-grid-breakpoint
+/// @group mds-layout-grid
+/// @param {String} $breakpoint The breakpoint
+/// @param {Boolean} $generate-column-flex-classes Should column flex classes be generated?
+/// @param {Boolean} $generate-column-pull-classes Should column pull classes be generated?
+/// @param {Boolean} $generate-column-push-classes Should column push classes be generated?
+/// @param {Boolean} $generate-column-squeeze-classes Should column squeeze classes be generated?
+/// @param {Boolean} $generate-column-zero-padding-classes Should column zero padding classes be generated?
+/// @param {Boolean} $generate-row-zero-margin-classes Should row zero margin classes be generated?
+/// @param {Boolean} $set-column-padding Should padding be applied to columns?
+/// @param {Boolean} $set-row-margin Should negative margins be applied to rows?
+@mixin mds-layout-grid-breakpoint(
+    $breakpoint: $mds-layout-grid-first-breakpoint,
+    $generate-column-flex-classes: false,
+    $generate-column-pull-classes: false,
+    $generate-column-push-classes: false,
+    $generate-column-squeeze-classes: false,
+    $generate-column-zero-padding-classes: false,
+    $generate-row-zero-margin-classes: false,
+    $set-column-padding: false,
+    $set-row-margin: false) {
+    // The max number of double offset (equal margin on both sides) column classes to generate
+    $double-offset-columns: ceil($mds-layout-grid-columns / 2) - 1;
+    // The max number of single offset (margin only set on one side) column classes to generate
+    $single-offset-columns: $mds-layout-grid-columns - 1;
+    // The negative margin applied to rows
+    $row-margin: $mds-layout-grid-breakpoint-margin;
+    // The padding applied to columns (equal to half the gutter)
+    $column-padding: $mds-layout-grid-breakpoint-padding;
+
+    // Set styles for a specific breakpoint
+    @include mds-layout-grid-responsive($breakpoint) {
+        // Set negative row margin (negative)?
+        @if ($set-row-margin == true) {
+            .mds-layout-grid__row {
+                margin: 0 $row-margin;
+            }
+        }
+
+        // Set zero row margin?
+        @if ($generate-row-zero-margin-classes == true) {
+            .mds-layout-grid__row--zero-margin {
+                margin: 0;
+            }
+        }
+
+        // Set column padding?
+        @if ($set-column-padding == true) {
+            .mds-layout-grid__col {
+                padding: 0 $column-padding;
+            }
+        }
+
+        // Set zero column padding?
+        @if ($generate-column-zero-padding-classes == true) {
+            .mds-layout-grid__col--zero-padding {
+                padding: 0;
+            }
+        }
+
+        // Create default column and column with only breakpoint classes
+        // ex. .mds-layout-grid__col, .mds-layout-grid__col--at-600, etc.
+        $mds-layout-grid-breakpoint-class: mds-layout-grid__col--at-#{$breakpoint};
+        // If no breakpoint is declared by using '0' then omit it from the class name
+        @if ($breakpoint == 0) {
+            $mds-layout-grid-breakpoint-class: mds-layout-grid__col;
+        }
+
+        // Dynamically set class name based on need for breakpoint
+        .#{$mds-layout-grid-breakpoint-class} {
+            @include mds-layout-grid-column;
+        }
+
+        // Generate flex column classes?
+        @if ($generate-column-flex-classes == true) {
+
+            // Generate classes for "auto" based widths (.mds-layout-grid__col--auto, .mds-layout-grid__col--auto-at-600, etc.)
+            $auto-class: mds-layout-grid-column-modifier-class-with-breakpoint($breakpoint, null, 'auto');
+
+            // Generate the auto-width class
+            .#{$auto-class} {
+                @include mds-layout-grid-column-auto;
+            }
+
+            // Generate column span width classes
+            @for $i from 1 through $mds-layout-grid-columns {
+                // Define the default class naming pattern
+                $mds-layout-grid-col-and-breakpoint-class: mds-layout-grid__col--#{$i}-at-#{$breakpoint};
+                // If no breakpoint is declared by using '0' then omit it from the class name
+                @if ($breakpoint == 0) {
+                    $mds-layout-grid-col-and-breakpoint-class: mds-layout-grid__col--#{$i};
+                }
+
+                // Dynamically set class name based on need for breakpoint
+                .#{$mds-layout-grid-col-and-breakpoint-class} {
+                    flex-basis: mds-layout-grid-to-percent($i, $mds-layout-grid-columns);
+                    flex-grow: 0;
+                    flex-shrink: 0;
+                    // Fix for IE
+                    max-width: mds-layout-grid-to-percent($i, $mds-layout-grid-columns);
+                }
+            }
+        }
+
+        // Generate pull column classes?
+        @if ($generate-column-pull-classes == true) {
+            @for $i from 0 through $single-offset-columns {
+
+                $class: mds-layout-grid-column-modifier-class-with-breakpoint($breakpoint, $i, 'pull');
+
+                .#{$class} {
+                    margin-right: mds-layout-grid-to-percent($i, $mds-layout-grid-columns);
+                }
+            }
+        }
+
+        // Generate push column classes?
+        @if ($generate-column-push-classes == true) {
+            @for $i from 0 through $single-offset-columns {
+
+                $class: mds-layout-grid-column-modifier-class-with-breakpoint($breakpoint, $i, 'push');
+
+                .#{$class} {
+                    margin-left: mds-layout-grid-to-percent($i, $mds-layout-grid-columns);
+                }
+            }
+        }
+
+        // Generate squeeze column classes?
+        @if ($generate-column-squeeze-classes == true) {
+            @for $i from 0 through $double-offset-columns {
+
+                $class: mds-layout-grid-column-modifier-class-with-breakpoint($breakpoint, $i, 'squeeze');
+
+                .#{$class} {
+                    margin-left: mds-layout-grid-to-percent($i, $mds-layout-grid-columns);
+                    margin-right: mds-layout-grid-to-percent($i, $mds-layout-grid-columns);
+                }
+            }
+        }
+
+    }
+}
+
+/// Applies base styles for a grid column
+/// @name mds-layout-grid-column
+/// @group mds-layout-grid
+@mixin mds-layout-grid-column () {
+    @include mds-border-box();
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+}
+
+/// Applies auto-base styles for a grid column
+/// @name mds-layout-grid-column-auto
+/// @group mds-layout-grid
+@mixin mds-layout-grid-column-auto () {
+    @include mds-border-box();
+    flex-basis: auto;
+    flex-grow: 0;
+    flex-shrink: 0;
+    // Fix for IE
+    max-width: none;
+}
+
+/// Selectively generates grid styles across all breakpoints
+/// @name mds-layout-grid-each-breakpoint
+/// @group mds-layout-grid
+/// @param {Boolean} $generate-column-flex-classes Should column flex classes be generated?
+/// @param {Boolean} $generate-column-pull-classes Should column pull classes be generated?
+/// @param {Boolean} $generate-column-push-classes Should column push classes be generated?
+/// @param {Boolean} $generate-column-squeeze-classes Should column squeeze classes be generated?
+/// @param {Boolean} $generate-column-zero-padding-classes Should column zero padding classes be generated?
+/// @param {Boolean} $generate-row-zero-margin-classes Should row zero margin classes be generated?
+/// @param {Boolean} $set-column-padding Should padding be applied to columns?
+/// @param {Boolean} $set-row-margins Should negative margins be applied to rows?
+@mixin mds-layout-grid-each-breakpoint (
+    $generate-column-flex-classes: false,
+    $generate-column-pull-classes: false,
+    $generate-column-push-classes: false,
+    $generate-column-squeeze-classes: false,
+    $generate-column-zero-padding-classes: false,
+    $generate-row-zero-margin-classes: false,
+    $set-column-padding: false,
+    $set-row-margin: false) {
+
+    // Apply breakpoint-specific styles
+    @each $breakpoint in $mds-layout-grid-breakpoints {
+        @include mds-layout-grid-breakpoint(
+            $breakpoint: $breakpoint,
+            $generate-column-flex-classes: $generate-column-flex-classes,
+            $generate-column-pull-classes: $generate-column-pull-classes,
+            $generate-column-push-classes: $generate-column-push-classes,
+            $generate-column-squeeze-classes: $generate-column-squeeze-classes,
+            $generate-column-zero-padding-classes: $generate-column-zero-padding-classes,
+            $generate-row-zero-margin-classes: $generate-row-zero-margin-classes,
+            $set-column-padding: $set-column-padding,
+            $set-row-margin: $set-row-margin
+        );
+    }
+}
+
+/// Wraps content within a media query if needed
+/// @name mds-layout-grid-responsive
+/// @group mds-layout-grid
+/// @param {String} $breakpoint The breakpoint
+@mixin mds-layout-grid-responsive($breakpoint: $mds-layout-grid-first-breakpoint) {
+
+    // The grid's first breakpoint (mobile-first)
+    $grid-first-breakpoint: nth($mds-layout-grid-breakpoints, 1);
+
+    // Output content using a media query only when needed
+    @if ($breakpoint == $grid-first-breakpoint) {
+        @content;
+    } @else {
+        @media ('min-width': #{$breakpoint}px) {
+            @content;
+        }
+    }
+}
+
+/// Applies base styles for a grid row
+/// @name mds-layout-grid-row
+/// @group mds-layout-grid
+@mixin mds-layout-grid-row () {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/// Generates modifier classes for horizontal justification
+/// @name mds-layout-grid-row-horizontal-justify
+/// @group mds-layout-grid
+@mixin mds-layout-grid-row-horizontal-justify($positions: 'center' 'flex-end' 'flex-start' 'space-around' 'space-between') {
+    @each $pos in $positions {
+        &--justify-content-#{$pos} {
+            justify-content: #{$pos};
+        }
+    }
+}
+
+/// Generates modifier classes for horizontal justification
+/// @name mds-layout-grid-row-align-items-classes
+/// @group mds-layout-grid
+@mixin mds-layout-grid-row-align-items-classes ($positions: 'stretch' 'center' 'flex-end' 'flex-start') {
+    @each $pos in $positions {
+        &--align-items-#{$pos} {
+            align-items: #{$pos};
+        }
+    }
+}
+
+
+/// Generates modifier class for flex wrap nowrap and adjusts column flex-shrink behavior
+/// @name mds-layout-grid-row-flex-wrap-nowrap
+/// @group mds-layout-grid
+@mixin mds-layout-grid-row-flex-wrap-nowrap () {
+    &--nowrap {
+        flex-wrap: nowrap;
+
+        // Allow columns to maintain their relative widths (don't shrink)
+        .mds-layout-grid__col {
+            flex-shrink: 0;
+        }
+    }
+}
+
+/// Generates modifier classes for column align-self
+/// @name mds-layout-grid-col-align-self-classes
+/// @group mds-layout-grid
+@mixin mds-layout-grid-col-align-self-classes ($positions: 'auto' 'center' 'flex-end' 'flex-start') {
+    @each $pos in $positions {
+        &--align-self-#{$pos} {
+            align-self: #{$pos};
+        }
+    }
+}

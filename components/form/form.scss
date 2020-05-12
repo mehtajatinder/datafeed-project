@@ -1,0 +1,559 @@
+@import 'form_dependencies';
+
+@include mds-export-once('mds_form') {
+    .mds-form,
+    .mds-form__field-group,
+    .mds-form__fieldset {
+        @include mds-border-box();
+    }
+
+    .mds-form__field-group--horizontal {
+        align-items: flex-start;
+        display: flex;
+
+        & > * {
+            margin-bottom: 0;
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+
+    .mds-form__field-group,
+    mds-field-group {
+        flex-grow: 1;
+    }
+
+    .mds-form__microcopy {
+        @include mds-text-crop();
+        @include mds-incremental-font-sizes($component-name: 'form__microcopy', $selector-level: 'block');
+        @include mds-container-dark-parent-selectors {
+            color: $mds-color-form-microcopy-on-dark;
+        }
+        color: $mds-color-form-microcopy;
+        display: block;
+        font-family: $mds-font-family-sans-serif;
+        font-weight: $mds-font-weight-light;
+        line-height: $mds-line-height-form;
+
+        &.mds-form__microcopy--small {
+            font-weight: $mds-font-weight-regular;
+        }
+
+        &.mds-form__microcopy--touch {
+            font-size: $mds-font-size-l;
+        }
+
+        .mds-form__label + & {
+            display: block;
+        }
+    }
+
+    .mds-form__required-fields-key {
+        @include mds-incremental-font-sizes($component-name: 'form__required-fields-key', $selector-level: 'block');
+        @include mds-container-dark-parent-selectors {
+            color: $mds-color-form-label-on-dark;
+        }
+        color: $mds-color-form-label;
+        display: inline-block;
+        font-family: $mds-font-family-sans-serif;
+        font-weight: $mds-font-weight-light;
+
+        &.mds-form__required-fields-key--small {
+            font-weight: $mds-font-weight-regular;
+        }
+
+        &.mds-form__required-fields-key--touch {
+            font-size: $mds-font-size-l;
+        }
+
+        &:before {
+            color: $mds-color-red-50;
+            content: '*\20';
+        }
+    }
+
+    // only for web component
+    mds-field-error {
+        .mds-form__field-error {
+            &.mds-form__field-error--hidden {
+                display: none;
+            }
+        }
+    }
+
+    .mds-form__field-error {
+        @include mds-incremental-font-sizes($component-name: 'form__field-error', $selector-level: 'block');
+        @include mds-text-color-error;
+        display: block;
+        font-family: $mds-font-family-sans-serif;
+        font-weight: $mds-font-weight-light;
+
+        &.mds-form__field-error--small {
+            font-weight: $mds-font-weight-regular;
+        }
+
+        &.mds-form__field-error--touch {
+            font-size: $mds-font-size-l;
+        }
+    }
+
+    .mds-form__field-error-text {
+        @include mds-text-crop();
+        line-height: $mds-line-height-form;
+    }
+
+    .mds-form__fieldset {
+        border: 0;
+        margin: 0;
+        padding: 0;
+    }
+
+    .mds-form__legend {
+        @include mds-accessibly-hidden();
+    }
+
+    // Form Layout Classes
+    .mds-form__field-group,
+    .mds-form__required-fields-key {
+        .mds-form--small-layout & {
+            margin: $mds-form-space-stack-2-and-a-half-x;
+        }
+
+        .mds-form--medium-layout & {
+            margin: $mds-space-stack-3-x;
+        }
+
+        .mds-form--large-layout & {
+            margin: $mds-space-stack-4-x;
+        }
+
+        .mds-form--touch-layout & {
+            margin-bottom: $mds-space-1-x * 6; //TODO: Replace calc
+        }
+    }
+
+    // applies to html/css checkbox
+    .mds-form__checkbox-group > .mds-form__checkbox {
+        .mds-form--small-layout & {
+            margin: $mds-space-stack-three-quarter-x;
+
+            &:last-child {
+                margin: 0;
+            }
+        }
+
+        .mds-form--medium-layout & {
+            margin: $mds-space-stack-1-x;
+
+            &:last-child {
+                margin: 0;
+            }
+        }
+
+        .mds-form--large-layout &,
+        .mds-form--touch-layout & {
+            margin: $mds-space-stack-1-and-a-half-x;
+
+            &:last-child {
+                margin: 0;
+            }
+        }
+    }
+
+    // applies to html/css radio button
+    .mds-form__radio-button-group > .mds-form__radio-button {
+        .mds-form--small-layout & {
+            margin: $mds-space-stack-three-quarter-x;
+
+            &:last-child {
+                margin: 0;
+            }
+        }
+
+        .mds-form--medium-layout & {
+            margin: $mds-space-stack-1-x;
+
+            &:last-child {
+                margin: 0;
+            }
+        }
+
+        .mds-form--large-layout &,
+        .mds-form--touch-layout & {
+            margin: $mds-space-stack-1-and-a-half-x;
+
+            &:last-child {
+                margin: 0;
+            }
+        }
+    }
+
+    // applies to web component checkbox
+    .mds-form__checkbox-group {
+        mds-checkbox {
+            .mds-form--small-layout & {
+                .mds-form__checkbox {
+                    margin: $mds-space-stack-three-quarter-x;
+                }
+
+                &:last-child >
+                .mds-form__checkbox {
+                    margin: 0;
+                }
+            }
+
+            .mds-form--medium-layout & {
+                .mds-form__checkbox {
+                    margin: $mds-space-stack-1-x;
+                }
+
+                &:last-child >
+                .mds-form__checkbox {
+                    margin: 0;
+                }
+            }
+
+            .mds-form--large-layout &,
+            .mds-form--touch-layout & {
+                .mds-form__checkbox {
+                    margin: $mds-space-stack-1-and-a-half-x;
+                }
+
+                &:last-child >
+                .mds-form__checkbox {
+                    margin: 0;
+                }
+            }
+        }
+    }
+
+    // applies to web component radio button
+    .mds-form__radio-button-group  {
+        mds-radio-button {
+            .mds-form--small-layout & {
+                .mds-form__radio-button {
+                    margin: $mds-space-stack-three-quarter-x;
+                }
+
+                &:last-child >
+                .mds-form__radio-button {
+                    margin: 0;
+                }
+            }
+
+            .mds-form--medium-layout & {
+                .mds-form__radio-button {
+                    margin: $mds-space-stack-1-x;
+                }
+
+                &:last-child >
+                .mds-form__radio-button {
+                    margin: 0;
+                }
+            }
+
+            .mds-form--large-layout &,
+            .mds-form--touch-layout & {
+                .mds-form__radio-button {
+                    margin: $mds-space-stack-1-and-a-half-x;
+                }
+
+                &:last-child >
+                .mds-form__radio-button {
+                    margin: 0;
+                }
+            }
+        }
+    }
+
+    .mds-form__field-group--horizontal {
+        .mds-form--small-layout & {
+            > .mds-form__field-group,
+            .mds-form__radio-button-group > .mds-form__radio-button,    // applies to html/css radio button
+            .mds-form__checkbox-group > .mds-form__checkbox {           // applies to html/css checkbox
+                margin-bottom: 0;
+                margin-right: $mds-form-space-1-and-a-quarter-x;
+
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+
+            // applies to web component radio button
+            mds-radio-button {
+                .mds-form__radio-button {
+                    margin-bottom: 0;
+                    margin-right: $mds-form-space-1-and-a-quarter-x;
+                }
+
+                &:last-child > .mds-form__radio-button {
+                    margin-right: 0;
+                }
+            }
+
+            // applies to web component checkbox
+            mds-checkbox {
+                .mds-form__checkbox {
+                    margin-bottom: 0;
+                    margin-right: $mds-form-space-1-and-a-quarter-x;
+                }
+
+                &:last-child > .mds-form__checkbox {
+                    margin-right: 0;
+                }
+            }
+
+            // applies to web component field group
+            mds-field-group {
+                .mds-form__field-group {
+                    margin-bottom: 0;
+                    margin-right: $mds-form-space-1-and-a-quarter-x;
+                }
+
+                &:last-child > .mds-form__field-group {
+                    margin-right: 0;
+                }
+            }
+        }
+
+        .mds-form--medium-layout & {
+            > .mds-form__field-group,
+            .mds-form__radio-button-group  > .mds-form__radio-button,        // applies to html/css radio button
+            .mds-form__checkbox-group > .mds-form__checkbox {               // applies to html/css checkbox
+                margin: $mds-space-inline-left-1-and-a-half-x;
+
+                &:last-child {
+                    margin: 0;
+                }
+            }
+
+            // applies to web component radio button
+            mds-radio-button {
+                .mds-form__radio-button {
+                    margin: $mds-space-inline-left-1-and-a-half-x;
+                }
+
+                &:last-child > .mds-form__radio-button {
+                    margin: 0;
+                }
+            }
+
+            // applies to web component checkbox
+            mds-checkbox {
+                .mds-form__checkbox {
+                    margin: $mds-space-inline-left-1-and-a-half-x;
+                }
+
+                &:last-child > .mds-form__checkbox {
+                    margin: 0;
+                }
+            }
+
+            // applies to web component field group
+            mds-field-group {
+                .mds-form__field-group {
+                    margin: $mds-space-inline-left-1-and-a-half-x;
+                    margin-bottom: 0;
+                }
+
+                &:last-child > .mds-form__field-group {
+                    margin: 0;
+                }
+            }
+        }
+
+        .mds-form--large-layout &,
+        .mds-form--touch-layout & {
+            > .mds-form__field-group,
+            .mds-form__radio-button-group > .mds-form__radio-button,      // applies to html/css radio button
+            .mds-form__checkbox-group > .mds-form__checkbox {            // applies to html/css checkbox
+                margin: $mds-space-inline-left-2-x;
+
+                &:last-child {
+                    margin: 0;
+                }
+            }
+
+            // applies to web component checkbox
+            mds-radio-button {
+                .mds-form__radio-button {
+                    margin: $mds-space-inline-left-2-x;
+                }
+
+                &:last-child > .mds-form__radio-button {
+                    margin: 0;
+                }
+            }
+
+            // applies to web component checkbox
+            mds-checkbox {
+                .mds-form__checkbox {
+                    margin: $mds-space-inline-left-2-x;
+                }
+
+                &:last-child > .mds-form__checkbox {
+                    margin: 0;
+                }
+            }
+
+            // applies to web component field group
+            mds-field-group {
+                .mds-form__field-group {
+                    margin: $mds-space-inline-left-2-x;
+                }
+
+                &:last-child > .mds-form__field-group {
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+
+    .mds-form__label,
+    .mds-form__radio-button-group-label,
+    .mds-form__checkbox-group-label {
+        .mds-form--small-layout & {
+            margin: $mds-form-space-stack-1-and-a-quarter-x;
+        }
+
+        .mds-form--medium-layout & {
+            margin: $mds-space-stack-1-and-a-half-x;
+        }
+
+        .mds-form--large-layout &,
+        .mds-form--touch-layout & {
+            margin: $mds-space-stack-2-x;
+        }
+    }
+
+    @keyframes mds-form-field-error-animation-small {
+        0% {
+            margin-top: 0;
+            opacity: 0;
+        }
+
+        100% {
+            margin-top: $mds-space-three-quarter-x;
+            opacity: 1;
+        }
+    }
+
+    @keyframes mds-form-field-error-animation-medium {
+        0% {
+            margin-top: 0;
+            opacity: 0;
+        }
+
+        100% {
+            margin-top: $mds-animation-timing-1-x;
+            opacity: 1;
+        }
+    }
+
+    @keyframes mds-form-field-error-animation-large {
+        0% {
+            margin-top: 0;
+            opacity: 0;
+        }
+
+        100% {
+            margin-top: $mds-space-1-and-a-half-x;
+            opacity: 1;
+        }
+    }
+
+    .mds-form__field-error {
+        .mds-form--small-layout & {
+            animation: mds-form-field-error-animation-small $mds-animation-timing-1-x linear;
+            margin-top: $mds-space-three-quarter-x;
+        }
+
+        .mds-form--medium-layout & {
+            animation: mds-form-field-error-animation-medium $mds-animation-timing-1-x linear;
+            margin-top: $mds-space-1-x;
+        }
+
+        .mds-form--large-layout &,
+        .mds-form--touch-layout & {
+            animation: mds-form-field-error-animation-large $mds-animation-timing-1-x linear;
+            margin-top: $mds-space-1-and-a-half-x;
+        }
+    }
+
+    .mds-form__textarea + .mds-form__field-error,
+    mds-textarea + mds-field-error .mds-form__field-error,
+    .mds-form__label + .mds-form__microcopy,
+    mds-label + mds-microcopy .mds-form__microcopy { // applies to web component microcopy
+        .mds-form--small-layout & {
+            @include mds-text-crop($top-adjustment: -3px); // Tweak to correct text-crop discrepancy
+            line-height: $mds-line-height-form;
+        }
+
+        .mds-form--medium-layout & {
+            @include mds-text-crop($top-adjustment: -4px); // Tweak to correct text-crop discrepancy
+            line-height: $mds-line-height-form;
+        }
+
+        .mds-form--large-layout &,
+        .mds-form--touch-layout & {
+            @include mds-text-crop($top-adjustment: -4px); // Tweak to correct text-crop discrepancy
+            line-height: $mds-line-height-form;
+        }
+    }
+
+    .mds-form__label + .mds-form__microcopy,
+    mds-label + mds-microcopy .mds-form__microcopy, // applies to web component microcopy
+    .mds-form__checkbox-group-label + .mds-form__microcopy,
+    mds-checkbox-group .mds-form__microcopy, // applies to web component microcopy
+    .mds-form__radio-button-group-label + .mds-form__microcopy,
+    mds-radio-button-group .mds-form__microcopy { // applies to web component microcopy 
+        .mds-form--small-layout & {
+            margin: $mds-form-space-stack-1-and-a-quarter-x;
+        }
+
+        .mds-form--medium-layout & {
+            margin: $mds-space-stack-1-and-a-half-x;
+        }
+
+        .mds-form--large-layout &,
+        .mds-form--touch-layout & {
+            margin: $mds-space-stack-2-x;
+        }
+    }
+
+    .mds-form__input + .mds-form__microcopy,
+    mds-input + mds-microcopy .mds-form__microcopy,
+    .mds-form__textarea + .mds-form__microcopy,
+    mds-textarea + mds-microcopy .mds-form__microcopy,
+    .mds-form__select + .mds-form__microcopy,
+    mds-select + mds-microcopy .mds-form__microcopy,
+    .mds-form__checkbox + .mds-form__microcopy,
+    mds-checkbox + mds-microcopy .mds-form__microcopy,
+    .mds-form__radio-button + .mds-form__microcopy,
+    mds-radio-button + mds-microcopy .mds-form__microcopy,
+    .mds-combo-box + .mds-form__microcopy,
+    .mds-combo-box + mds-microcopy .mds-form__microcopy,
+    .mds-form__field-error + .mds-form__microcopy,
+    mds-field-error + mds-microcopy .mds-form__microcopy {
+        .mds-form--small-layout & {
+            margin-top: $mds-form-space-1-and-a-quarter-x;
+        }
+
+        .mds-form--medium-layout & {
+            margin-top: $mds-space-1-and-a-half-x;
+        }
+
+        .mds-form--large-layout &,
+        .mds-form--touch-layout & {
+            margin-top: $mds-space-2-x;
+        }
+    }
+
+    .mds-form--layout { // Deprecated, do not use. Will be removed in 3.0.0
+        .mds-combo-box {
+            margin: $mds-space-stack-1-x;
+        }
+    }
+} // End of Export

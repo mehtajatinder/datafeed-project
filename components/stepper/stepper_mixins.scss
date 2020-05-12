@@ -1,0 +1,43 @@
+@mixin mds-stepper-wide-properties($selector) {
+    #{$selector} {
+        .mds-stepper__list-item-label {
+            display: block;
+        }
+
+        .mds-stepper__active-step-summary {
+            display: none;
+        }
+    }
+}
+
+// Usage of mds-stepper-wide-at mixin
+// - determine the width at which all your stepper labels can be comforatably displayed
+// within your scss include the mixin:
+// @include mds-stepper-wide-at(843px); // where 843px is the width at which the stepper should switch to the "wide viewport" display
+
+// If you need to target multiple steppers, use the $selector argument to set responsive behavior for different steppers:
+// @include mds-stepper-wide-at(900px, '.my-first-stepper');
+// @include mds-stepper-wide-at(647px, '.my-second-stepper');
+
+// If you would like to hide small steps until switching to the wide display, set the $hide-narrow-small-steps argument to true
+// @include mds-stepper-wide-at(647px, $hide-narrow-small-steps: true);
+
+@mixin mds-stepper-wide-at($screen-width, $selector: '.mds-stepper', $hide-narrow-small-steps: false) {
+    @if $hide-narrow-small-steps == false {
+        @media screen and (min-width: #{$screen-width}) {
+            @include mds-stepper-wide-properties($selector);
+        }
+    } @else if $hide-narrow-small-steps == true {
+        #{$selector} .mds-stepper__step--small-step .mds-stepper__step-indicator {
+            display: none;
+        }
+    
+        @media screen and (min-width: #{$screen-width}) {
+            @include mds-stepper-wide-properties($selector);
+
+            #{$selector} .mds-stepper__step--small-step .mds-stepper__step-indicator {
+                display: block;
+            }
+        }
+    }
+}

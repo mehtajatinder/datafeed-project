@@ -1,0 +1,54 @@
+@import 'module_container_dependencies';
+
+@include mds-export-once('mds_module_container') {
+    // Module Container Component
+    .mds-module-container {
+        @include mds-border-box();
+        background-color: $mds-background-color-white;
+        border: $mds-border-container-on-all-backgrounds;
+        border-radius: $mds-border-radius-panel;
+        padding: $mds-space-2-x;
+        text-decoration: none;
+
+        // This is to support non-breaking changes since Header now has border-bottom. Deprecate in 3.0.0
+        .mds-header {
+            align-items: center;
+            display: flex;
+            margin: -$mds-space-2-x 0 $mds-space-2-x;
+
+            .mds-header__actions {
+                padding-top: 0;
+            }
+
+            .mds-header__title {
+                padding: $mds-space-2-x 0;
+            }
+        }
+
+        // This is to support non-breaking changes since Header now has border-bottom. Deprecate in 3.0.0
+        .mds-header.mds-header--primary {
+            @include mds-border-header-primary($sides: bottom, $enable-dark: true);
+            border-top: 0 none;
+        }
+
+        // This is to support non-breaking changes since Header now has border-bottom. Deprecate in 3.0.0
+        .mds-header.mds-header--secondary {
+            @include mds-border-header-secondary($sides: bottom, $enable-dark: true);
+            border-top: 0 none;
+        }
+
+        // This is to support non-breaking changes since Header now has border-bottom. Deprecate in 3.0.0
+        .mds-header.mds-header--tertiary {
+            @include mds-border-header-tertiary($sides: bottom, $enable-dark: true);
+            border-top: 0 none;
+        }
+    }
+
+    // This is to support non-breaking changes for the deprecated version of Module Container. Deprecate in 3.0.0
+    .mds-module-container__content {
+        &:only-child {
+            padding-top: 0;
+        }
+    }
+
+} // End of Export

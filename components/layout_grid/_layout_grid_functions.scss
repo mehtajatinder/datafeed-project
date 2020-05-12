@@ -1,0 +1,39 @@
+/// Returns class name based on breakpoint and omits breakpoint = 0
+/// @name mds-layout-grid-column-modifier-class-with-breakpoint
+/// @group mds-layout-grid
+/// @param {List} $params The query parameter conditions
+/// @return {String}
+@function mds-layout-grid-column-modifier-class-with-breakpoint ($breakpoint, $column, $modifier) {
+
+    // Check if $column is null, if it is omit it fro the class name
+    $ifcolumns: if($column, -#{$column}, '');
+    // Define the default class naming pattern
+    $class: mds-layout-grid__col--#{$modifier}#{$ifcolumns}-at-#{$breakpoint};
+
+    // If no breakpoint is declared by using '0' then omit it from the class name
+    @if ($breakpoint == 0) {
+        $class: mds-layout-grid__col--#{$modifier}#{$ifcolumns};
+    }
+
+    @return $class;
+}
+
+/// Returns a unitless number
+/// @name mds-layout-grid-strip-number
+/// @group mds-layout-grid
+/// @param {Number} $number The number to strip the unit from
+/// @return {Number}
+@function mds-layout-grid-strip-unit ($number) {
+    @return $number / ($number * 0 + 1);
+}
+
+/// Returns a percentage
+/// @name mds-layout-grid-to-percent
+/// @group mds-layout-grid
+/// @param {Number} $part The part (numerator)
+/// @param {Number} $whole The whole (denomenator)
+/// @return {*}
+@function mds-layout-grid-to-percent ($part, $whole) {
+    @return (mds-layout-grid-strip-unit($part) / mds-layout-grid-strip-unit($whole)) * 100%;
+}
+

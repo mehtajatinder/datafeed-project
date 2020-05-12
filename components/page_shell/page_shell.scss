@@ -1,0 +1,223 @@
+@import 'page_shell_dependencies';
+$mds-site-navigation-off-canvas-overlay-color: rgba($mds-background-color-black, $mds-opacity-overlay) !default;
+$mds-site-navigation-off-canvas-overlay-color-transparent: rgba($mds-background-color-black, 0) !default;
+
+@include mds-export-once('mds_page_shell') {
+    .mds-page-shell {
+        @include mds-border-box;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+        width: 100%;
+
+        &.mds-page-shell--on-canvas-left-navigation {
+            @media screen and (min-width: $mds-breakpoint-navigation-on-canvas-nav) {
+                grid-template-columns: $mds-site-navigation-vertical-width  1fr;
+            }
+        }
+
+        &.mds-page-shell--on-canvas-vertical-navigation {
+            @media screen and (min-width: $mds-breakpoint-navigation-on-canvas-nav) {
+                grid-template-columns: $mds-site-navigation-vertical-width  1fr;
+            }
+        }
+    }
+
+    .mds-page-shell__site-navigation {
+        background: $mds-site-navigation-off-canvas-overlay-color-transparent;
+        bottom: 0;
+        height: 100vh;
+        left: 0;
+        position: fixed;
+        right: 0;
+        top: 0;
+        transition: background .4s, visibility .4s;
+        visibility: hidden;
+        width: 100vw;
+        z-index: $mds-z-index-top-of-the-world;
+
+        @media screen and (min-width: $mds-breakpoint-navigation-on-canvas-nav) {
+            display: none;
+        }
+
+        .mds-page-shell--off-canvas-navigation-visible & {
+            background: $mds-site-navigation-off-canvas-overlay-color;
+            transition: background .4s, visibility .4s;
+            visibility: visible;
+            
+            @media screen and (min-width: $mds-breakpoint-navigation-on-canvas-nav) {
+                visibility: hidden;
+            }
+        }
+
+        .mds-page-shell--on-canvas-vertical-navigation & {
+            @media screen and (min-width: $mds-breakpoint-navigation-on-canvas-nav) {
+                display: block;
+                grid-column: 1 / span 1;
+                grid-row: 2 / span 1;
+                position: static;
+                visibility: visible;
+                width: 100%;
+                z-index: 0;
+            }
+        }
+
+        .mds-page-shell--on-canvas-left-navigation & {
+            @media screen and (min-width: $mds-breakpoint-navigation-on-canvas-nav) {
+                display: block;
+                grid-column: 1 / span 1;
+                grid-row: 2 / span 1;
+                position: static;
+                visibility: visible;
+                width: 100%;
+                z-index: 0;
+            }
+        }
+
+        .mds-page-shell--off-canvas-navigation-always & {
+            @media screen and (min-width: $mds-breakpoint-navigation-on-canvas-nav) {
+                display: block;
+            }
+        }
+
+        .mds-page-shell--off-canvas-navigation-always.mds-page-shell--off-canvas-navigation-visible & {
+            @media screen and (min-width: $mds-breakpoint-navigation-on-canvas-nav) {
+                visibility: visible;
+            }
+        }
+    }
+
+    .mds-page-shell--off-canvas-navigation-always .mds-site-navigation__actions {
+        display: flex; // Persist "close nav" button at wide viewports
+    }
+
+    .mds-page-shell__site-navigation-inner {
+        border-bottom: 0;
+        bottom: 0;
+        display: block;
+        height: 100vh;
+        left: -100%;
+        max-width: $mds-site-navigation-vertical-width;
+        position: fixed;
+        right: 0;
+        top: 0;
+        transition: left .4s;
+        width: 100%;
+
+        // Override site-navigation defaults so it renders full height in off-canvas mode
+        .mds-site-navigation--vertical {
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .mds-page-shell--off-canvas-navigation-visible & {
+            left: 0;
+            transition: left .4s;
+        }
+
+        .mds-page-shell--on-canvas-vertical-navigation & {
+            @media screen and (min-width: $mds-breakpoint-navigation-on-canvas-nav) {
+                height: auto;
+                position: static;
+                transition: none;
+                visibility: visible;
+            }
+        }
+
+        .mds-page-shell__header--sticky + .mds-page-shell--on-canvas-vertical-navigation & {
+            @media screen and (min-width: $mds-breakpoint-navigation-on-canvas-nav) {
+                height: calc(100vh - #{$mds-masthead-height});
+            }
+        }
+
+        .mds-page-shell__site-navigation--sticky & {
+            @media screen and (min-width: $mds-breakpoint-navigation-on-canvas-nav) {
+                // height: auto;
+                left: 0;
+                position: fixed;
+            }
+        }
+
+        .mds-page-shell__header--sticky + .mds-page-shell__site-navigation--sticky & {
+            @media screen and (min-width: $mds-breakpoint-navigation-on-canvas-nav) {
+                top: $mds-masthead-height + $mds-site-navigation-height;
+            }   
+        }
+
+        .mds-page-shell__header--sticky.mds-page-shell__header--masthead-only + .mds-page-shell__site-navigation--sticky & {
+            @media screen and (min-width: $mds-breakpoint-navigation-on-canvas-nav) {
+                top: $mds-masthead-height;
+            }   
+        }
+
+        .mds-page-shell__header--sticky.mds-page-shell__header--tall + .mds-page-shell__site-navigation--sticky & {
+            @media screen and (min-width: $mds-breakpoint-navigation-on-canvas-nav) {
+                top: $mds-masthead-height-tall + $mds-site-navigation-height;
+            }   
+        }
+    }
+
+    .mds-page-shell--on-canvas-vertical-navigation .mds-page-shell__header--sticky + .mds-page-shell__site-navigation .mds-site-navigation--vertical {
+        @media screen and (min-width: $mds-breakpoint-navigation-on-canvas-nav) {
+            height: 100%;
+        }
+    }
+
+
+
+    .mds-page-shell__header {
+        grid-row: 1 / span 1;
+        width: 100%;
+
+        .mds-page-shell--on-canvas-vertical-navigation & {
+            @media screen and (min-width: $mds-breakpoint-navigation-on-canvas-nav) {
+                grid-column: 1 / span 2;
+            }
+        }
+    }
+
+    .mds-page-shell__header--sticky {
+        height: $mds-masthead-height;
+
+        @media screen and (min-width: $mds-breakpoint-navigation-on-canvas-nav) {
+            height: $mds-masthead-height + $mds-site-navigation-height;
+        }
+
+        .mds-page-shell__header-inner {
+            left: 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: $mds-z-index-sticky;
+        }
+    }
+
+    .mds-page-shell__header--tall {
+        @media screen and (min-width: $mds-breakpoint-navigation-on-canvas-nav) {
+            height: $mds-masthead-height-tall + $mds-site-navigation-height;
+        }
+    }
+
+    .mds-page-shell__header--masthead-only {
+        @media screen and (min-width: $mds-breakpoint-navigation-on-canvas-nav) {
+            height: $mds-masthead-height;
+        }   
+    }
+
+    .mds-page-shell__content {
+        grid-row: 2 / span 1;
+        width: 100%;
+
+        .mds-page-shell--on-canvas-left-navigation & {
+            @media screen and (min-width: $mds-breakpoint-navigation-on-canvas-nav) {
+                grid-column: 2 / span 1;
+            }
+        }
+
+        .mds-page-shell--on-canvas-vertical-navigation & {
+            @media screen and (min-width: $mds-breakpoint-navigation-on-canvas-nav) {
+                grid-column: 2 / span 1;
+            }
+        }
+    }
+} // End of Export

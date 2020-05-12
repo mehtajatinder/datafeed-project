@@ -1,0 +1,21 @@
+@import '../../constants/constants';
+
+$mds-stepper-border-width-indicator: 2px !default;
+
+$mds-stepper-color-complete: $mds-interactive-color-primary-default !default;
+$mds-stepper-color-active: $mds-interactive-color-primary-default !default;
+$mds-stepper-color-progress-line: $mds-color-neutral-67 !default;
+$mds-stepper-color-progress-line-on-dark: $mds-color-neutral-37 !default;
+$mds-stepper-progress-line-thickness: 3px !default;
+
+$mds-stepper-size-indicator: 21px !default;
+$mds-stepper-size-indicator-complete: $mds-stepper-size-indicator !default; // Keeping these the same size prevents a left shift of the progress track
+$mds-stepper-size-indicator-center-dot: 11px !default;
+$mds-stepper-size-step-complete-icon: 11px !default;
+$mds-stepper-size-small-step-indicator: 7px !default;
+$mds-stepper-scale-indicator-center-dot: $mds-stepper-size-indicator-center-dot / $mds-stepper-size-indicator !default;
+
+$mds-stepper-transition-timing: $mds-animation-timing-2-x !default;
+$mds-stepper-transition-timing-wait-for-progress-line: $mds-stepper-transition-timing / 2 $mds-stepper-transition-timing linear !default;
+
+$mds-stepper-maximum-number-of-steps: 7 !default; // This will auto-generate the correct CSS to support steppers with up to this many steps

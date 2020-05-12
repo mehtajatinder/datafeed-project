@@ -1,0 +1,162 @@
+$mds-font-asset-path: '../../../fonts/' !default; // This font path is used to render the component-only test page correctly
+@import '../../styles/visual-language/fonts';
+@import '../../constants/constants';
+@import '../../styles/utils/import_once';
+@import '../../styles/visual-language/color';
+@import '../../styles/visual-language/size';
+@import '../../styles/visual-language/typography';
+@import '../../styles/utils/accessibility';
+@import './form_variables';
+@import './form_mixins';
+
+@include mds-export-once('mds_form_select') {
+    .mds-form__select {
+        @include mds-border-box();
+        background-clip: padding-box;
+        background-color: none;
+        display: inline-block;
+        position: relative;
+    }
+
+    .mds-form__select-input {
+        @include mds-incremental-font-sizes('form__select');
+        @include mds-incremental-spacing('form__select', 'inset', $text-cropped: false)  {
+            padding-bottom: 0;
+            padding-right: $mds-size-icon-s * 2;
+            padding-top: 0;
+        }
+        @include mds-container-dark-parent-selectors {
+            color: $mds-color-form-select-on-dark;
+        }
+        appearance: none;
+        background: none;
+        border: 0;
+        color: $mds-color-form-input;
+        cursor: pointer;
+        font-family: $mds-font-family-sans-serif;
+        font-weight: $mds-font-weight-light;
+        height: $mds-size-element-height-m;
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+        z-index: 10;
+
+        .mds-form__select--small & {
+            font-weight: $mds-font-weight-regular;
+            height: $mds-size-element-height-s;
+        }
+
+        .mds-form__select--large & {
+            height: $mds-size-element-height-l;
+        }
+
+        .mds-form__select--touch & {
+            font-size: $mds-font-size-l;
+            height: $mds-size-element-height-touch;
+        }
+
+        &:focus {
+            outline: none;
+        }
+
+        &:disabled {
+            @include mds-disabled();
+        }
+
+        &:focus::-ms-value { // sass-lint:disable-line no-vendor-prefixes - have to target IE specifically here
+            background: transparent;
+            color: inherit;
+        }
+
+        &::-ms-expand { // sass-lint:disable-line no-vendor-prefixes - have to target IE specifically here
+            display: none;
+        }
+    }
+
+    .mds-form__select-option {
+        @include mds-container-dark-parent-selectors {
+            color: $mds-color-form-input;
+        }
+    }
+
+    .mds-form__select-visual-wrap {
+        @include mds-container-dark-parent-selectors {
+            background-color: $mds-background-color-form-input-on-dark;
+        }
+        background-clip: padding-box;
+        background-color: $mds-background-color-form-input;
+        border: 0;
+        bottom: 0;
+        box-shadow: $mds-box-shadow-form-input-border;
+        cursor: pointer;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transition: $mds-animation-timing-1-x linear;
+        z-index: 0;
+
+        .mds-form__select:hover &,
+        .mds-form__select--hover & {
+            @include mds-form-hover-styles();
+        }
+
+        .mds-form__select-input:focus ~ &,
+        .mds-form__select--focus & {
+            @include mds-form-focus-styles();
+        }
+
+        .mds-form__select--focus:hover & {
+            box-shadow: $mds-box-shadow-form-input-border, $mds-box-shadow-form-element-focus;
+        }
+
+        .mds-form__select-input:disabled ~ & {
+            @include mds-disabled();
+            box-shadow: $mds-box-shadow-form-input-border;
+        }
+
+        .mds-form--error &, // Do not use, will be deprecated in 3.0.0
+        .mds-form__field-group--error &,
+        .mds-form--error .mds-form__select:hover &, // Do not use, will be deprecated in 3.0.0
+        .mds-form__field-group--error .mds-form__select:hover & {
+            @include mds-form-error-styles();
+        }
+
+        .mds-form--error .mds-form__select-input:focus ~ &, // Do not use, will be deprecated in 3.0.0
+        .mds-form__field-group--error .mds-form__select-input:focus ~ & {
+            box-shadow: $mds-box-shadow-form-element-focus-input-border-error;
+        }
+
+    }
+
+    .mds-form__select-open-indicator {
+        bottom: 0;
+        content: '';
+        display: block;
+        position: absolute;
+        right: -1px;
+        text-align: center;
+        top: 0;
+        width: $mds-size-icon-s * 2;
+
+        .mds-form__select-input:disabled ~ & {
+            @include mds-disabled();
+        }
+    }
+
+    .mds-form__select-open-icon {
+        @include mds-container-dark-parent-selectors {
+            fill: $mds-color-form-select-on-dark;
+        }
+        cursor: pointer;
+        display: block;
+        fill: $mds-color-form-input;
+        height: $mds-size-icon-s;
+        left: 50%;
+        margin-left: -($mds-size-icon-s / 2);
+        margin-top: -($mds-size-icon-s / 2);
+        position: absolute;
+        top: 50%;
+        width: $mds-size-icon-s;
+    }
+}

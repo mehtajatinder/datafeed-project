@@ -1,0 +1,103 @@
+@mixin mds-article-eyebrow() {
+    @include mds-text-crop();
+    @include mds-eyebrow-heading();
+    @include mds-text-color-primary;
+    border-bottom: 1px solid $mds-color-red-50;
+    display: inline-block;
+    margin: $mds-space-stack-3-x;
+    padding: $mds-space-stack-1-x;
+}
+
+@mixin mds-article-title() {
+    @include mds-text-crop($bottom-adjustment: -4px);
+    @include mds-level-1-heading();
+    @include mds-text-color-primary;
+    font-weight: $mds-font-weight-bold;
+    margin: $mds-space-stack-4-x;
+}
+
+@mixin mds-article-deck() {
+    @include mds-text-crop();
+    @include mds-level-3-heading();
+    @include mds-text-color-primary;
+    margin: $mds-space-stack-4-x;
+}
+
+@mixin mds-article-paragraph() {
+    @include mds-text-crop();
+    @include mds-body-text-l();
+    @include mds-text-color-primary;
+    margin: $mds-space-stack-3-x;
+}
+
+@mixin mds-article-footnote() {
+    @include mds-text-crop();
+    @include mds-body-text-s();
+    @include mds-text-color-secondary;
+    color: $mds-text-color-secondary-on-light;
+}
+
+@mixin mds-article-heading-level-3() { // Deprecated (to be removed in MDS 3.x)
+    @include mds-text-crop();
+    @include mds-level-3-heading();
+    @include mds-text-color-primary;
+    display: block;
+    font-weight: $mds-font-weight-bold;
+    margin: $mds-space-stack-1-x;
+}
+
+@mixin mds-article-heading-level-4() { // Deprecated (to be removed in MDS 3.x)
+    @include mds-text-crop();
+    @include mds-level-4-heading();
+    @include mds-text-color-primary;
+    display: block;
+    font-weight: $mds-font-weight-bold;
+    margin: $mds-space-stack-1-x;
+}
+
+@mixin mds-article-heading-level-5() { // Deprecated (to be removed in MDS 3.x)
+    @include mds-text-crop();
+    @include mds-level-5-heading();
+    @include mds-text-color-primary;
+    display: block;
+    font-weight: $mds-font-weight-bold;
+    margin: $mds-space-stack-1-x;
+}
+//
+
+@mixin mds-article-heading-large() {
+    @include mds-text-crop();
+    @include mds-level-3-heading();
+    @include mds-text-color-primary;
+    display: block;
+    font-weight: $mds-font-weight-bold;
+    margin: $mds-space-stack-1-x;
+}
+
+@mixin mds-article-heading-medium() {
+    @include mds-text-crop();
+    @include mds-level-4-heading();
+    @include mds-text-color-primary;
+    display: block;
+    font-weight: $mds-font-weight-bold;
+    margin: $mds-space-stack-1-x;
+}
+
+@mixin mds-article-heading-small() {
+    @include mds-text-crop();
+    @include mds-level-5-heading();
+    @include mds-text-color-primary;
+    display: block;
+    font-weight: $mds-font-weight-bold;
+    margin: $mds-space-stack-1-x;
+}
+
+@mixin mds-article-ul() {
+    @include mds-unordered-list(large);
+    margin: $mds-space-stack-3-x;
+}
+
+@mixin mds-article-ol() {
+    @include mds-ordered-list(large);
+    margin: $mds-space-stack-3-x;
+}

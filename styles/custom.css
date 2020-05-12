@@ -1,0 +1,13 @@
+body{
+    margin-left: 16px;
+    margin-right: 16px;
+}
+.mds-header .mds-header__title{
+    font-weight: 200;
+}
+.mds-header .mds-header__title + .updation{
+    font-size: 10px;
+    font-family: Univers,HelveticaNeue,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    margin-top: 8px;
+    color: #ababab;
+}

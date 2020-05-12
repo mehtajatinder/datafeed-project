@@ -1,0 +1,33 @@
+@import '../../constants/constants';
+@import 'search_field_variables';
+
+@mixin mds-search-field-input-focus-outline {
+    border-radius: $mds-border-radius-pill;
+    bottom: 0;
+    box-shadow: $mds-box-shadow-focus;
+    display: block;
+    left: 0;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+@mixin mds-search-field-touch-properties {
+    .mds-search-field__input {
+        font-size: $mds-font-size-l;
+        height: $mds-size-element-height-touch;
+        padding-left: $mds-search-field-input-touch-icon-padding;
+        padding-right: $mds-search-field-input-inset-horizontal;
+    }
+
+    .mds-search-field__search-icon {
+        height: $mds-size-icon-m;
+        left: $mds-search-field-icon-touch-margin;
+        width: $mds-size-icon-m;
+    }
+
+    .mds-search-field__clear-button {
+        right: $mds-search-field-icon-touch-margin;
+    }
+}

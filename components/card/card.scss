@@ -1,0 +1,185 @@
+@import 'card_dependencies';
+
+@include mds-export-once('mds_card') {
+    // Card Component
+    .mds-card {
+        @include mds-border-box();
+        background-color: $mds-background-color-white;
+        border: $mds-border-container-on-all-backgrounds;
+        border-radius: $mds-border-radius-panel;
+        display: inline-block;
+        max-width: 100%;
+        overflow: hidden;
+        padding-top: $mds-space-2-x;
+        text-decoration: none;
+
+        &:focus {
+            border-radius: $mds-border-radius-panel;
+            bottom: 0;
+            box-shadow: $mds-box-shadow-focus;
+            left: 0;
+            outline: none;
+            right: 0;
+            top: 0;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+    }
+
+    .mds-card__label-title {
+        @include mds-font-reset;
+        background-color: $mds-background-color-black;
+        color: $mds-text-color-primary-on-dark;
+        display: inline-block;
+        font-size: $mds-font-size-xs;
+        font-weight: $mds-font-weight-bold;
+        letter-spacing: 1.67px;
+        line-height: $mds-font-line-height-headings;
+        margin: 0;
+        padding: 4px $mds-space-three-quarter-x 3px; // removed text-crop() to address card label misalignment with padding
+        text-transform: uppercase;
+        vertical-align: top;
+    }
+
+    .mds-card__label {
+        margin: $mds-space-stack-1-and-a-half-x;
+        margin-left: $mds-space-2-x;
+        margin-right: $mds-space-2-x;
+        margin-top: -$mds-space-2-x;
+
+        .mds-card--small & {
+            margin-bottom: $mds-space-1-x;
+        }
+
+        .mds-card--full-bleed.mds-card--full-bleed-top-label-overlap &  {
+            position: absolute;
+        }
+
+    }
+
+    .mds-card__title {
+        @include mds-text-crop();
+        @include mds-level-5-heading();
+        @include mds-text-color-primary($enable-dark: false);
+        border-top: solid 2px transparent; // required for text-crop() reasons
+        display: block;
+        font-weight: $mds-font-weight-bold;
+        margin: $mds-space-stack-2-x;
+        margin-top: -2px; // required for text-crop() reasons
+        padding-left: $mds-space-inset-2-x;
+        padding-right: $mds-space-inset-2-x;
+
+        .mds-card--small & {
+            @include mds-level-6-heading();
+            font-weight: $mds-font-weight-bold;
+            margin: $mds-space-stack-1-and-a-half-x;
+
+            &:last-child {
+                margin-bottom: $mds-space-2-x;
+            }
+        }
+
+        .mds-card--large & {
+            @include mds-level-4-heading();
+            font-weight: $mds-font-weight-bold;
+        }
+    }
+
+    .mds-card__caption {
+        @include mds-body-text-m();
+        @include mds-text-color-primary();
+        @include mds-text-crop();
+        border-top: solid 2px transparent; // required for text-crop() reasons
+        font-family: $mds-font-family-sans-serif;
+        margin: $mds-space-stack-2-x;
+        margin-top: -2px; // required for text-crop() reasons
+        padding-left: $mds-space-inset-2-x;
+        padding-right: $mds-space-inset-2-x;
+
+        .mds-card--small & {
+            @include mds-body-text-s();
+            margin-bottom: $mds-space-1-and-a-half-x;
+
+            &:last-child {
+                margin-bottom: $mds-space-2-x;
+            }
+        }
+
+        .mds-card--large & {
+            @include mds-body-text-l();
+        }
+    }
+
+    .mds-card__supplemental-content {
+        line-height: 0;
+        margin: $mds-space-stack-2-x;
+        padding-left: $mds-space-inset-2-x;
+        padding-right: $mds-space-inset-2-x;
+        vertical-align: bottom;
+
+        .mds-card--small & {
+            margin: $mds-space-stack-1-and-a-half-x;
+
+            &:last-child {
+                margin-bottom: $mds-space-2-x;
+            }
+        }
+
+        .mds-card--full-bleed & {
+            padding-left: 0;
+            padding-right: 0;
+
+            &:first-child {
+                margin-top: -$mds-space-2-x;
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    .mds-card__label + .mds-card__supplemental-content {
+        .mds-card--full-bleed & {
+            margin-top: -$mds-space-2-x;
+        }
+    }
+
+    .mds-card__action {
+        margin: $mds-space-stack-2-x;
+        padding-left: $mds-space-inset-2-x;
+        padding-right: $mds-space-inset-2-x;
+
+        .mds-card--small & {
+            margin: $mds-space-stack-1-and-a-half-x;
+
+            &:last-child {
+                margin-bottom: $mds-space-2-x;
+            }
+        }
+    }
+
+    .mds-card__metadata {
+        @include mds-text-crop();
+        border-top: solid 2px transparent; // required for text-crop() reasons
+        color: $mds-text-color-secondary-on-light;
+        display: block;
+        font-family: $mds-font-family-sans-serif;
+        font-size: $mds-font-size-s;
+        font-weight: $mds-font-weight-regular;
+        line-height: $mds-font-line-height-body;
+        margin: $mds-space-stack-2-x;
+        margin-top: -2px; // required for text-crop() reasons
+        padding-left: $mds-space-inset-2-x;
+        padding-right: $mds-space-inset-2-x;
+
+    }
+
+    // MDSWC Changes
+    mds-card {
+        display: inline-block;
+    }
+}

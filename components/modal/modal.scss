@@ -1,0 +1,226 @@
+@import 'modal_dependencies';
+
+$mds-modal-widths: (
+    600px,
+    900px,
+    1200px
+) !default;
+
+// Dimensions
+$mds-modal-height: 100px !default;
+
+// Transitions
+$mds-modal-transition-visibility: z-index $mds-animation-timing-2-x $mds-animation-ease-in-out, visibility $mds-animation-timing-2-x $mds-animation-ease-in-out !default;
+$mds-modal-transition-transform: transform $mds-animation-timing-2-x $mds-animation-ease-in-out, opacity $mds-animation-timing-2-x $mds-animation-ease-in-out !default;
+
+@include mds-export-once('mds_modal') {
+    // Modal Component
+    .mds-modal {
+        @include mds-border-box();
+
+        &.mds-modal--open {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            left: 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: $mds-z-index-modal-content;
+        }
+
+        &:focus {
+            outline: 0 solid transparent;
+        }
+    }
+
+    // "Inner" Wrapper to handle vertical alignment of a modal
+    .mds-modal__wrapper {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: center;
+    }
+
+    // Modal popup itself
+    .mds-modal__container {
+        @include mds-border-box();
+        display: none;
+        margin: 0 auto;
+        opacity: 0;
+        position: absolute;
+        transform: translateY(-100%);
+        transition: $mds-modal-transition-visibility;
+        visibility: hidden;
+        width: 90%;
+        z-index: -1;
+
+        .mds-modal--open & {
+            box-shadow: $mds-box-shadow-drop;
+            display: flex;
+            flex-direction: row;
+            position: inherit; // needed for IE11
+            transition: $mds-modal-transition-transform;
+            visibility: visible;
+            z-index: $mds-z-index-modal-content;
+        }
+
+        .mds-modal--active & {
+            opacity: 1;
+            transform: translateY(0%);
+        }
+
+        @each $mds-modal-width in $mds-modal-widths {
+            .mds-modal--width-#{$mds-modal-width} & {
+                max-width: $mds-modal-width;
+            }
+        }
+    }
+
+    // Inside Modal popup
+    .mds-modal__inner {
+        @include mds-border-box();
+        background: $mds-background-color-white;
+        border: $mds-border-container-on-all-backgrounds;
+        border-radius: $mds-border-radius-panel;
+        box-shadow: $mds-box-shadow-drop;
+        color: $mds-text-color-primary-default;
+        display: flex;
+        flex-direction: column;
+        max-height: 90vh;
+        overflow: hidden;
+        padding: $mds-space-inset-2-x;
+        width: 100%;
+    }
+
+    .mds-modal__header {
+        @include mds-border-box();
+        align-items: top;
+        border-bottom: $mds-border-separator-on-title;
+        display: flex;
+        flex-shrink: 0;
+        justify-content: space-between;
+        margin-bottom: $mds-space-inset-2-x;
+        padding-bottom: $mds-space-inset-2-x;
+
+        &--no-title {
+            border: 0 none;
+            margin-bottom: 0;
+        }
+    }
+
+    // Content body container.
+    // Scrollbars is also applied depending on content height
+    .mds-modal__content {
+        overflow-y: auto;
+    }
+
+    .mds-modal__title {
+        @include mds-border-box();
+        @include mds-text-crop();
+        color: $mds-text-color-primary-on-light;
+        flex-grow: 2;
+        font-family: $mds-font-family-sans-serif;
+        font-size: $mds-font-size-l;
+        font-weight: $mds-font-weight-bold;
+        margin: 0;
+        position: relative;
+        width: 100%;
+
+        .mds-modal__header--no-title & {
+            @include mds-accessibly-hidden();
+        }
+    }
+
+    .mds-modal__actions {
+        font-size: 0;
+        margin-bottom: -7px;
+        margin-top: -7px;
+        order: 2;
+        text-align: right;
+        width: 50%;
+
+        // Neutralize vertical spaces
+        .mds-button {
+            margin: $mds-space-inline-right-1-x;
+
+            &.mds-button--icon-only {
+                margin: $mds-space-inline-right-2-x;
+                margin-top: $mds-space-half-x;
+            }
+        }
+
+        .mds-button--icon-only + .mds-button {
+            margin: $mds-space-inline-right-2-x;
+        }
+
+        .mds-modal__header--no-title & {
+            flex-grow: 1;
+            width: 100%;
+        }
+
+        // Fixes to button colors for consistency
+        .mds-button--secondary {
+            color: $mds-text-color-secondary-default;
+
+            &:hover {
+                color: $mds-text-color-primary-on-dark;
+            }
+        }
+
+        .mds-button--icon-only .mds-button__icon {
+            fill: $mds-text-color-secondary-default;
+        }
+
+        .mds-button--icon-only:hover .mds-button__icon {
+            fill: $mds-text-color-primary-default;
+        }
+    }
+
+    // web component specific
+    mds-modal {
+        position: absolute;
+        visibility: hidden; // needed to avoid FOUT
+
+        // TODO: 3.0 Optimize for inheritance of dark parent styles
+        .mds-header {
+            margin: $mds-space-stack-2-x;
+
+            &.mds-header--primary.mds-header--border-bottom {
+                border-color: $mds-color-neutral-20;
+            }
+
+            .mds-header__title {
+                color: $mds-text-color-primary-default;
+            }
+
+            .mds-button--secondary {
+                color: $mds-text-color-secondary-default;
+
+                &:hover {
+                    color: $mds-text-color-primary-on-dark;
+                }
+            }
+
+            .mds-button--icon-only .mds-button__icon {
+                fill: $mds-text-color-secondary-default;
+            }
+
+            .mds-button--icon-only:hover .mds-button__icon {
+                fill: $mds-text-color-primary-default;
+            }
+
+            slot slot span:first-child,
+            slot slot div:first-child {
+                align-items: center;
+                display: flex;
+            }
+        }
+
+        .mds-modal__inner {
+            padding-top: 0;
+        }
+    }
+
+} // End of Export

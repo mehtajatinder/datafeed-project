@@ -1,0 +1,35 @@
+// TODO: This file is deprecated and will be moved out of Library in MDS v3.0. Do not use any styles defined here.
+
+// This file is included on the Steppers test page as well as the Steppers doc page. 
+// It includes calls to the stepper's mixin to switch from the narrow to wide layout at specific breakpoints
+@import '../../constants/constants';
+
+
+@import './stepper';
+
+// Sink page examples
+@include mds-stepper-wide-at(990px, '.steppers-test-your-information-example', $hide-narrow-small-steps: true);
+@include mds-stepper-wide-at(990px, '.steppers-test-suppressed-substep-indicators');
+@include mds-stepper-wide-at(990px, '.steppers-test-non-interactive-substeps');
+@include mds-stepper-wide-at(1568px, '.steppers-test-long-labels-example');
+@include mds-stepper-wide-at(1280px, '.steppers-test-long-labels-medium-font-example');
+@include mds-stepper-wide-at(1112px, '.steppers-test-long-labels-small-font-example');
+@include mds-stepper-wide-at(260px, '.steppers-test-three-step-example');
+@include mds-stepper-wide-at(320px, '.steppers-test-four-step-example');
+@include mds-stepper-wide-at(414px, '.steppers-test-five-step-example');
+@include mds-stepper-wide-at(536px, '.steppers-test-six-step-example');
+@include mds-stepper-wide-at(587px, '.steppers-test-seven-step-example');
+@include mds-stepper-wide-at(780px, '.steppers-test-light-labels');
+
+
+// Continue / Back Button wrapper controls
+.stepper-demo-wrap {
+    margin: 0 0 32px;
+}
+
+.stepper-demo-wrap__controls {
+    margin: 0 auto;
+    max-width: 400px;
+    text-align: center;
+    width: 100%;
+}

@@ -1,0 +1,99 @@
+@import 'pagination_dependencies';
+@include mds-export-once('mds_pagination') {
+    .mds-pagination {
+        @include mds-text-crop($top-adjustment: -1px); // Space adheres to mds-button--small
+        @include mds-border-box();
+        @include mds-box-shadow-border($mds-border-control-color);
+        border-radius: $mds-border-radius-pill;
+        display: inline-block;
+        font-family: $mds-font-family-sans-serif;
+        font-weight: $mds-font-weight-regular;
+        list-style: none;
+        margin: 0;
+        padding: $mds-space-inset-stretch-s; // Space adheres to mds-button--small
+        white-space: nowrap;
+    }
+
+    .mds-pagination__item {
+        display: inline-block;
+        font-size: $mds-font-size-s;
+        padding: 0;
+    }
+
+    .mds-pagination__link {
+        @include mds-link($underline: false, $visited-styles: false);
+        background: transparent;
+        cursor: pointer;
+        display: inline-block;
+        padding: 0 $mds-space-inset-half-x;
+
+        &.mds-pagination__link--selected,
+        &.mds-pagination__link--selected:hover {
+            @include mds-container-dark-parent-selectors {
+                color: $mds-text-color-primary-on-dark;
+            }
+
+            color: $mds-text-color-primary-default;
+            cursor: default;
+            font-weight: $mds-font-weight-bold;
+        }
+
+        &.mds-pagination__link:disabled,
+        &.mds-pagination__link--disabled,
+        &.mds-pagination__link:disabled:hover,
+        &.mds-pagination__link--disabled:hover {
+            @include mds-container-dark-parent-selectors {
+                color: $mds-text-color-secondary-on-dark;
+
+                & .mds-pagination__icon {
+                    fill: $mds-text-color-secondary-on-dark;
+                }
+            }
+
+            color: $mds-text-color-secondary-default;
+            cursor: not-allowed;
+            opacity: $mds-opacity-disabled;
+
+            & .mds-pagination__icon {
+                fill: $mds-text-color-secondary-default;
+            }
+        }
+
+        // .mds-pagination__link--hover is for doc purposes only
+        &.mds-pagination__link--hover {
+            @include mds-container-dark-parent-selectors {
+                color: $mds-text-color-link-on-dark;
+            }
+            color: $mds-text-color-link-on-light;
+        }
+
+        // .mds-pagination__link--focus is for doc purposes only
+        &.mds-pagination__link--focus {
+            box-shadow: $mds-box-shadow-focus;
+        }
+    }
+
+    .mds-pagination__icon {
+        @include mds-container-dark-parent-selectors {
+            fill: $mds-text-color-secondary-on-dark;
+        }
+        fill: $mds-text-color-secondary-default;
+        height: $mds-size-icon-s;
+        position: relative;
+        top: 2px;                           // Space override different from buttons because of display type, this sits in it's own block, in buttons it's side-by-side with text
+        width: $mds-size-icon-s;
+
+
+        .mds-pagination__link--hover &,
+        .mds-pagination__link:hover & {
+            @include mds-container-dark-parent-selectors {
+                fill: $mds-text-color-link-on-dark;
+            }
+            fill: $mds-text-color-link-on-light;
+        }
+
+        .mds-pagination__item--disabled & {
+            fill-opacity: $mds-opacity-disabled;
+        }
+    }
+} // End of Export

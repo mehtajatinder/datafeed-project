@@ -1,0 +1,8 @@
+{% set masthead_left %}
+    {{ library.button(icon_left="menu-padless", class="mds-button--icon-only mds-masthead--hide-wide") }}
+{% endset %}
+{% set masthead_right %}
+    {{ library.button(icon_left="envelope", class="mds-button--icon-only mds-masthead--hide-wide") }}
+    {{ library.button(text="Contact Us", class="mds-button--secondary mds-masthead--show-wide") }}
+{% endset %}
+{{ library.masthead(logo="/images/mastheads/logos/commodity-data-management-lockup.png", masthead_left=masthead_left, masthead_right=masthead_right) }}

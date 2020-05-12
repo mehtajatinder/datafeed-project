@@ -1,0 +1,275 @@
+@import 'switch_dependencies';
+@import 'switch_variables';
+@import 'switch_mixins';
+
+@include mds-export-once('mds_switch') {
+    .mds-switch,
+    .mds-switch__group,
+    .mds-switch__field-group {
+        @include mds-border-box();
+    }
+
+    .mds-switch__label {
+        color: $mds-color-switch-label;
+        cursor: pointer;
+
+        .mds-container--dark-gray &,
+        .mds-container--black & {
+            color: $mds-color-switch-label-on-dark;
+        }
+    }
+
+    .mds-switch__text {
+        @include mds-incremental-font-sizes('switch', $selector-level: 'element');
+        cursor: pointer;
+        display: inline-block;
+        font-family: $mds-font-family-sans-serif;
+        font-weight: $mds-font-weight-light;
+        padding-left: $mds-switch-width + $mds-space-three-quarter-x;
+        position: relative;
+        transition: $mds-switch-transition-hover;
+
+        .mds-switch--touch & {
+            font-size: $mds-font-size-l;
+            padding-bottom: $mds-space-1-and-a-half-x;
+            padding-top: $mds-space-1-and-a-half-x;
+        }
+
+        // Border
+        &:before {
+            border: $mds-border-control-on-all-backgrounds;
+            border-radius: $mds-border-radius-pill;
+            content: '';
+            display: block;
+            height: $mds-switch-height;
+            left: 0;
+            position: absolute;
+            top: 2px;
+            transition: $mds-switch-transition-click;
+            width: $mds-switch-width;
+
+            .mds-switch--small & {
+                top: 1px;
+            }
+
+            .mds-switch--large & {
+                height: $mds-switch-large-height;
+                top: 1px;
+                width: $mds-switch-large-width;
+            }
+
+            .mds-switch--touch & {
+                height: $mds-switch-large-height;
+                top: $mds-switch-touch-border-top;
+                width: $mds-switch-large-width;
+            }
+        }
+
+        // Dot
+        &:after {
+            border: $mds-border-control-on-all-backgrounds;
+            border-radius: $mds-border-radius-round;
+            content: '';
+            display: block;
+            height: $mds-switch-toggle-height;
+            left: 0;
+            margin-left: $mds-switch-toggle-offset;
+            position: absolute;
+            top: 4px;
+            transition: $mds-switch-transition-click;
+            width: $mds-switch-toggle-width;
+
+            .mds-switch--small & {
+                top: 3px;
+            }
+
+            .mds-switch--large & {
+                height: $mds-switch-large-toggle-height;
+                width: $mds-switch-large-toggle-width;
+            }
+
+            .mds-switch--touch & {
+                height: $mds-switch-large-toggle-height;
+                top: $mds-switch-touch-dot-top;
+                width: $mds-switch-large-toggle-width;
+            }
+
+        }
+
+        .mds-switch--small & {
+            font-weight: $mds-font-weight-regular;
+            padding-left: $mds-switch-width + $mds-space-half-x;
+        }
+
+        .mds-switch--large &,
+        .mds-switch--touch & {
+            padding-left: $mds-switch-large-width + $mds-space-three-quarter-x;
+        }
+
+        // Hide Label (e.g. no label)
+        .mds-switch--hide-label & {
+            padding: 0;
+            text-indent: -9999px;
+            width: $mds-switch-width;
+
+        }
+
+        .mds-switch--hide-label.mds-switch--large & {
+            width: $mds-switch-large-width;
+        }
+
+        .mds-switch--hide-label.mds-switch--touch & {
+            min-height: $mds-size-element-height-touch;
+            width: $mds-switch-large-width;
+        }
+
+    }
+
+    .mds-switch__input {
+        // hide checkbox
+        @include mds-accessibly-hidden();
+
+        // Focus/active state
+        &:focus ~ .mds-switch__text,
+        .mds-switch--focus & ~ .mds-switch__text { // TODO: Remove `mds-switch--focus` modifier class in 3.0
+            box-shadow: $mds-box-shadow-focus;
+            outline: none;
+        }
+
+        &:checked ~ .mds-switch__text {
+            &:after {
+                margin-left: $mds-switch-toggle-width;
+
+                .mds-switch--large &,
+                .mds-switch--touch & {
+                    margin-left: $mds-switch-large-toggle-width;
+                }
+            }
+        }
+
+        // Checked state (enabled)
+        &:not([disabled]):checked ~ .mds-switch__text {
+            color: $mds-color-switch-label-hover;
+
+            .mds-container--dark-gray &,
+            .mds-container--black & {
+                color: $mds-color-switch-label-hover-on-dark;
+            }
+
+            &:before,
+            &:after {
+                border-color: $mds-interactive-color-primary-default;
+            }
+
+            &:after {
+                background: $mds-interactive-color-primary-default;
+
+                .mds-switch__label:active &,
+                .mds-switch--active & { // TODO: Remove `mds-switch--active` modifier class in 3.0
+                    background: $mds-interactive-color-primary-active;
+                }
+            }
+        }
+
+        // Disabled
+        &:disabled ~ .mds-switch__text,
+        &[disabled] ~ .mds-switch__text,
+        .mds-switch--disabled & ~ .mds-switch__text  { // TODO: Remove `mds-switch--disabled` modifier class in 3.0
+            @include mds-disabled();
+            opacity: $mds-opacity-disabled;
+
+            &:before,
+            &:after {
+                border: $mds-border-disabled;
+            }
+
+        }
+
+        // Disabled - checked state
+        &:disabled:checked ~ .mds-switch__text {
+            &:after {
+                background: $mds-interactive-color-disabled-on-light;
+            }
+        }
+
+        // Hover & Active
+        &:not([disabled]) ~ .mds-switch__text,
+        &:not([disabled]):checked ~ .mds-switch__text {
+
+            .mds-switch__label:hover &,
+            .mds-switch--hover & { // TODO: Remove `mds-switch--hover` modifier class in 3.0
+                color: $mds-color-switch-label-hover;
+
+                .mds-container--dark-gray &,
+                .mds-container--black & {
+                    color: $mds-color-switch-label-hover-on-dark;
+                }
+            }
+
+            &:before {
+                .mds-switch__label:hover &,
+                .mds-switch--hover & { // TODO: Remove `mds-switch--hover` modifier class in 3.0
+                    border-color: $mds-interactive-color-primary-hover;
+                }
+
+                .mds-switch__label:active &,
+                .mds-switch--active & { // TODO: Remove `mds-switch--active` modifier class in 3.0
+                    border-color: $mds-interactive-color-primary-active;
+                }
+            }
+
+            &:after {
+                .mds-switch__label:hover &,
+                .mds-switch--hover & { // TODO: Remove `mds-switch--hover` modifier class in 3.0
+                    border-color: $mds-interactive-color-primary-hover;
+                }
+
+                .mds-switch__label:active &,
+                .mds-switch--active & { // TODO: Remove `mds-switch--active` modifier class in 3.0
+                    border-color: $mds-interactive-color-primary-active;
+                }
+            }
+
+        }
+
+
+    }
+
+    // Stacked Switches
+    .mds-switch__group {
+        border: 0;
+        margin: 0;
+        padding: 0;
+
+        .mds-switch {
+            margin: $mds-space-stack-1-x;
+        }
+    }
+
+    .mds-switch__group-label { //TODO: Make this label bold in v3.0 to match other Forms
+        @include mds-text-crop();
+        color: $mds-color-switch-group-label;
+        display: block;
+        font-family: $mds-font-family-sans-serif;
+        font-size: $mds-font-size-m;
+        font-weight: $mds-font-weight-light;
+        margin: $mds-space-stack-1-x;
+        padding: 0;
+
+        .mds-container--dark-gray &,
+        .mds-container--black & {
+            color: $mds-color-switch-group-label-on-dark;
+        }
+    }
+
+    // Horizontal Switches
+    .mds-switch__field-group--horizontal {
+        align-items: flex-start;
+        display: flex;
+
+        .mds-switch {
+            display: inline-flex;
+            margin: $mds-switch-space-grid;
+        }
+    }
+} // End of Export

@@ -1,0 +1,246 @@
+@import 'data_table_dependencies';
+$mds-border-color-data-table-header-cell-inner-selected-on-dark: $mds-color-white !default;
+$mds-border-color-data-table-header-cell-inner-selected-on-light: $mds-color-neutral-12 !default;
+$mds-border-arrow-data-table-header-cell-inner-selected-offset: 4px !default;
+$mds-border-arrow-data-table-header-cell-inner-selected-offset-margin: -4px !default;
+
+$mds-space-data-table-cell-default: $mds-space-inset-1-x !default;
+$mds-space-data-table-cell-s: $mds-space-inset-three-quarter-x !default;
+$mds-space-data-table-cell-l: $mds-space-inset-1-and-a-half-x !default;
+$mds-space-data-table-cell-indent-default: 25px !default;
+$mds-space-data-table-cell-indent-l: 40px !default;
+
+$mds-text-color-data-table-header-cell-inner-selected-on-light: $mds-color-neutral-12 !default;
+$mds-text-color-data-table-header-cell-inner-selected-on-dark: $mds-color-white !default;
+$mds-text-color-data-table-header-cell-inner-on-light: $mds-color-neutral-37 !default;
+$mds-text-color-data-table-header-cell-inner-on-dark: $mds-color-neutral-67 !default;
+
+@mixin mds-data-table-selected-arrow($sort, $bg) {
+    @if $sort == 'ascending' {
+        border-width: 0 4px 8px;
+        bottom: -1px;
+        @if $bg == 'light' {
+            border-bottom-color: $mds-border-color-data-table-header-cell-inner-selected-on-light;
+        } @else if $bg == 'dark' {
+            border-bottom-color: $mds-border-color-data-table-header-cell-inner-selected-on-dark;
+        }
+    } @else if $sort == 'descending' {
+        border-width: 8px 4px 0;
+        bottom: -8px;
+        @if $bg == 'light' {
+            border-top-color: $mds-border-color-data-table-header-cell-inner-selected-on-light;
+        } @else if $bg == 'dark' {
+            border-top-color: $mds-border-color-data-table-header-cell-inner-selected-on-dark;
+        }
+    }
+}
+@include mds-export-once('mds_data_table') {
+    .mds-data-table {
+        @include mds-border-box();
+        background-color: transparent;
+        border-collapse: collapse;
+        border-spacing: 0;
+        color: $mds-text-color-primary-on-light;
+        display: table;
+        font-family: $mds-font-family-sans-serif;
+        font-weight: $mds-font-weight-light;
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .mds-data-table__caption {
+        @include mds-accessibly-hidden;
+    }
+
+    .mds-data-table__cell {
+        @include mds-text-crop;
+        @include mds-incremental-font-sizes('data-table');
+        @include mds-border-separator('top');
+        @include mds-incremental-spacing(
+            $component-name: 'data-table',
+            $spacing-type: 'inset',
+            $default-size: 'medium');
+        text-align: left;
+        vertical-align: top;
+
+        &:first-child {
+            padding-left: 0;
+        }
+
+        &:last-child {
+            padding-right: 0;
+        }
+
+        .mds-data-table--small & {
+            @include mds-text-crop($top-adjustment: 1px);
+        }
+
+        .mds-data-table__body .mds-data-table__row:first-child & {
+            border-top: 0;
+        }
+
+        .mds-container--dark-gray &,
+        .mds-container--black & {
+            color: $mds-text-color-primary-on-dark;
+        }
+    }
+
+    .mds-data-table__header-cell {
+        border-top: 0;
+        font-size: $mds-font-size-s;
+        font-weight: $mds-font-weight-regular;
+        padding: 0 $mds-space-data-table-cell-default;
+        text-align: left;
+        vertical-align: bottom;
+
+        &:first-child {
+            padding-left: 0;
+        }
+
+        &:last-child {
+            padding-right: 0;
+        }
+
+        .mds-container--dark-gray &,
+        .mds-container--black & {
+            border-top: 0;
+        }
+    }
+
+    .mds-data-table__header-cell-inner {
+        @include mds-text-crop;
+        border-bottom: 1px solid transparent;
+        color: $mds-text-color-data-table-header-cell-inner-on-light;
+        margin-bottom: 10px;
+        padding-bottom: $mds-space-data-table-cell-default;
+        position: relative;
+
+        &[role='button'] { // sort order
+            cursor: pointer;
+            outline: 0;
+
+            &:hover {
+                @include mds-text-color-link;
+            }
+
+            &:focus {
+                box-shadow: $mds-box-shadow-focus;
+            }
+        }
+
+        .mds-container--dark-gray &,
+        .mds-container--black & {
+            color: $mds-text-color-data-table-header-cell-inner-on-dark;
+        }
+    }
+
+    .mds-data-table__header-cell-inner--selected-none {
+        border-bottom: 1px solid transparent;
+
+        &:after {
+            border-color: transparent;
+            content: '';
+            height: 0;
+            left: $mds-border-arrow-data-table-header-cell-inner-selected-offset;
+            margin-left: $mds-border-arrow-data-table-header-cell-inner-selected-offset-margin;
+            pointer-events: none;
+            position: absolute;
+            width: 0;
+        }
+    }
+
+    .mds-data-table__header-cell-inner--selected-ascending,
+    .mds-data-table__header-cell-inner--selected-descending {
+        border-bottom: 1px solid transparent;
+        border-bottom-color: $mds-border-color-data-table-header-cell-inner-selected-on-light;
+        color: $mds-text-color-data-table-header-cell-inner-selected-on-light;
+
+        &:after {
+            border: solid transparent;
+            border-color: transparent;
+            content: '';
+            height: 0;
+            left: $mds-border-arrow-data-table-header-cell-inner-selected-offset;
+            margin-left: $mds-border-arrow-data-table-header-cell-inner-selected-offset-margin;
+            pointer-events: none;
+            position: absolute;
+            width: 0;
+
+            .mds-data-table__header-cell--right & { // Do not use, will be deprecated in 3.0.0 (MDS-6505)
+                left: auto;
+                margin-left: 0;
+                margin-right: $mds-border-arrow-data-table-header-cell-inner-selected-offset-margin;
+                right: $mds-border-arrow-data-table-header-cell-inner-selected-offset;
+            }
+        }
+
+        .mds-container--dark-gray &,
+        .mds-container--black & {
+            border-bottom-color: $mds-border-color-data-table-header-cell-inner-selected-on-dark;
+            color: $mds-text-color-data-table-header-cell-inner-selected-on-dark;
+        }
+    }
+
+    // Aligns sort arrow to the right if column is right-aligned (Replaces 'mds-data-table__header-cell--right' MDS-6505)
+    .mds-data-table__header-cell-inner--right {
+        &:after {
+            left: auto;
+            margin-left: 0;
+            margin-right: $mds-border-arrow-data-table-header-cell-inner-selected-offset-margin;
+            right: $mds-border-arrow-data-table-header-cell-inner-selected-offset;
+        }
+    }
+
+    .mds-data-table__header-cell-inner--selected-ascending {
+        &:after {
+            @include mds-data-table-selected-arrow('ascending', 'light');
+        }
+
+        .mds-container--dark-gray &,
+        .mds-container--black & {
+            &:after {
+                @include mds-data-table-selected-arrow('ascending', 'dark');
+            }
+        }
+    }
+
+    .mds-data-table__header-cell-inner--selected-descending {
+        &:after {
+            @include mds-data-table-selected-arrow('descending', 'light');
+        }
+
+        .mds-container--dark-gray &,
+        .mds-container--black & {
+            &:after {
+                @include mds-data-table-selected-arrow('descending', 'dark');
+            }
+        }
+    }
+
+    .mds-data-table__header-cell--right, // Do not use, will be deprecated in 3.0.0 (MDS-6505)
+    .mds-data-table__header-cell-inner--right,
+    .mds-data-table__cell--right {
+        text-align: right;
+    }
+
+    .mds-data-table__cell--child {
+        padding-left: $mds-space-data-table-cell-indent-default;
+
+        &:first-child {
+            padding-left: $mds-space-data-table-cell-indent-default;
+        }
+    }
+
+    .mds-data-table__cell--sub-child {
+        padding-left: $mds-space-data-table-cell-indent-l;
+
+        &:first-child {
+            padding-left: $mds-space-data-table-cell-indent-l;
+        }
+    }
+
+    // Overrides for sub-components inside MDS Data Table
+    .mds-data-table .mds-form__checkbox--hide-label {
+        display: inline;
+    }
+} // End of Export

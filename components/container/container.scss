@@ -1,0 +1,44 @@
+@import 'container_dependencies';
+@include mds-export-once('mds_container') {
+    // Use mds-background classes when you need the background of the element to change AND you want child elements affected by the change
+    .mds-container--white {
+        @include mds-border-box();
+        background: $mds-background-color-white;
+    }
+
+    .mds-container--light-gray {
+        @include mds-border-box();
+        background: $mds-background-color-light-gray; 
+    }
+
+    .mds-container--dark-gray {
+        @include mds-border-box();
+        background: $mds-background-color-dark-gray; 
+    }
+
+    .mds-container--black {
+        @include mds-border-box();
+        background: $mds-background-color-black; 
+    }
+
+    // Use mds-background classes when you need the background of the element to change but do not want any child elements affected by the change
+    .mds-background--white {
+        @include mds-border-box();
+        background: $mds-background-color-white;
+    }
+
+    .mds-background--light-gray {
+        @include mds-border-box();
+        background: $mds-background-color-light-gray; 
+    }
+
+    .mds-background--dark-gray {
+        @include mds-border-box();
+        background: $mds-background-color-dark-gray; 
+    }
+
+    .mds-background--black {
+        @include mds-border-box();
+        background: $mds-background-color-black; 
+    }
+} // End of Export

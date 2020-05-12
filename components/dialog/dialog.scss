@@ -1,0 +1,103 @@
+@import 'dialog_dependencies';
+
+// Transition used for modals and dialogs
+$mds-layer-transition-transform: transform $mds-animation-timing-2-x $mds-animation-ease-in-out, opacity $mds-animation-timing-2-x $mds-animation-ease-in-out !default;
+
+@include mds-export-once('mds_dialog') {
+    .mds-dialog {
+        @include mds-border-box();
+        background-color: $mds-background-color-white;
+        border: $mds-border-container-on-all-backgrounds;
+        border-radius: $mds-border-radius-panel;
+        box-shadow: $mds-box-shadow-drop;
+        display: block;
+        max-width: 350px;
+        padding: $mds-space-inset-2-x;
+        width: 100%;
+        z-index: $mds-z-index-modal-content;
+    }
+
+    .mds-dialog--active {
+        left: 50%;
+        margin: auto;
+        opacity: 1;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%) translateX(-50%);
+        transition: $mds-layer-transition-transform;
+    }
+
+    .mds-dialog--fadeout {
+        opacity: 0;
+        transform: translateY(-150%) translateX(-50%);
+    }
+
+    .mds-dialog__message {
+        font-family: $mds-font-family-sans-serif;
+        font-size: $mds-font-size-m;
+        font-weight: $mds-font-weight-light;
+        margin: $mds-space-stack-2-x;
+
+        &:focus {
+            outline: 0;
+        }
+    }
+
+    .mds-dialog__action-buttons {
+        align-items: stretch;
+        display: flex;
+        flex-flow: row nowrap;
+        font-size: 0;
+    }
+
+    .mds-dialog__reject-button {
+        flex-grow: 0;
+    }
+
+    .mds-dialog__cancel-resolve-buttons-holder {
+        display: flex;
+        margin-left: auto;
+        text-align: right;
+    }
+
+    .mds-dialog__cancel-button,
+    .mds-dialog__resolve-button {
+        margin: $mds-space-inline-right-1-x;
+    }
+
+    .mds-dialog-wrapper {
+        bottom: 0;
+        display: block;
+        left: 0;
+        outline: 0;
+        overflow: auto;
+        overflow-y: scroll;
+        position: fixed;
+        right: 0;
+        top: 0;
+        z-index: $mds-z-index-modal-content;
+    }
+
+    // Width
+    .mds-dialog--width-500px {
+        max-width: 500px;
+    }
+
+    //Web component only
+    mds-dialog {
+        background: transparent;
+        display: block;
+        outline: 0;
+        pointer-events: none;
+        z-index: $mds-z-index-modal-content;
+
+        .mds-dialog {
+            pointer-events: auto;
+        }
+
+        .mds-dialog--hidden {
+            display: none;
+        }
+    }
+
+} // End of Export

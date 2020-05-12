@@ -1,0 +1,32 @@
+// WARNING: This file renders CSS when @imported into another scss file
+@import '../utils/import_once';
+
+// Overlay styling moved to /components/overlay/overlay
+// This file will be deprecated in 3.0.0
+@include mds-export-once('mds_shared_overlay') {
+    $mds-overlay-transition: opacity .5s ease-out !default;
+
+    .mds-overlay {
+        background: $mds-background-color-black;
+        bottom: 0;
+        left: 0;
+        opacity: $mds-opacity-overlay;
+        position: fixed;
+        right: 0;
+        top: 0;
+        transition: $mds-overlay-transition;
+        z-index: $mds-z-index-modal-overlay;
+    }
+
+    .mds-overlay--hidden {
+        display: none;
+    }
+
+    .mds-overlay--fadeout {
+        opacity: 0;
+    }
+
+    .mds-body-overlay {
+        overflow: hidden;
+    }
+}

@@ -1,0 +1,4 @@
+@import '../../constants/constants';
+@import '../../styles/utils/import_once';
+@import '../button/button'; // Not a direct dependency, but button group as a component depends on button
+@import './button_group_variables';

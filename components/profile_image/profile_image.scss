@@ -1,0 +1,7 @@
+@import 'profile_image_dependencies';
+
+@include mds-export-once('mds_profile_image') {
+    .mds-profile-image {
+        border-radius: $mds-border-radius-round;
+    }
+} // End of Export

@@ -1,0 +1,322 @@
+$mds-font-asset-path: '../../../fonts/' !default; // This font path is used to render the component-only test page correctly
+@import '../../styles/visual-language/fonts';
+@import '../../constants/constants';
+@import '../../styles/utils/import_once';
+@import '../../styles/visual-language/color';
+@import '../../styles/visual-language/size';
+@import '../../styles/visual-language/typography';
+@import '../../styles/utils/accessibility';
+@import './form_variables';
+@import './form_mixins';
+
+@include mds-export-once('mds_form_checkbox') {
+    .mds-form__checkbox,
+    .mds-form__checkbox-group {
+        @include mds-border-box();
+    }
+
+    .mds-form__checkbox-group-label {
+        @include mds-text-crop();
+        @include mds-incremental-font-sizes($component-name: 'form__checkbox-group');
+        @include mds-container-dark-parent-selectors {
+            color: $mds-color-form-label-on-dark;
+        }
+        color: $mds-color-form-label;
+        display: block;
+        font-family: $mds-font-family-sans-serif;
+        font-weight: $mds-font-weight-bold;
+        line-height: $mds-line-height-form;
+        padding: 0;
+
+        .mds-form__checkbox-group--touch & {
+            font-size: $mds-font-size-l;
+        }
+    }
+
+    .mds-form__checkbox-visible-wrap {
+        align-items: flex-start;
+        border: 0;
+        display: inline-flex;
+
+        .mds-form__checkbox--touch & {
+            padding: 12px 0; // Renders at 48px tall
+        }
+    }
+
+    .mds-form__checkbox-visible-wrap {
+        .mds-form__checkbox--focus &,
+        .mds-form__checkbox-input:focus + & {
+            box-shadow: $mds-box-shadow-form-element-focus;
+        }
+    }
+
+    .mds-form__checkbox {
+        align-items: flex-start;
+        cursor: pointer;
+        display: flex;
+        font-family: $mds-font-family-sans-serif;
+        font-weight: $mds-font-weight-light;
+
+        .mds-form__field-group--horizontal & {
+            display: inline-block;
+        }
+    }
+
+    .mds-form__checkbox--disabled {
+        cursor: not-allowed;
+    }
+
+    .mds-form__checkbox-input {
+        @include mds-accessibly-hidden();
+        transition: $mds-animation-timing-1-x linear;
+    }
+
+    .mds-form__checkbox-visual {
+        align-items: center;
+        border: $mds-border-control-on-all-backgrounds;
+        border-radius: $mds-border-radius-s;
+        display: block;
+        flex: 0 0 auto;
+        height: $mds-size-form-checkbox;
+        justify-content: center;
+        margin: $mds-space-inline-left-form-checkbox-visual;
+        position: relative;
+        top: 0;
+        transition: $mds-animation-timing-half-x linear, transform $mds-animation-timing-quarter-x linear;
+        width: $mds-size-form-checkbox;
+
+        .mds-form__checkbox--small & {
+            top: -1px;
+        }
+
+        .mds-form__checkbox--touch & {
+            margin-right: $mds-space-1-x;
+        }
+
+        .mds-form__checkbox--large &,
+        .mds-form__checkbox--touch & {
+            height: $mds-form-checkbox-large-height;
+            width: $mds-form-checkbox-large-width;
+        }
+
+        .mds-form__checkbox-input:indeterminate + .mds-form__checkbox-visible-wrap &,
+        .mds-form__checkbox-input:checked + .mds-form__checkbox-visible-wrap & {
+            background: $mds-interactive-color-primary-default;
+            border-color: $mds-interactive-color-primary-default;
+
+            @at-root {
+                .mds-form__checkbox--hover &,
+                .mds-form__checkbox:hover & {
+                    background: $mds-interactive-color-primary-hover;
+                    border-color: $mds-interactive-color-primary-hover;
+                }
+            }
+        }
+
+        .mds-form__checkbox:active & {
+            transform: scale(.9);
+        }
+
+        .mds-form__checkbox:hover &,
+        .mds-form__checkbox--hover & {
+            border-color: $mds-interactive-color-primary-hover;
+        }
+
+        .mds-form__checkbox:hover,
+        .mds-form__checkbox--hover {
+            .mds-form__checkbox-input:indeterminate + .mds-form__checkbox-visible-wrap &,
+            .mds-form__checkbox-input:checked + .mds-form__checkbox-visible-wrap & {
+                background: $mds-interactive-color-primary-hover;
+            }
+        }
+
+        .mds-form__checkbox--active .mds-form__checkbox-input:checked + .mds-form__checkbox-visible-wrap &,
+        .mds-form__checkbox-input:checked:active + .mds-form__checkbox-visible-wrap &,
+        .mds-form__checkbox:hover .mds-form__checkbox-input:checked:active + .mds-form__checkbox-visible-wrap &,
+        .mds-form__checkbox--active .mds-form__checkbox-input:indeterminate + .mds-form__checkbox-visible-wrap &,
+        .mds-form__checkbox-input:indeterminate:active + .mds-form__checkbox-visible-wrap &,
+        .mds-form__checkbox:hover .mds-form__checkbox-input:indeterminate:active + .mds-form__checkbox-visible-wrap & {
+            background: $mds-interactive-color-primary-active;
+            border-color: $mds-interactive-color-primary-active;
+        }
+
+        .mds-form__checkbox-input:disabled + .mds-form__checkbox-visible-wrap & {
+            @include mds-disabled();
+            border-color: $mds-border-color-form-input;
+            transform: scale(1);
+        }
+
+        .mds-form__checkbox-input:checked:disabled + .mds-form__checkbox-visible-wrap & {
+            @include mds-disabled();
+            background: $mds-interactive-color-primary-default;
+            border-color: $mds-interactive-color-primary-default;
+            transform: scale(1);
+
+            .mds-form__checkbox:active &,
+            .mds-form__checkbox:hover & {
+                background: $mds-interactive-color-primary-default;
+                border-color: $mds-interactive-color-primary-default;
+            }
+        }
+    }
+
+
+    .mds-form__checkbox--hide-label {
+        display: inline-flex;
+
+        .mds-form__checkbox-visual {
+            margin: 0;
+            top: 0;
+        }
+
+        .mds-form__checkbox-text {
+            @include mds-accessibly-hidden();
+        }
+    }
+
+    .mds-form__checkbox-checked-icon {
+        display: inline-block;
+        fill: $mds-color-white;
+        height: $mds-size-icon-s;
+        left: 50%;
+        margin-left: -($mds-size-icon-s / 2);
+        margin-top: -($mds-size-icon-s / 2);
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        transform: scale(.6);
+        transition: transform $mds-animation-timing-half-x linear;
+        width: $mds-size-icon-s;
+
+        .mds-form__checkbox--large &,
+        .mds-form__checkbox--touch & {
+            height: $mds-form-checkbox-large-width;
+            margin-left: -($mds-form-checkbox-large-width / 2);
+            margin-top: -($mds-form-checkbox-large-width / 2);
+            width: $mds-form-checkbox-large-width;
+        }
+
+        .mds-form__checkbox-input:checked + .mds-form__checkbox-visible-wrap .mds-form__checkbox-visual & {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    .mds-form__checkbox-indeterminate-icon {
+        display: none;
+        fill: $mds-color-white;
+        height: $mds-size-icon-s;
+        left: 50%;
+        margin-left: -($mds-size-icon-s / 2);
+        margin-top: -($mds-size-icon-s / 2);
+        position: absolute;
+        top: 50%;
+        width: $mds-size-icon-s;
+
+        .mds-form__checkbox--large &,
+        .mds-form__checkbox--touch & {
+            height: $mds-form-checkbox-large-width;
+            margin-left: -($mds-form-checkbox-large-width / 2);
+            margin-top: -($mds-form-checkbox-large-width / 2);
+            width: $mds-form-checkbox-large-width;
+        }
+
+        .mds-form__checkbox-input:indeterminate + .mds-form__checkbox-visible-wrap .mds-form__checkbox-visual & {
+            display: block;
+        }
+    }
+
+    .mds-form__checkbox-text {
+        @include mds-container-dark-parent-selectors {
+            color: $mds-color-form-radio-label-on-dark;
+        }
+        color: $mds-color-form-radio-label;
+        cursor: pointer;
+        line-height: $mds-line-height-form;
+        transition: $mds-animation-timing-1-x linear;
+
+        .mds-form__checkbox--small & {
+            font-size: $mds-font-size-s;
+            font-weight: $mds-font-weight-regular;
+        }
+
+        .mds-form__checkbox--large &,
+        .mds-form__checkbox--touch & {
+            font-size: $mds-font-size-l;
+        }
+
+        .mds-form__checkbox--hover &,
+        .mds-form__checkbox:hover & {
+            @include mds-container-dark-parent-selectors {
+                color: $mds-color-form-radio-label-hover-on-dark;
+            }
+            color: $mds-color-form-radio-label-hover;
+        }
+
+        .mds-form__checkbox-input:checked + .mds-form__checkbox-visible-wrap & {
+            @include mds-container-dark-parent-selectors {
+                color: $mds-color-form-radio-label-hover-on-dark;
+            }
+            color: $mds-color-form-radio-label-hover;
+        }
+
+        .mds-form__checkbox--focus &,
+        .mds-form__checkbox-input:focus + .mds-form__checkbox-visible-wrap & {
+            @include mds-container-dark-parent-selectors {
+                color: $mds-color-form-radio-label-hover-on-dark;
+            }
+            color: $mds-color-form-radio-label-hover;
+
+        }
+
+        .mds-form__checkbox-input:disabled + .mds-form__checkbox-visible-wrap & {
+            @include mds-disabled();
+            @include mds-container-dark-parent-selectors {
+                color: $mds-color-form-radio-label-hover-on-dark;
+            }
+            color: $mds-color-form-radio-label;
+        }
+    }
+
+    .mds-form__checkbox-microcopy {
+        color: $mds-text-color-secondary-on-light;
+        display: block;
+        font-size: $mds-font-size-s;
+        font-weight: $mds-font-weight-regular;
+        line-height: $mds-font-line-height-headings;
+        margin: $mds-space-quarter-x 0 $mds-space-half-x;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        .mds-container--dark-gray &,
+        .mds-container--black & {
+            color: $mds-text-color-secondary-on-dark;
+        }
+
+        .mds-form__checkbox--large &,
+        .mds-form__checkbox--touch & {
+            font-size: $mds-font-size-m;
+            font-weight: $mds-font-weight-light;
+            margin: $mds-space-half-x 0 $mds-space-three-quarter-x;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    .mds-form__checkbox-group {
+        border: 0;
+        margin: 0;
+        padding: 0;
+    }
+
+    mds-checkbox-group .mds-form__checkbox-group {
+        &:focus,
+        &:active {
+            outline: 0 none;
+        }
+    }
+}

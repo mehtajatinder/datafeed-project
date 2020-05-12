@@ -1,0 +1,35 @@
+@import 'navigation_container_dependencies';
+$mds-navigation-container-transition-timing: .4s !default;
+
+@include mds-export-once('mds_navigation_container') {
+    .mds-navigation-container {
+        @include mds-border-box;
+        height: auto;
+        left: -100%;
+        opacity: 0;
+        overflow: hidden;
+        padding: $mds-space-inset-2-x;
+        visibility: hidden;
+        width: 100vw;
+        z-index: $mds-z-index-sticky;
+
+        @media screen and (min-width: $mds-breakpoint-navigation-on-canvas-nav) {
+            left: 0;
+            transform: translateY(-10px);
+        }
+    }
+
+    .mds-navigation-container--visible {
+        left: 0;
+        opacity: 1;
+        visibility: visible;
+
+        @media screen and (min-width: $mds-breakpoint-navigation-on-canvas-nav) {
+            left: 0;
+            transform: translateY(0);
+        }
+    }
+} // End of Export
+
+// Component Dependencies
+@import '../container/container'; //TODO: Fix - this has to be included after navigation_container or navigation_container overrides it

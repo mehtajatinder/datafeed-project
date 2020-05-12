@@ -1,0 +1,12 @@
+@import '../../constants/constants';
+$mds-font-asset-path: '../../../fonts/' !default; // This font path is used to render the component-only test page correctly
+@import '../../styles/visual-language/color';
+@import '../../styles/visual-language/fonts';
+@import '../../styles/visual-language/shape';
+@import '../../styles/visual-language/size';
+@import '../../styles/utils/import_once';
+@import '../../styles/utils/accessibility';
+@import 'combo_box_variables';
+
+// Component Dependencies
+@import '../form/form_input'; // Relies on the form input styling

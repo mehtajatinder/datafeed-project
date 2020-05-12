@@ -1,0 +1,39 @@
+@import '../../constants/constants';
+@import 'button_variables';
+
+@mixin mds-button-touch-properties() {
+    .mds-button,
+    .mds-button--secondary,
+    .mds-button.mds-button--small {
+        font-size: $mds-font-size-l;
+        font-weight: $mds-font-weight-light;
+        line-height: 1.25;
+        padding: $mds-space-2-x $mds-space-3-x;
+    }
+
+    .mds-button--flat,
+    .mds-button.mds-button--small.mds-button--flat {
+        padding: $mds-space-2-x $mds-space-half-x;
+    }
+
+    .mds-button__icon {
+        height: $mds-size-icon-m;
+        margin-top: -4px;
+        width: $mds-size-icon-m;
+    }
+
+    .mds-button--icon-only,
+    .mds-button.mds-button--small.mds-button--icon-only {
+        height: $mds-size-element-height-touch;
+        padding: 16px 12px;
+        width: $mds-size-element-height-touch;
+    }
+
+    .mds-button__input+.mds-button--icon-only {
+        padding: 16px 12px;
+    }
+
+    .mds-button__text {
+        margin-top: -4px;
+    }
+}

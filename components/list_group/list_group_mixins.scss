@@ -1,0 +1,149 @@
+// T-Shirt sized padding, generates .mds-list-group--small &, .mds-list-group--large &, as well as default values
+@mixin mds-list-group-item-padding {
+    @include mds-incremental-spacing(
+        $component-name: 'list-group',
+        $spacing-type: 'inset',
+        $default-size: 'medium') {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+// Touch Properties
+@mixin mds-list-group-touch-properties() { //TODO: Deprecated, will be removed in 3.0, use @mixin mds-list-grou-touch-revised-properties() instead
+    .mds-list-group {
+        font-size: $mds-font-size-l;
+    }
+
+    .mds-list-group__link {
+        .mds-list-group__item--active &:visited,
+        .mds-list-group__item--active & {
+            padding-right: $mds-size-icon-m + $mds-space-1-x;
+        }
+    }
+
+    .mds-list-group__item-text {
+        padding: $mds-space-3-x 0;
+
+        .mds-list-group--with-icon & {
+            padding-left: $mds-size-icon-m + $mds-space-1-x;
+        }
+    }
+
+    .mds-list-group__active-icon {
+        height: $mds-size-icon-m;
+        top: 15px; // Manual centering
+        width: $mds-size-icon-m;
+    }
+
+    .mds-list-group__active-icon {
+        height: $mds-size-icon-m;
+        top: 22px; // Manual centering
+        width: $mds-size-icon-m;
+    }
+
+    .mds-list-group__left-icon {
+        height: $mds-size-icon-m;
+        margin-top: -4px;
+        top: $mds-space-3-x;
+        width: $mds-size-icon-m;
+    }
+
+    .mds-list-group__toggle-text {
+        padding: $mds-space-3-x 0 $mds-space-3-x $mds-space-1-x;
+    }
+
+    .mds-list-group__toggle-icon {
+        height: 20px; // Size icon for touch
+        margin-left: 3px; // Manual alignment
+        top: $mds-space-3-x;
+        width: 20px; // Size icon for touch
+
+        .mds-list-group--with-icon & {
+            margin-left: $mds-size-icon-m + $mds-space-1-x;
+        }
+    }
+
+    .mds-list-group__sublist {
+        .mds-list-group__item-text {
+            font-size: $mds-font-size-l;
+            font-weight: $mds-font-weight-light;
+        }
+    }
+
+    .mds-list-group__item--sublist {
+        padding-left: $mds-space-4-x;
+    }
+}
+
+@mixin mds-list-group-touch-revised-properties() {
+    .mds-list-group {
+        font-size: $mds-font-size-l;
+    }
+
+    .mds-list-group__item--header {
+        font-size: 12px;
+    }
+
+    .mds-list-group__link {
+        .mds-list-group__item--active &:visited,
+        .mds-list-group__item--active & {
+            padding-right: $mds-size-icon-m + $mds-space-1-x;
+        }
+    }
+
+    .mds-list-group__item-text {
+        padding: $mds-space-2-and-a-half-x 0;
+
+        .mds-list-group--with-icon & {
+            padding-left: 37px;
+        }
+    }
+
+    .mds-list-group__item--header {
+        font-size: $mds-font-size-s;
+        letter-spacing: .17em;
+        padding: $mds-space-1-and-a-half-x 0;
+    }
+
+    .mds-list-group__active-icon {
+        height: $mds-size-icon-m;
+        margin-top: 0;
+        top: 16px; // Manual centering
+        width: $mds-size-icon-m;
+    }
+
+    .mds-list-group__left-icon {
+        height: $mds-size-icon-m;
+        margin-top: 0;
+        top: 16px; // Manual centering
+        width: $mds-size-icon-m;
+    }
+
+    .mds-list-group__toggle-text {
+        padding: $mds-space-2-and-a-half-x 0 $mds-space-2-and-a-half-x $mds-space-1-x;
+    }
+
+    .mds-list-group__toggle-icon {
+        height: $mds-size-icon-m;
+        margin-left: -5px; // Manual alignment
+        margin-top: 0;
+        top: 16px; // Manual alignment
+        width: $mds-size-icon-m;
+
+        .mds-list-group--with-icon & {
+            margin-left: $mds-size-icon-m + $mds-space-1-x;
+        }
+    }
+
+    .mds-list-group__sublist {
+        .mds-list-group__item-text {
+            font-size: $mds-font-size-l;
+            font-weight: $mds-font-weight-light;
+        }
+    }
+
+    .mds-list-group__item--sublist {
+        padding-left: 26px;
+    }
+}

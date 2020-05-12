@@ -1,0 +1,121 @@
+@import 'top_hat_dependencies';
+@include mds-export-once('mds_top_hat') {
+    .mds-top-hat {
+        @include mds-border-box();
+        background-color: $mds-background-color-light-gray;
+        border-bottom: solid 3px $mds-color-neutral-37;
+        line-height: 0;
+        padding: $mds-space-inset-2-x;
+        position: relative;
+        text-align: center;
+        width: 100%;
+    }
+
+    .mds-top-hat--small {
+        padding: $mds-space-inset-1-x;
+    }
+
+    .mds-top-hat--dismissible {
+        padding-right: $mds-size-icon-s + $mds-space-2-x + $mds-space-2-x;
+
+        &.mds-top-hat--small {
+            padding-right: $mds-size-icon-s + $mds-space-1-x + $mds-space-1-x;
+        }
+    }
+
+    .mds-top-hat--warning {
+        background-color: $mds-feedback-color-warning-background;
+        border-bottom-color: $mds-feedback-color-warning;
+    }
+
+    .mds-top-hat--error {
+        background-color: $mds-feedback-color-error-background;
+        border-bottom-color: $mds-feedback-color-error;
+    }
+
+    @keyframes tophatfadeout {
+        0% {
+            max-height: 150px;
+            opacity: 1;
+        }
+
+        100% {
+            border: 0;
+            max-height: 0;
+            opacity: 0;
+            padding-bottom: 0;
+            padding-top: 0;
+        }
+    }
+
+    .mds-top-hat--is-dismissed {
+        animation: tophatfadeout $mds-animation-timing-1-x linear forwards;
+        margin: 0;
+        overflow: hidden;
+    }
+
+    .mds-top-hat__body {
+        align-items: center;
+        display: inline-flex;
+        max-width: 500px;
+    }
+
+    .mds-top-hat__message {
+        @include mds-text-crop();
+        color: $mds-text-color-primary-on-light;
+        display: inline-block;
+        font-family: $mds-font-family-sans-serif;
+        font-size: $mds-font-size-m;
+        font-weight: $mds-font-weight-light;
+        letter-spacing: normal;
+        padding: $mds-space-inline-right-1-x;
+        text-align: left;
+
+        .mds-top-hat--small & {
+            font-size: $mds-font-size-s;
+            font-weight: $mds-font-weight-regular;
+            padding: $mds-space-inline-right-three-quarter-x;
+        }
+
+        a {
+            @include mds-link($enable-dark: false);
+        }
+    }
+
+    .mds-top-hat__icon {
+        fill: $mds-color-neutral-37;
+        flex-shrink: 0;
+
+        .mds-top-hat--small & {
+            height: $mds-size-icon-s;
+            width: $mds-size-icon-s;
+        }
+
+        .mds-top-hat--warning & {
+            fill: $mds-feedback-color-warning;
+        }
+
+        .mds-top-hat--error & {
+            fill: $mds-feedback-color-error;
+        }
+    }
+
+    .mds-top-hat__dismiss-button {
+        display: block;
+        position: absolute;
+        right: $mds-space-2-x;
+        top: $mds-space-2-x;
+
+        .mds-top-hat--small & {
+            right: $mds-space-1-x;
+            top: $mds-space-1-x;
+        }
+    }
+
+    // MDSWC specific
+    mds-top-hat .mds-top-hat {
+        mds-button {
+            display: block;
+        }
+    }
+} // End of Export

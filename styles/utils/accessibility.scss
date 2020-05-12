@@ -1,0 +1,12 @@
+@import '../../constants/constants';
+@mixin mds-accessibly-hidden() {
+    clip: rect(0 0 0 0);
+    left: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+@mixin mds-disabled() {
+    cursor: not-allowed;
+    opacity: $mds-opacity-disabled;
+}

@@ -1,0 +1,5 @@
+@import '../../constants/constants';
+
+$mds-article-responsive-breakpoint: 768px !default;
+$mds-article-max-width: 565px !default;
+$mds-article-space-3-and-a-half-x: $mds-space-3-and-a-half-x !default; //TODO: Remove in 3.0 Deprecated constant is no longer needed

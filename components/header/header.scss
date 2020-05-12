@@ -1,0 +1,212 @@
+@import 'header_dependencies';
+
+$mds-typography-eyebrow-letter-spacing: 1.67px !default;
+
+@mixin mds-header-padding {
+    @include mds-incremental-spacing(
+        $component-name: 'header',
+        $default-size: 'medium',
+        $property-list: ('padding-top'),
+        $spacing-type: 'inset') {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+@include mds-export-once('mds_header') {
+    // Header Component
+    .mds-header {
+        @include mds-border-box();
+        display: flex;
+
+        &.mds-header--border-bottom {
+            align-items: center;
+        }
+    }
+
+    .mds-header--primary {
+        @include mds-border-header-primary($sides: top, $enable-dark: true);
+
+        &.mds-header--border-bottom {
+            @include mds-border-header-primary($sides: bottom, $enable-dark: true);
+            border-top: 0 none;
+        }
+    }
+
+    .mds-header--secondary {
+        @include mds-border-header-secondary($sides: top, $enable-dark: true);
+
+        &.mds-header--border-bottom {
+            @include mds-border-header-secondary($sides: bottom, $enable-dark: true);
+            border-top: 0 none;
+        }
+    }
+
+    .mds-header--tertiary {
+        @include mds-border-header-tertiary($sides: top, $enable-dark: true);
+
+        &.mds-header--border-bottom {
+            @include mds-border-header-tertiary($sides: bottom, $enable-dark: true);
+            border-top: 0 none;
+        }
+    }
+
+    .mds-header--primary,
+    .mds-header--secondary,
+    .mds-header--tertiary {
+        .mds-header__title,
+        .mds-header__actions {
+            @include mds-header-padding();
+        }
+
+        .mds-header__title {
+            margin-right: $mds-space-1-x;
+        }
+
+        &.mds-header--level-6,
+        &.mds-header--level-7,
+        &.mds-header--level-8,
+        &.mds-header--level-9 {
+            .mds-header__title,
+            .mds-header__actions {
+                padding-top: $mds-space-inset-three-quarter-x;
+            }
+        }
+
+        // Update in 3.0.0
+        &.mds-header--border-bottom {
+            .mds-header__title {
+                padding: $mds-space-2-x 0; // Update padding to 0 0 $mds-space-2-x. This was written to account for Header in Module Container.
+            }
+
+            .mds-header__actions {
+                padding-top: 0;
+            }
+        }
+    }
+
+    .mds-header__title {
+        @include mds-container-dark-parent-selectors {
+            color: $mds-text-color-primary-on-dark;
+        };
+        @include mds-text-crop();
+        color: $mds-text-color-primary-default;
+        display: inline-block;
+        font-family: $mds-font-family-sans-serif;
+        font-size: $mds-font-size-heading-level-5;
+        font-weight: $mds-font-weight-bold;
+        line-height: 1.2;
+        margin-bottom: 0;
+        margin-top: 0;
+        vertical-align: middle;
+
+        .mds-header--level-1 & {
+            font-size: $mds-font-size-heading-level-1;
+        }
+
+        .mds-header--level-2 & {
+            font-size: $mds-font-size-heading-level-2;
+        }
+
+        .mds-header--level-3 & {
+            font-size: $mds-font-size-heading-level-3;
+        }
+
+        .mds-header--level-4 & {
+            font-size: $mds-font-size-heading-level-4;
+        }
+
+        .mds-header--level-5 & {
+            font-size: $mds-font-size-heading-level-5;
+        }
+
+        .mds-header--level-6 & {
+            font-size: $mds-font-size-heading-level-6;
+        }
+
+        .mds-header--level-7 & {
+            font-size: $mds-font-size-m;
+        }
+
+        .mds-header--level-8 & {
+            font-size: $mds-font-size-s;
+        }
+
+        .mds-header--level-9 & {
+            font-size: $mds-font-size-xs;
+            letter-spacing: $mds-typography-eyebrow-letter-spacing;
+            text-transform: uppercase;
+        }
+
+    }
+
+    .mds-header__title-description {
+        @include mds-container-dark-parent-selectors {
+            color: $mds-text-color-primary-on-dark;
+        };
+        display: inline-block;
+        font-size: 0;
+        vertical-align: middle;
+        white-space: nowrap;
+    }
+
+    .mds-header__title .mds-header__title-description {
+        margin-top: -$mds-space-half-x;
+    }
+
+    .mds-header__actions {
+        @include mds-container-dark-parent-selectors {
+            color: $mds-text-color-primary-on-dark;
+        };
+        align-items: flex-start;
+        display: flex;
+        margin: $mds-space-inline-right-1-x;
+        margin-left: auto;
+    }
+
+    .mds-header .mds-header__actions > * {
+        margin-left: $mds-space-1-x;
+
+        &:first-child {
+            margin-left: 0;
+        }
+
+    }
+
+    //web component specific
+    mds-header {
+        display: block;
+
+        .mds-header .mds-header__actions slot[name='mds-header-actions'] > :first-child > * {
+            margin-left: $mds-space-1-x;
+
+            &:first-child {
+                margin-left: 0;
+            }
+
+        }
+
+        .mds-header__actions slot[name='mds-header-actions'] > :first-child {
+            @include mds-container-dark-parent-selectors {
+                color: $mds-text-color-primary-on-dark;
+            };
+            align-items: flex-start;
+            display: flex;
+            margin: $mds-space-inline-right-1-x;
+            margin-left: auto;
+        }
+
+        .mds-header--border-bottom .mds-header__actions slot[name='mds-header-actions'] > :first-child {
+            align-items: center;
+        }
+
+        .mds-header.mds-header--primary.mds-header--title-hidden {
+            border-width: 0;
+            padding-top: 11px; // adhoc fix for consistent header size
+
+            .mds-header__title {
+                @include mds-accessibly-hidden();
+            }
+        }
+    }
+}

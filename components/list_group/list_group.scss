@@ -1,0 +1,703 @@
+@import 'list_group_dependencies';
+@import 'list_group_mixins';
+
+@include mds-export-once('mds_list_group') {
+    .mds-list-group {
+        @include mds-border-box();
+        @include mds-incremental-font-sizes('list-group', $selector-level: 'block');
+        display: block;
+        font-family: $mds-font-family-sans-serif;
+        font-weight: $mds-font-weight-regular;
+        list-style: none;
+        margin: $mds-space-stack-1-x;
+        padding: 0;
+        width: 100%;
+
+        &.mds-list-group--touch, // TODO: Deprecated, will be removed in 3.0, use .mds-list-group--touch-revised instead
+        &.mds-list-group--touch-revised {
+            font-size: $mds-font-size-l;
+        }
+    }
+
+    .mds-list-group__item {
+        @include mds-border-separator('top');
+        display: block;
+        margin: 0;
+        position: relative;
+
+        &:first-child {
+            border-top: 0;
+        }
+    }
+
+    .mds-list-group__item--separator-before {
+        &:before {
+            @include mds-border-separator('top');
+            content: '';
+            display: block;
+            margin: $mds-space-inset-three-quarter-x;
+            margin-left: 0;
+            margin-right: 0;
+        }
+    }
+
+    .mds-list-group__item--header {
+        @include mds-eyebrow-heading;
+        @include mds-text-color-primary;
+        @include mds-list-group-item-padding;
+        border-top: 0;
+        margin-top: $mds-space-1-and-a-half-x;
+
+        &:first-child {
+            margin-top: 0; // Don't add additional space at the top if the header is at the top of the list
+        }
+
+        .mds-container--light-gray &,
+        .mds-container--dark-gray &,
+        .mds-container--black & {
+            border-top: 0;
+        }
+
+        .mds-list-group--touch-revised & {
+            font-size: $mds-font-size-s; // Adjustment for legibility on small screens
+            letter-spacing: .17em; // Proportional to eyebrow letter-spacing
+            padding: $mds-space-1-and-a-half-x 0;
+        }
+    }
+
+    .mds-list-group__link {
+        @include mds-link($underline: false, $visited-styles: false);
+        display: block;
+        position: relative;
+
+        // For docs only
+        .mds-list-group__item--hover & {
+            @include mds-text-color-link;
+        }
+
+        // For docs only
+        .mds-list-group__item--focus & {
+            box-shadow: $mds-box-shadow-focus;
+        }
+
+        &:active {
+            @include mds-text-color-link;
+        }
+
+        .mds-list-group__item--active &:visited,
+        .mds-list-group__item--active & {
+            @include mds-text-color-link;
+            padding-right: $mds-size-icon-s + $mds-space-1-x;
+
+            .mds-list-group--large &,
+            .mds-list-group--touch &, // TODO: Deprecated, will be removed in 3.0, use .mds-list-group--touch-revised instead
+            .mds-list-group--touch-revised & {
+                padding-right: $mds-size-icon-m + $mds-space-1-x;
+            }
+        }
+
+        .mds-list-group__toggle & {
+            display: block;
+            flex: 1 1 auto;
+            padding: 0;
+        }
+
+        .mds-list-group__item--disabled & {
+            opacity: $mds-opacity-disabled;
+            pointer-events: none;
+        }
+    }
+
+    .mds-list-group__item--disabled {
+        cursor: not-allowed; // Set this on the list item, not the link since pointer-events: none; will prevent the hover effect from working
+    }
+
+    .mds-list-group__item-text {
+        @include mds-list-group-item-padding;
+        @include mds-text-crop;
+        display: inline-block;
+        font-weight: $mds-font-weight-light;
+
+        .mds-list-group--small & {
+            @include mds-text-crop($top-adjustment: 1px);
+            font-weight: $mds-font-weight-regular;
+        }
+
+        .mds-list-group--touch & { // TODO: Deprecated, will be removed in 3.0, use .mds-list-group--touch-revised instead
+            padding: $mds-space-3-x 0;
+        }
+
+        .mds-list-group--touch-revised & {
+            padding: $mds-space-2-and-a-half-x 0;
+        }
+
+        // With icon
+        .mds-list-group--with-icon & {
+            padding-left: $mds-size-icon-s + $mds-space-1-x;
+        }
+
+        .mds-list-group--with-icon.mds-list-group--large &,
+        .mds-list-group--with-icon.mds-list-group--touch & { // TODO: Deprecated, will be removed in 3.0, use .mds-list-group--touch-revised instead
+            padding-left: $mds-size-icon-m + $mds-space-1-x;
+        }
+
+        .mds-list-group--with-icon.mds-list-group--touch-revised & {
+            padding-left: 37px; // Manual alignment
+        }
+    }
+
+    .mds-list-group__item-metadata {
+        @include mds-text-crop;
+        color: $mds-text-color-secondary-on-light;
+        display: inline-block;
+
+        .mds-container--dark-gray &,
+        .mds-container--black & {
+            color: $mds-text-color-secondary-on-dark;
+        }
+    }
+
+    .mds-list-group__item-metadata-below {
+        display: block;
+        font-size: 0;
+        padding-top: 0;
+
+        .mds-list-group__item-metadata-below-item {
+            color: $mds-text-color-secondary-on-light;
+            font-size: $mds-font-size-s;
+            font-weight: $mds-font-weight-regular;
+            line-height: $mds-font-line-height-headings;
+            padding-right: $mds-space-half-x;
+
+            &:last-child {
+                padding-right: 0;
+            }
+
+            &:not(:first-child):before {
+                color: $mds-color-neutral-80;
+                content: '\2022';
+                padding-right: $mds-space-half-x;
+
+                .mds-container--dark-gray &,
+                .mds-container--black & {
+                    color: $mds-color-neutral-37;
+                }
+            }
+
+            .mds-container--dark-gray &,
+            .mds-container--black & {
+                color: $mds-text-color-secondary-on-dark;
+            }
+
+            .mds-list-group--large &,
+            .mds-list-group--touch &, // TODO: Deprecated, will be removed in 3.0, use .mds-list-group--touch-revised instead
+            .mds-list-group--touch-revised & {
+                font-size: $mds-font-size-m;
+                font-weight: $mds-font-weight-light;
+            }
+        }
+    }
+
+    .mds-list-group__item-microcopy {
+        color: $mds-text-color-secondary-on-light;
+        display: block;
+        font-size: $mds-font-size-s;
+        font-weight: $mds-font-weight-regular;
+        line-height: $mds-font-line-height-headings;
+        margin: $mds-space-quarter-x 0 $mds-space-half-x;
+        padding-top: 0;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        .mds-container--dark-gray &,
+        .mds-container--black & {
+            color: $mds-text-color-secondary-on-dark;
+        }
+
+        .mds-list-group--large &,
+        .mds-list-group--touch &, // TODO: Deprecated, will be removed in 3.0, use .mds-list-group--touch-revised instead
+        .mds-list-group--touch-revised & {
+            font-size: $mds-font-size-m;
+            font-weight: $mds-font-weight-light;
+            margin: $mds-space-half-x 0 $mds-space-three-quarter-x;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+    
+
+    .mds-list-group__link--with-image,
+    .mds-list-group__selection--with-image {
+        display: flex;
+
+        .mds-list-group__item-text {
+            align-self: center;
+        }
+    }
+
+    .mds-list-group__item-image {
+        align-self: flex-start;
+        height: $mds-space-4-x;
+        margin: $mds-space-1-x 0;
+        width: $mds-space-4-x;
+
+        &.mds-list-group__item-image--round {
+            border-radius: $mds-border-radius-round;
+        }
+
+        .mds-list-group--small & {
+            margin: $mds-space-three-quarter-x 0;
+        }
+
+        .mds-list-group--large &,
+        .mds-list-group--touch &,
+        .mds-list-group--touch-revised & {
+            height: $mds-space-5-x;
+            width: $mds-space-5-x;
+        }
+
+        .mds-list-group--large & {
+            margin: $mds-space-1-and-a-half-x 0;
+        }
+
+        .mds-list-group--touch & {
+            margin: $mds-space-3-x 0;
+        }
+
+        .mds-list-group--touch-revised & {
+            margin: $mds-space-2-and-a-half-x 0;
+        }
+    }
+
+    .mds-list-group__item-image + .mds-list-group__item-text {
+        margin-left: $mds-space-1-x;
+
+        .mds-list-group--touch &,
+        .mds-list-group--touch-revised & {
+            margin-left: $mds-space-1-and-a-half-x;
+        }
+    }
+
+    // Icon on the right
+    .mds-list-group__active-icon {
+        @include mds-text-color-link($property: 'fill');
+        height: $mds-size-icon-s;
+        margin-top: -1px; // shift icon above due to canvas size
+        opacity: 0;
+        position: absolute;
+        right: 0;
+        top: $mds-space-1-x;
+        transition: opacity $mds-animation-timing-1-x $mds-animation-ease-in-out;
+        width: $mds-size-icon-s;
+
+        .mds-list-group--small & {
+            margin-top: -2px; // shift icon above due to canvas size
+            top: $mds-space-three-quarter-x;
+        }
+
+        .mds-list-group--large & {
+            height: $mds-size-icon-m;
+            margin-top: -2px; // shift icon above due to canvas size
+            top: 10px; // Manual centering
+            width: $mds-size-icon-m;
+        }
+
+        .mds-list-group--touch & { // TODO: Deprecated, will be removed in 3.0, use .mds-list-group--touch-revised instead
+            height: $mds-size-icon-m;
+            top: 22px; // Manual centering
+            width: $mds-size-icon-m;
+        }
+
+        .mds-list-group--touch-revised & {
+            height: $mds-size-icon-m;
+            margin-top: 0;
+            top: 16px; // Manual centering
+            width: $mds-size-icon-m;
+        }
+
+        .mds-list-group__item--active & {
+            opacity: 1;
+        }
+    }
+
+    // Navigation active indicator
+    .mds-list-group__active-indicator {
+        background-color: $mds-interactive-color-primary-default;
+        height: 100%;
+        margin: 0;
+        opacity: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transition: opacity $mds-animation-timing-1-x linear;
+        width: $mds-space-half-x;
+
+        .mds-list-group__item--active & {
+            opacity: 1;
+        }
+    }
+
+    // Icon (activated via mds-list-group--with-icon modifier class)
+    .mds-list-group__left-icon {
+        @include mds-text-color-primary($property: 'fill');
+        height: $mds-size-icon-s;
+        left: 0;
+        margin-top: -1px;
+        position: absolute;
+        top: $mds-space-1-x;
+        transition: fill $mds-animation-timing-1-x linear;
+        width: $mds-size-icon-s;
+
+        .mds-list-group--small & {
+            margin-top: -2px; // shift icon above due to canvas size
+            top: $mds-space-three-quarter-x;
+        }
+
+        .mds-list-group--large & {
+            height: $mds-size-icon-m;
+            margin-top: -2px;
+            top: 10px; // Manual centering
+            width: $mds-size-icon-m;
+        }
+
+        .mds-list-group--touch & { // TODO: Deprecated, will be removed in 3.0, use .mds-list-group--touch-revised instead
+            height: $mds-size-icon-m;
+            margin-top: -4px;
+            top: 24px; // Manual centering
+            width: $mds-size-icon-m;
+        }
+
+        .mds-list-group--touch-revised & {
+            height: $mds-size-icon-m;
+            margin-top: 0;
+            top: 16px; // Manual alignment
+            width: $mds-size-icon-m;
+        }
+
+        .mds-list-group__selection:hover &,
+        .mds-list-group__link:hover &,
+        .mds-list-group__item--active & {
+            @include mds-text-color-link($property: 'fill');
+        }
+    }
+
+    .mds-list-group__right-icon { // TODO: Dry left and right classes in 3.0
+        @include mds-text-color-primary($property: 'fill');
+        height: $mds-size-icon-s;
+        margin-top: -1px;
+        position: absolute;
+        right: 0;
+        top: $mds-space-1-x;
+        transition: fill $mds-animation-timing-1-x linear;
+        width: $mds-size-icon-s;
+
+        .mds-list-group--small & {
+            margin-top: -2px; // shift icon above due to canvas size
+            top: $mds-space-three-quarter-x;
+        }
+
+        .mds-list-group--large & {
+            height: $mds-size-icon-m;
+            margin-top: -2px;
+            top: 10px; // Manual centering
+            width: $mds-size-icon-m;
+        }
+
+        .mds-list-group--touch-revised & {
+            height: $mds-size-icon-m;
+            margin-top: 0;
+            top: 16px; // Manual alignment
+            width: $mds-size-icon-m;
+        }
+
+        .mds-list-group__selection:hover &,
+        .mds-list-group__link:hover &,
+        .mds-list-group__item--active & {
+            @include mds-text-color-link($property: 'fill');
+        }
+    }
+
+    // Toggle based item
+    .mds-list-group__toggle {
+        @include mds-link($underline: false, $visited-styles: false);
+        cursor: pointer;
+        display: flex;
+
+        .mds-list-group__toggle--hover & {
+            @include mds-text-color-link;
+        }
+
+        &:active {
+            @include mds-text-color-link;
+        }
+
+        .mds-list-group__toggle-input:checked + & {
+            border-bottom: 0;
+        }
+
+        .mds-list-group__toggle-input:focus + & {
+            box-shadow: $mds-box-shadow-focus;
+        }
+    }
+
+    .mds-list-group__toggle-input {
+        @include mds-accessibly-hidden();
+    }
+
+    .mds-list-group__toggle-text {
+        @include mds-list-group-item-padding;
+        @include mds-text-crop;
+        font-weight: $mds-font-weight-light;
+
+        .mds-list-group--small & {
+            font-weight: $mds-font-weight-regular;
+        }
+
+        .mds-list-group--touch & { // TODO: Deprecated, will be removed in 3.0, use .mds-list-group--touch-revised instead
+            padding: $mds-space-3-x 0 $mds-space-3-x $mds-space-1-x;
+        }
+
+        .mds-list-group--touch-revised & {
+            padding: $mds-space-2-and-a-half-x 0 $mds-space-2-and-a-half-x $mds-space-1-x;
+        }
+    }
+
+    .mds-list-group__toggle-icon {
+        fill: $mds-text-color-secondary-default;
+        flex-shrink: 0;
+        height: $mds-size-icon-s;
+        margin-top: -1px;
+        position: relative;
+        top: $mds-space-1-x;
+        transform: rotate(-90deg);
+        width: $mds-size-icon-s;
+
+        .mds-list-group__toggle-input:checked + .mds-list-group__toggle & {
+            transform: rotate(0deg);
+        }
+
+        .mds-list-group--small & {
+            margin-top: -2px;
+            top: $mds-space-three-quarter-x;
+        }
+
+        .mds-list-group--large & {
+            margin-top: 0;
+            top: $mds-space-1-and-a-half-x;
+        }
+
+        .mds-list-group--touch & { // TODO: Deprecated, will be removed in 3.0, use .mds-list-group--touch-revised instead
+            height: 20px; // Size icon for touch
+            margin-left: 3px; // Manual alignment
+            top: $mds-space-3-x;
+            width: 20px; // Size icon for touch
+        }
+
+        .mds-list-group--touch-revised & {
+            height: $mds-size-icon-m;
+            margin-left: -5px; // Manual alignment
+            margin-top: 0;
+            top: 16px; // Manual alignment
+            width: $mds-size-icon-m;
+        }
+
+        // With icon
+        .mds-list-group--with-icon & {
+            margin-left: $mds-size-icon-s + $mds-space-1-x;
+        }
+
+        .mds-list-group--with-icon.mds-list-group--large &,
+        .mds-list-group--with-icon.mds-list-group--touch &, // TODO: Deprecated, will be removed in 3.0, use .mds-list-group--touch-revised instead
+        .mds-list-group--with-icon.mds-list-group--touch-revised & {
+            margin-left: $mds-size-icon-m + $mds-space-1-x;
+        }
+
+        // Dark/Black containers
+        .mds-container--dark-gray &,
+        .mds-container--black & {
+            fill: $mds-text-color-secondary-on-dark;
+        }
+    }
+
+    // Child items
+    .mds-list-group__sublist {
+        border-color: $mds-color-neutral-80;
+        height: 0;
+        list-style: none;
+        overflow: hidden;
+        padding: 0 $mds-space-three-quarter-x;
+        visibility: hidden;
+
+        .mds-list-group__link {
+            opacity: 0;
+            position: relative;
+            top: -$mds-space-1-x;
+        }
+
+        .mds-list-group__item-text {
+            font-size: $mds-font-size-s;
+            font-weight: $mds-font-weight-regular;
+
+            .mds-list-group--large & {
+                font-size: $mds-font-size-m;
+                font-weight: $mds-font-weight-light;
+            }
+
+            .mds-list-group--touch &, // TODO: Deprecated, will be removed in 3.0, use .mds-list-group--touch-revised instead
+            .mds-list-group--touch-revised & {
+                font-size: $mds-font-size-l;
+                font-weight: $mds-font-weight-light;
+            }
+        }
+
+        .mds-list-group__active-icon {
+            margin-top: -3px; // shift icon above due to canvas size
+
+            .mds-list-group--large & {
+                margin-top: -6px; // shift icon above due to canvas size
+            }
+
+            .mds-list-group--touch & { // TODO: Deprecated, will be removed in 3.0, use .mds-list-group--touch-revised instead
+                margin-top: -2px; // shift icon above due to canvas size
+            }
+
+            .mds-list-group--touch-revised & {
+                margin-top: 0; // shift icon above due to canvas size
+            }
+        }
+
+        .mds-list-group__toggle-input:checked ~ & {
+            height: auto;
+            overflow: visible;
+            padding: 0;
+            visibility: visible;
+
+            .mds-list-group__link {
+                opacity: 1;
+                top: 0;
+            }
+        }
+    }
+
+    .mds-list-group__item--sublist {
+        @include mds-container-light-parent-selectors {
+            border: 0;
+        }
+        @include mds-container-dark-parent-selectors {
+            border: 0;
+        }
+        padding-left: $mds-space-2-x;
+
+        &:last-child {
+            @include mds-incremental-spacing('list-group', $spacing-type: 'stack');
+        }
+
+        .mds-list-group--touch & { // TODO: Deprecated, will be removed in 3.0, use .mds-list-group--touch-revised instead
+            padding-left: $mds-space-4-x;
+        }
+
+        .mds-list-group--touch-revised & {
+            padding-left: 26px; // Manual alignment
+        }
+    }
+
+    // Single Selection variation (radio button based)
+    .mds-list-group__selection {
+        @include mds-link($underline: false, $visited-styles: false);
+        cursor: pointer; // for consistency with the link based list group
+        display: flex;
+
+        &:hover {
+            @include mds-text-color-link;
+        }
+
+        &:active {
+            @include mds-text-color-link;
+            box-shadow: $mds-box-shadow-focus;
+        }
+
+        .mds-list-group__selection-input:focus + & {
+            box-shadow: $mds-box-shadow-focus;
+        }
+
+        // Matches link to ensure that text label isn't clashing with the icon
+        .mds-list-group__item--active & {
+            @include mds-text-color-link;
+            padding-right: $mds-size-icon-s + $mds-space-1-x;
+
+            .mds-list-group--large & {
+                padding-right: $mds-size-icon-m + $mds-space-1-x;
+            }
+        }
+
+        // Disabled
+        .mds-list-group__item--disabled & {
+            opacity: $mds-opacity-disabled;
+            pointer-events: none;
+        }
+    }
+
+    .mds-list-group__selection-input {
+        @include mds-accessibly-hidden;
+    }
+
+    // MDSWC Changes
+    .mds-list-group mds-list-group-item {
+        .mds-list-group__item {
+            @include mds-border-separator('top');
+        }
+
+        .mds-list-group__item--header {
+            border-top: 0;
+            margin-top: $mds-space-1-and-a-half-x;
+        }
+
+        &:first-child .mds-list-group__item {
+            border-top: 0;
+        }
+
+        &:first-child .mds-list-group__item--header {
+            margin-top: 0;
+        }
+
+        .mds-list-group__item--sublist {
+            @include mds-container-light-parent-selectors {
+                border: 0;
+            }
+            @include mds-container-dark-parent-selectors {
+                border: 0;
+            }
+        }
+    }
+
+    mds-list-group .mds-list-group {
+        &:focus,
+        &:active {
+            outline: 0 none;
+        }
+    }
+
+    mds-list-group,
+    mds-list-group-item {
+        display: block;
+    }
+
+    // Ignore dark parent containers for single selection list group in popover with menu attribute
+    .mds-container--dark-gray,
+    .mds-container--black {
+        mds-popover[menu] {
+            .mds-list-group__selection {
+                @include mds-text-color-primary($enable-dark: false);
+            }
+
+            .mds-list-group__item--active .mds-list-group__selection {
+                @include mds-text-color-link($enable-dark: false);
+            }
+        }
+    }
+
+} // End of Export

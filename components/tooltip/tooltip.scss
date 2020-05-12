@@ -1,0 +1,324 @@
+@import 'tooltip_dependencies';
+$mds-tooltip-width-s: 80px !default;
+$mds-tooltip-width-m: 106px !default;
+$mds-tooltip-width-l: 200px !default;
+$mds-tooltip-width-xl: 360px !default;
+$mds-tooltip-max-width: 200px !default;
+
+$mds-tooltip-drop-shadow: $mds-box-shadow-drop !default;
+$mds-tooltip-padding: 4px 8px !default;
+$mds-tooltip-transition: opacity $mds-animation-timing-1-x linear, visibility $mds-animation-timing-1-x linear !default;
+$mds-tooltip-z-index: $mds-z-index-top-of-the-world !default;
+
+$mds-prompt-closable-padding-right: 27px !default;
+$mds-prompt-close-button-border-left: 1px solid $mds-color-neutral-80 !default;
+$mds-prompt-close-button-right: 5px !default;
+$mds-prompt-close-button-bottom: 5px !default;
+$mds-prompt-close-button-top: 5px !default;
+$mds-prompt-close-button-defualt-fill: $mds-button-icon-only-default-on-dark !default;
+$mds-prompt-close-button-hover-active-fill: $mds-button-icon-only-hover-active-on-dark !default;
+
+@include mds-export-once('mds_tooltip') {
+    // Generate classes for bubble styles(prompt, error) and positioning --------
+    $tip-types: tooltip--default tooltip--prompt tooltip--error !default;
+    $with-border: false !default;
+    @each $current-type in $tip-types {
+        $i: index($tip-types, $current-type);
+        @if $current-type == tooltip--default {
+            $with-border: true;
+
+            .mds-#{$current-type} {
+                background-color: $mds-color-neutral-90;
+                color: $mds-color-neutral-20;
+            }
+        } @else if $current-type == tooltip--prompt {
+            $with-border: false;
+
+            .mds-#{$current-type} {
+                background-color: $mds-color-neutral-37;
+                color: $mds-color-white;
+            }
+        } @else if $current-type == tooltip--error {
+            $with-border: false;
+
+            .mds-#{$current-type} {
+                background-color: $mds-color-red-44;
+                color: $mds-color-white;
+            }
+        }
+
+        .mds-tooltip__wrapper .mds-#{$current-type}.mds-tooltip--top-center {
+            @include mds-bubble-positioner(top, center);
+            @include mds-bubble(bottom, null, $with-border, #{$current-type});
+        }
+
+        // applies to web component tooltip
+        mds-tooltip .mds-#{$current-type}.mds-tooltip--top-center {
+            @include mds-bubble(bottom, null, $with-border, #{$current-type});
+        }
+
+        .mds-tooltip__wrapper .mds-#{$current-type}.mds-tooltip--top-right {
+            @include mds-bubble-positioner(top, right);
+            @include mds-bubble(bottom, corner-left, $with-border, #{$current-type});
+        }
+
+        // applies to web component tooltip
+        mds-tooltip .mds-#{$current-type}.mds-tooltip--top-right {
+            @include mds-bubble(bottom, corner-left, $with-border, #{$current-type});
+        }
+
+        .mds-tooltip__wrapper .mds-#{$current-type}.mds-tooltip--top-left {
+            @include mds-bubble-positioner(top, left);
+            @include mds-bubble(bottom, corner-right, $with-border, #{$current-type});
+        }
+
+        // applies to web component tooltip
+        mds-tooltip .mds-#{$current-type}.mds-tooltip--top-left {
+            @include mds-bubble(bottom, corner-right, $with-border, #{$current-type});
+        }
+
+        .mds-tooltip__wrapper .mds-#{$current-type}.mds-tooltip--bottom-center {
+            @include mds-bubble-positioner(bottom, center);
+            @include mds-bubble(top, null, $with-border, #{$current-type});
+        }
+
+        // applies to web component tooltip
+        mds-tooltip .mds-#{$current-type}.mds-tooltip--bottom-center {
+            @include mds-bubble(top, null, $with-border, #{$current-type});
+        }
+
+        .mds-tooltip__wrapper .mds-#{$current-type}.mds-tooltip--bottom-right {
+            @include mds-bubble-positioner(bottom, right);
+            @include mds-bubble(top, corner-left, $with-border, #{$current-type});
+        }
+
+        // applies to web component tooltip
+        mds-tooltip .mds-#{$current-type}.mds-tooltip--bottom-right {
+            @include mds-bubble(top, corner-left, $with-border, #{$current-type});
+        }
+
+        .mds-tooltip__wrapper .mds-#{$current-type}.mds-tooltip--bottom-left {
+            @include mds-bubble-positioner(bottom, left);
+            @include mds-bubble(top, corner-right, $with-border, #{$current-type});
+        }
+
+        // applies to web component tooltip
+        mds-tooltip .mds-#{$current-type}.mds-tooltip--bottom-left {
+            @include mds-bubble(top, corner-right, $with-border, #{$current-type});
+        }
+
+        .mds-tooltip__wrapper .mds-#{$current-type}.mds-tooltip--right-center {
+            @include mds-bubble-positioner(right, center);
+            @include mds-bubble(left, null, $with-border, #{$current-type});
+        }
+
+        // applies to web component tooltip
+        mds-tooltip .mds-#{$current-type}.mds-tooltip--right-center {
+            @include mds-bubble(left, null, $with-border, #{$current-type});
+        }
+
+        .mds-tooltip__wrapper .mds-#{$current-type}.mds-tooltip--right-top {
+            @include mds-bubble-positioner(right, top);
+            @include mds-bubble(left, corner-bottom, $with-border, #{$current-type});
+        }
+
+        // applies to web component tooltip
+        mds-tooltip .mds-#{$current-type}.mds-tooltip--right-top {
+            @include mds-bubble(left, corner-bottom, $with-border, #{$current-type});
+        }
+
+        .mds-tooltip__wrapper .mds-#{$current-type}.mds-tooltip--right-bottom {
+            @include mds-bubble-positioner(right, bottom);
+            @include mds-bubble(left, corner-top, $with-border, #{$current-type});
+        }
+
+        // applies to web component tooltip
+        mds-tooltip .mds-#{$current-type}.mds-tooltip--right-bottom {
+            @include mds-bubble(left, corner-top, $with-border, #{$current-type});
+        }
+
+        .mds-tooltip__wrapper .mds-#{$current-type}.mds-tooltip--left-center {
+            @include mds-bubble-positioner(left, center);
+            @include mds-bubble(right, null, $with-border, #{$current-type});
+        }
+
+        // applies to web component tooltip
+        mds-tooltip .mds-#{$current-type}.mds-tooltip--left-center {
+            @include mds-bubble(right, null, $with-border, #{$current-type});
+        }
+
+        .mds-tooltip__wrapper .mds-#{$current-type}.mds-tooltip--left-top {
+            @include mds-bubble-positioner(left, top);
+            @include mds-bubble(right, corner-bottom, $with-border, #{$current-type});
+        }
+
+        // applies to web component tooltip
+        mds-tooltip .mds-#{$current-type}.mds-tooltip--left-top {
+            @include mds-bubble(right, corner-bottom, $with-border, #{$current-type});
+        }
+
+        .mds-tooltip__wrapper .mds-#{$current-type}.mds-tooltip--left-bottom {
+            @include mds-bubble-positioner(left, bottom);
+            @include mds-bubble(right, corner-top, $with-border, #{$current-type});
+        }
+
+        // applies to web component tooltip
+        mds-tooltip .mds-#{$current-type}.mds-tooltip--left-bottom {
+            @include mds-bubble(right, corner-top, $with-border, #{$current-type});
+        }
+    }
+
+    // Basic classes for styling and layout --------
+    .mds-tooltip {
+        @include mds-border-box();
+        border-radius: $mds-border-radius-s;
+        box-shadow: $mds-tooltip-drop-shadow;
+        display: block;
+        font-family: $mds-font-family-sans-serif;
+        font-size: $mds-font-size-m;
+        font-style: normal;
+        font-weight: $mds-font-weight-light;
+        opacity: 0;
+        position: absolute;
+        text-align: left;
+        text-decoration: none;
+        transition: $mds-tooltip-transition;
+        visibility: hidden;
+        z-index: $mds-tooltip-z-index;
+
+        &.mds-tooltip--small {
+            font-size: $mds-font-size-s;
+            font-weight: $mds-font-weight-regular;
+        }
+
+        &.mds-tooltip--large {
+            font-size: $mds-font-size-l;
+            font-weight: $mds-font-weight-light;
+        }
+    }
+
+    .mds-tooltip__text {
+        @include mds-text-crop();
+        padding: $mds-space-inset-1-x;
+
+        &.mds-tooltip__text--large {
+            padding: $mds-space-inset-1-and-a-half-x;
+        }
+    }
+
+    .mds-tooltip--sticky,
+    .mds-tooltip__wrapper:hover .mds-tooltip,
+    .mds-tooltip__target:focus + .mds-tooltip {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .mds-tooltip--visible {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .mds-tooltip--width-s {
+        width: $mds-tooltip-width-s;
+    }
+
+    .mds-tooltip--width-m {
+        width: $mds-tooltip-width-m;
+    }
+
+    .mds-tooltip--width-l {
+        width: $mds-tooltip-width-l;
+    }
+
+    .mds-tooltip--width-xl {
+        width: $mds-tooltip-width-xl;
+    }
+
+    // applies to web component tooltip
+    mds-tooltip {
+        display: block;
+    }
+
+    mds-tooltip .mds-tooltip {
+        max-width: $mds-tooltip-max-width;
+    }
+
+    .mds-tooltip__wrapper {
+        display: inline-block;
+        position: relative;
+    }
+
+    .mds-tooltip--closable {
+        padding-right: $mds-prompt-closable-padding-right;
+    }
+
+    .mds-tooltip__close-button {
+        align-items: center;
+        border-left: $mds-prompt-close-button-border-left;
+        bottom: $mds-prompt-close-button-bottom;
+        cursor: pointer;
+        display: inline-flex;
+        padding: $mds-space-inset-three-quarter-x;
+        padding-right: 0;
+        position: absolute;
+        right: $mds-prompt-close-button-right;
+        top: $mds-prompt-close-button-top;
+
+        .mds-button--icon-only {
+            .mds-button__icon {
+                fill: $mds-prompt-close-button-defualt-fill;
+            }
+
+            &:hover .mds-button__icon,
+            &:active .mds-button__icon {
+                fill: $mds-prompt-close-button-hover-active-fill;
+            }
+        }
+    }
+
+    .mds-tooltip__close-icon {
+        height: $mds-size-icon-s;
+        width: $mds-size-icon-s;
+    }
+
+    .mds-tooltip__target--help {
+        cursor: help;
+    }
+
+    .mds-tooltip__target--block {
+        display: block;
+    }
+
+    .mds-tooltip--prompt,
+    .mds-tooltip--error {
+        font-size: $mds-font-size-s;
+        font-weight: $mds-font-weight-regular;
+    }
+
+    // Handle offsets for centering a tooltip horizontally or vertically
+    // on it's target.
+    .mds-tooltip--top-center.mds-tooltip--width-s,
+    .mds-tooltip--bottom-center.mds-tooltip--width-s {
+        margin-left: -($mds-tooltip-width-s / 2);
+    }
+
+    .mds-tooltip--top-center.mds-tooltip--width-m,
+    .mds-tooltip--bottom-center.mds-tooltip--width-m {
+        margin-left: -($mds-tooltip-width-m / 2);
+    }
+
+    .mds-tooltip--top-center.mds-tooltip--width-l,
+    .mds-tooltip--bottom-center.mds-tooltip--width-l {
+        margin-left: -($mds-tooltip-width-l / 2);
+    }
+
+    .mds-tooltip--bottom-center.mds-tooltip--width-xl,
+    .mds-tooltip--top-center.mds-tooltip--width-xl {
+        margin-left: -($mds-tooltip-width-xl / 2);
+    }
+
+    .mds-tooltip--left-center,
+    .mds-tooltip--right-center {
+        transform: translateY(-50%);
+    }
+} // End of Export

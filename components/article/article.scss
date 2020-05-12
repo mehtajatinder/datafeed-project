@@ -1,0 +1,170 @@
+@import 'article_dependencies';
+
+@include mds-export-once('mds_article') {
+    .mds-article {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+
+        .mds-exhibit {
+            margin: $mds-space-stack-3-x;
+            padding: 0;
+        }
+
+        .mds-exhibit--in-header, // Deprecated (to be removed in MDS 3.x)
+        .mds-exhibit--lead {
+            + .mds-article__author-bar {
+                border-top: 0;
+            }
+
+            &.mds-exhibit  {
+                margin: 0;
+            }
+
+            & .mds-exhibit__description {
+                border-bottom: $mds-border-header-tertiary-on-white;
+                padding: $mds-space-stack-1-x;
+            }
+
+        }
+
+        .mds-article__container {
+            max-width: $mds-article-max-width;
+
+            :last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        a {
+            @include mds-link;
+        }
+
+        strong,
+        .mds-article--bold {
+            font-weight: $mds-font-weight-bold;
+        }
+
+        .mds-article__eyebrow {
+            @include mds-article-eyebrow();
+        }
+
+        h1,
+        .mds-article__title {
+            @include mds-article-title();
+        }
+
+        .mds-article__deck {
+            @include mds-article-deck();
+        }
+
+        p,
+        .mds-article__paragraph {
+            @include mds-article-paragraph();
+        }
+
+        .mds-article__footnote {
+            @include mds-article-footnote();
+        }
+
+        h2,
+        .mds-article__heading--level-2, // Deprecated (to be removed in MDS 3.x)
+        .mds-article__heading--large {
+            @include mds-article-heading-large();
+        }
+
+        h3,
+        .mds-article__heading--level-3, // Deprecated (to be removed in MDS 3.x)
+        .mds-article__heading--medium {
+            @include mds-article-heading-medium();
+        }
+
+        h4,
+        .mds-article__heading--level-4, // Deprecated (to be removed in MDS 3.x)
+        .mds-article__heading--small {
+            @include mds-article-heading-small();
+        }
+
+        .mds-article__author-bar {
+            @include mds-border-header-tertiary(top);
+            align-items: center;
+            display: flex;
+            flex-direction: row;
+            margin: $mds-space-stack-2-x;
+            padding-top: $mds-space-1-x;
+
+            & .mds-profile-image {
+                height: 80px;
+                margin: $mds-space-inline-left-1-x;
+                width: 80px;
+            }
+
+            & .mds-article__author-bar-text {
+                display: block;
+
+                :last-child {
+                    padding: 0;
+                }
+            }
+
+            & .mds-article__author-bar-author-name {
+                @include mds-text-crop();
+                @include mds-body-text-m();
+                @include mds-text-color-primary;
+                font-weight: $mds-font-weight-bold;
+                padding: $mds-space-stack-1-x;
+            }
+
+            & .mds-article__author-bar-article-info {
+                @include mds-text-crop();
+                @include mds-body-text-m();
+                @include mds-text-color-primary;
+            }
+
+            & .mds-article__author-bar-actions {
+                margin-left: auto;
+            }
+        }
+
+        ul,
+        .mds-article__ul {
+            @include mds-article-ul();
+        }
+
+        ol,
+        .mds-article__ol {
+            @include mds-article-ol();
+        }
+    }
+
+    @media only screen and (max-width: $mds-article-responsive-breakpoint) {
+        .mds-article--responsive {
+            
+            h1,
+            .mds-article__title {
+                @include mds-level-2-heading();
+                font-weight: $mds-font-weight-bold;
+                margin: $mds-space-stack-3-x;
+            }
+
+            .mds-article__deck {
+                @include mds-level-4-heading();
+                margin: $mds-space-stack-3-x;
+            }
+
+            .mds-article__author-bar {
+                & .mds-profile-image {
+                    height: 60px;
+                    width: 60px;
+                }
+            }
+
+            .mds-exhibit__caption {
+                @include mds-body-text-m();
+            }
+        }
+    }
+} // End of Export
+
+// Component Dependencies
+@import '../container/container'; //TODO: Fix - this has to be included after navigation_container or navigation_container overrides it

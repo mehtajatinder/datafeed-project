@@ -1,0 +1,4 @@
+{% set masthead_left %}
+    {{ library.button(icon_left="menu-padless", class="mds-button--icon-only mds-masthead--hide-wide mds-page-shell--show-off-canvas-navigation") }}
+{% endset %}
+{{ library.masthead(class="mds-doc-design-system-masthead", logo="/images/mastheads/logos/MDS-logo-lockup-50px.svg", masthead_left=masthead_left, masthead_right=false, logo_link="../.") }}

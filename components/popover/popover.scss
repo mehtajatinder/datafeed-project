@@ -1,0 +1,345 @@
+@import 'popover_dependencies';
+
+$mds-popover-widths: (
+    200px,
+    300px,
+    500px
+) !default;
+
+$mds-popover-height-s: 30px !default;
+$mds-popover-height-m: 45px !default;
+$mds-popover-height-l: 50px !default;
+$mds-popover-height-xl: 76px !default;
+
+$mds-popover-transition: opacity $mds-animation-timing-1-x linear, visibility $mds-animation-timing-1-x linear !default;
+$mds-popover-z-index: $mds-z-index-low !default;
+
+$mds-popover-title-border: 2px solid $mds-color-neutral-20 !default;
+
+@include mds-export-once('mds_popover') {
+    .mds-popover {
+        @include mds-border-box();
+        background-color: $mds-color-white;
+        border-radius: $mds-border-radius-panel;
+        box-shadow: $mds-box-shadow-drop;
+        color: $mds-text-color-primary-default;
+        display: block;
+        font-family: $mds-font-family-sans-serif;
+        font-size: $mds-font-size-m;
+        font-weight: $mds-font-weight-light;
+        opacity: 0;
+        padding: $mds-space-inset-2-x;
+        position: absolute;
+        text-align: left;
+        text-decoration: none;
+        transition: $mds-popover-transition;
+        visibility: hidden;
+        z-index: $mds-popover-z-index;
+
+        .mds-list-group__item {
+            @include mds-border-separator('top', $enable-dark: false);
+
+            &:first-child {
+                border-top: 0;
+            }
+        }
+
+        .mds-popover__wrapper--visible & {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+
+    .mds-popover__overlay {
+        background: transparent;
+        display: none;
+        height: 100%;
+        left: 0;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: $mds-popover-z-index - 1;
+
+        .mds-popover__wrapper--visible & {
+            display: block;
+        }
+    }
+
+    .mds-popover__header {
+        @include mds-border-box();
+        align-items: center;
+        border-bottom: $mds-popover-title-border;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: $mds-space-inset-2-x;
+        padding-bottom: $mds-space-inset-2-x;
+    }
+
+    .mds-popover__title {
+        @include mds-border-box();
+        @include mds-text-crop();
+        color: $mds-text-color-primary-on-light;
+        font-size: $mds-font-size-s;
+        margin: 0;
+        position: relative;
+
+        .mds-popover__header--has-buttons & {
+            padding: $mds-space-inline-left-1-x; // Ensure it doesn't touch edge of buttons
+        }
+    }
+
+    .mds-popover__buttons {
+        font-size: 0;
+        margin-bottom: -7px;
+        margin-top: -7px;
+        order: 2;
+
+        // Neutralize vertical spaces
+        .mds-button {
+            margin: $mds-space-inline-right-three-quarter-x;
+        }
+
+        // Neutralize vertical spaces
+        .mds-button--icon-only {
+            margin-top: $mds-space-half-x;
+
+            &:hover,
+            &.mds-button--hover {
+
+                .mds-button__icon {
+                    fill: $mds-button-icon-only-hover-active-on-light;
+                }
+            }
+        }
+
+        .mds-button__icon {
+            fill: $mds-button-icon-only-default-on-light;
+
+            .mds-container--dark-gray &,
+            .mds-container--black & {
+                fill: $mds-button-icon-only-default-on-light;
+            }
+        }
+
+    }
+
+    .mds-popover--height-s {
+        height: $mds-popover-height-s;
+    }
+
+    .mds-popover--height-m {
+        height: $mds-popover-height-m;
+    }
+
+    .mds-popover--height-l {
+        height: $mds-popover-height-l;
+    }
+
+    .mds-popover__wrapper {
+        display: inline-block;
+        position: relative;
+    }
+
+    @each $mds-popover-width in $mds-popover-widths {
+        .mds-popover--width-#{$mds-popover-width} {
+            width: $mds-popover-width;
+        }
+
+        .mds-popover--top-center.mds-popover--width-#{$mds-popover-width},
+        .mds-popover--bottom-center.mds-popover--width-#{$mds-popover-width} {
+            margin-left: -($mds-popover-width / 2);
+        }
+    }
+
+    // Handle offsets for centering a popover horizontally or vertically
+    // on its target.
+    .mds-popover--left-center.mds-popover--height-s,
+    .mds-popover--right-center.mds-popover--height-s {
+        margin-top: -($mds-popover-height-s / 2);
+    }
+
+    .mds-popover--left-center.mds-popover--height-m,
+    .mds-popover--right-center.mds-popover--height-m {
+        margin-top: -($mds-popover-height-m / 2);
+    }
+
+    .mds-popover--left-center.mds-popover--height-l,
+    .mds-popover--right-center.mds-popover--height-l {
+        margin-top: -($mds-popover-height-l / 2);
+    }
+
+    .mds-popover--left-center.mds-popover--height-xl,
+    .mds-popover--right-center.mds-popover--height-xl {
+        margin-top: -($mds-popover-height-xl / 2);
+    }
+
+    .mds-popover.mds-popover--top-center {
+        @include mds-bubble-positioner(top, center);
+        @include mds-bubble(bottom, null, true, $mds-color-white, $mds-border-container-color-default);
+    }
+
+    .mds-popover.mds-popover--top-right {
+        @include mds-bubble-positioner(top, right);
+        @include mds-bubble(bottom, corner-left, true, $mds-color-white, $mds-border-container-color-default);
+    }
+
+    .mds-popover.mds-popover--top-left {
+        @include mds-bubble-positioner(top, left);
+        @include mds-bubble(bottom, corner-right, true, $mds-color-white, $mds-border-container-color-default);
+    }
+
+    .mds-popover.mds-popover--bottom-center {
+        @include mds-bubble-positioner(bottom, center);
+        @include mds-bubble(top, null, true, $mds-color-white, $mds-border-container-color-default);
+    }
+
+    .mds-popover.mds-popover--bottom-right {
+        @include mds-bubble-positioner(bottom, right);
+        @include mds-bubble(top, corner-left, true, $mds-color-white, $mds-border-container-color-default);
+    }
+
+    .mds-popover.mds-popover--bottom-left {
+        @include mds-bubble-positioner(bottom, left);
+        @include mds-bubble(top, corner-right, true, $mds-color-white, $mds-border-container-color-default);
+    }
+
+    .mds-popover.mds-popover--right-center {
+        @include mds-bubble-positioner(right, center);
+        @include mds-bubble(left, null, true, $mds-color-white, $mds-border-container-color-default);
+    }
+
+    .mds-popover.mds-popover--right-top {
+        @include mds-bubble-positioner(right, top);
+        @include mds-bubble(left, corner-bottom, true, $mds-color-white, $mds-border-container-color-default);
+    }
+
+    .mds-popover.mds-popover--right-bottom {
+        @include mds-bubble-positioner(right, bottom);
+        @include mds-bubble(left, corner-top, true, $mds-color-white, $mds-border-container-color-default);
+    }
+
+    .mds-popover.mds-popover--left-center {
+        @include mds-bubble-positioner(left, center);
+        @include mds-bubble(right, null, true, $mds-color-white, $mds-border-container-color-default);
+    }
+
+    .mds-popover.mds-popover--left-top {
+        @include mds-bubble-positioner(left, top);
+        @include mds-bubble(right, corner-bottom, true, $mds-color-white, $mds-border-container-color-default);
+    }
+
+    .mds-popover.mds-popover--left-bottom {
+        @include mds-bubble-positioner(left, bottom);
+        @include mds-bubble(right, corner-top, true, $mds-color-white, $mds-border-container-color-default);
+    }
+
+
+
+    // web component specific
+    mds-popover {
+        display: block;
+
+        .mds-popover {
+            padding-top: 0; // Let header handle padding
+
+            &--visible {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            // List Group
+            .mds-list-group {
+                margin-bottom: 0;
+            }
+
+            // TODO: 3.0 Optimize for inheritance of dark parent styles
+            mds-list-group-item {
+                .mds-list-group__item:first-child {
+                    @include mds-container-light-parent-selectors {
+                        border-top: $mds-border-header-tertiary-on-white;
+                    }
+                    @include mds-container-dark-parent-selectors {
+                        border-top: $mds-border-header-tertiary-on-white;
+                    }
+                }
+
+                &:first-child .mds-list-group__item {
+                    @include mds-container-light-parent-selectors {
+                        border-top: 0;
+                    }
+                    @include mds-container-dark-parent-selectors {
+                        border-top: 0;
+                    }
+                }
+
+                .mds-list-group__link {
+                    @include mds-container-dark-parent-selectors {
+                        @include mds-text-color-primary($enable-dark: false);
+                    }
+
+                    &:hover {
+                        @include mds-container-dark-parent-selectors {
+                            @include mds-text-color-link($enable-dark: false);
+                        }
+                    }
+                }
+
+                .mds-list-group__item--active .mds-list-group__link {
+                    @include mds-container-dark-parent-selectors {
+                        @include mds-text-color-link($enable-dark: false);
+                    }
+                }
+            }
+
+        }
+
+        .mds-header {
+            margin: $mds-space-stack-2-x;
+
+            &.mds-header--primary.mds-header--border-bottom {
+                border-color: $mds-color-neutral-20;
+            }
+
+            &.mds-header--primary.mds-header--title-hidden {
+                padding-top: 0; // cancel out custom padding in mds-header
+            }
+
+            .mds-header__title {
+                color: $mds-text-color-primary-default;
+            }
+
+            .mds-button--secondary {
+                color: $mds-text-color-secondary-default;
+
+                &:hover {
+                    color: $mds-text-color-primary-on-dark;
+                }
+            }
+
+            .mds-button--icon-only .mds-button__icon {
+                fill: $mds-text-color-secondary-default;
+            }
+
+            .mds-button--icon-only:hover .mds-button__icon {
+                fill: $mds-text-color-primary-default;
+            }
+
+            slot slot span:first-child,
+            slot slot div:first-child {
+                align-items: center;
+                display: flex;
+            }
+        }
+
+        // Reset margin if popover is Menu
+        .mds-popover--menu {
+            .mds-header {
+                margin-bottom: 0;
+            }
+
+            mds-header[title-hidden] + .mds-popover__content .mds-list-group {
+                margin-top: $mds-space-2-x;
+            }
+        }
+    }
+} // End of Export

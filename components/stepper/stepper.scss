@@ -1,0 +1,438 @@
+// TODO: Parent step label should remain bold when on small step that's part of parent step
+@import 'stepper_dependencies';
+
+@include mds-export-once('mds_stepper') {
+    .mds-stepper {
+        @include mds-border-box;
+        @include mds-font-reset;
+        overflow: hidden;
+        padding: 48px 0;
+        position: relative;
+        width: 100%;
+    }
+
+    @include mds-stepper-wide-properties('.mds-stepper--wide');
+
+    .mds-stepper__list {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+
+    .mds-stepper__list-item {
+        display: flex;
+        flex: 1 1 0;
+        position: relative;
+    }
+
+    @for $i from 1 through $mds-stepper-maximum-number-of-steps {
+        $stepper-step-width: 100% / $i;
+
+        .mds-stepper__list-item:first-child:nth-last-child(#{$i}),
+        .mds-stepper__list-item:first-child:nth-last-child(#{$i}) ~ .mds-stepper__list-item {
+            left: calc(#{$stepper-step-width / 2} - #{$mds-stepper-size-indicator / 2});
+        }
+    }
+
+    .mds-stepper__list-item-label {
+        @include mds-text-color-primary;
+        @include mds-incremental-font-sizes('stepper', $default-size: 'large');
+        bottom: 100%;
+        display: none;
+        font-weight: $mds-font-weight-light;
+        left: $mds-stepper-size-indicator / 2;
+        padding: $mds-space-stack-half-x;
+        pointer-events: none;
+        position: absolute;
+        text-align: center;
+        text-decoration: none;
+        transform: translateX(-50%) scale(1);
+        transform-origin: left bottom;
+        width: 100%;
+
+        &:focus {
+            outline: none;
+        }
+
+        // Complete step label
+        .mds-stepper__step--complete + & {
+            @include mds-text-color-secondary;
+            pointer-events: auto;
+        }
+
+        // Active step label
+        .mds-stepper__step--active + & {
+            font-weight: $mds-font-weight-bold;
+            transition: font-weight 0 $mds-stepper-transition-timing;
+        }
+
+        // Active parent step, should be clickable
+        .mds-stepper__step--active.mds-stepper__step--has-small-step + & {
+            pointer-events: auto;
+        }
+
+        .mds-stepper--light-labels & {
+            color: $mds-text-color-primary-on-dark;
+        }
+
+        .mds-stepper--light-labels .mds-stepper__step--complete + & {
+            color: $mds-text-color-primary-on-dark;
+        }
+    }
+
+    .mds-stepper__step {
+        align-items: center;
+        display: flex;
+        position: relative;
+        width: 100%;
+    }
+
+    .mds-stepper__step-progress-track {
+        background-color: $mds-stepper-color-progress-line;
+        height: $mds-stepper-progress-line-thickness;
+        position: relative;
+        width: 100%;
+
+        .mds-stepper__list-item:last-child & {
+            display: none;
+        }
+
+        // Progress track fill
+        &:after {
+            background-color: $mds-stepper-color-complete;
+            content: '';
+            display: block;
+            height: 100%;
+            left: 0;
+            position: absolute;
+            transition: width $mds-stepper-transition-timing linear;
+            width: 0;
+        }
+
+        .mds-container--black &,
+        .mds-container--dark-gray & {
+            background-color: $mds-stepper-color-progress-line-on-dark;
+        }
+    }
+
+    // Progress track, step complete - large step
+    .mds-stepper__step--complete .mds-stepper__step-progress-track--large-step {
+        &:after {
+            width: 100%;
+        }
+    }
+
+    .mds-stepper__step--small-step {
+        // When stepping backward the left progress track segment of a small step should transition immediately
+        .mds-stepper__step-progress-track--small-step-left:after {
+            transition: width $mds-stepper-transition-timing / 2 0s linear;
+        }
+    }
+
+    // Progress track, step active - small step
+    .mds-stepper__step--small-step.mds-stepper__step--active {
+        .mds-stepper__step-progress-track--small-step-left:after {
+            transition: width $mds-stepper-transition-timing / 2 $mds-stepper-transition-timing / 2 linear;
+            width: 100%;
+        }
+
+        // If transitioning TO active from complete, delay the transition timing
+        .mds-stepper__step-progress-track--small-step-right:after {
+            transition: width $mds-stepper-transition-timing / 2 $mds-stepper-transition-timing / 2 linear;
+            width: 0%;
+        }
+    }
+
+    // Progress track, step complete - small step
+    .mds-stepper__step--small-step.mds-stepper__step--complete {
+        .mds-stepper__step-progress-track--small-step-left:after {
+            width: 100%;
+        }
+
+        .mds-stepper__step-progress-track--small-step-right:after {
+            transition: width $mds-stepper-transition-timing / 2 0s linear;
+            width: 100%;
+        }
+    }
+
+
+    .mds-stepper__step-progress-track--small-step-left {
+        flex: 1 2 100%;
+        order: -1;
+    }
+
+    .mds-stepper__step-progress-track--small-step-right {
+        flex: 1 2 100%;
+        order: 3;
+    }
+
+    .mds-stepper__small-steps {
+        display: flex;
+        width: 100%;
+
+        // Leftmost and rightmost segments on a small step progress track should be wider than the inner segments
+        .mds-stepper__step:first-child .mds-stepper__step-progress-track--small-step-left,
+        .mds-stepper__step:last-child .mds-stepper__step-progress-track--small-step-right {
+            flex: 1 1 100%;
+
+            &:after {
+                // The first and last segments transition by themselves, so they should receive the full transition duration with no delay
+                transition: width $mds-stepper-transition-timing 0s linear;
+            }
+        }
+    }
+
+
+    .mds-stepper__step-indicator {
+        background: transparent;
+        border-radius: 50%;
+        display: block;
+        flex-grow: 0;
+        flex-shrink: 0;
+        height: $mds-stepper-size-indicator;
+        pointer-events: none;
+        position: relative;
+        transform-origin: center center;
+        transition: width $mds-stepper-transition-timing, height $mds-stepper-transition-timing, border-width $mds-stepper-transition-timing;
+        width: $mds-stepper-size-indicator;
+        z-index: 1;
+
+        &:focus {
+            box-shadow: $mds-box-shadow-focus;
+            outline: none;
+        }
+
+        &:after {
+            background: transparent;
+            border: solid $mds-stepper-border-width-indicator $mds-stepper-color-active;
+            border-radius: 50%;
+            content: '';
+            display: block;
+            height: 100%;
+            transform: scale(0); // Hide border
+            transform-origin: center center;
+            transition: transform $mds-stepper-transition-timing;
+            width: 100%;
+        }
+
+        &:before {
+            background-color: $mds-stepper-color-progress-line;
+            border-radius: 50%;
+            content: '';
+            display: block;
+            height: 100%;
+            left: 0;
+            position: absolute;
+            top: 0;
+            transform: scale($mds-stepper-scale-indicator-center-dot);
+            transform-origin: center center;
+            transition: transform $mds-stepper-transition-timing, background-color $mds-stepper-transition-timing;
+            width: 100%;
+            z-index: 2;
+        }
+
+        .mds-container--black &:before,
+        .mds-container--dark-gray &:before {
+            background-color: $mds-stepper-color-progress-line-on-dark;
+        }
+
+        // Active Status
+        .mds-stepper__step--active & {
+            background: transparent;
+            transition: background $mds-stepper-transition-timing-wait-for-progress-line, border $mds-stepper-transition-timing-wait-for-progress-line;
+
+            &:before {
+                background: $mds-stepper-color-active;
+                transition: transform $mds-stepper-transition-timing, background-color $mds-stepper-transition-timing $mds-stepper-transition-timing;
+            }
+
+            &:after {
+                // Show border
+                transform: scale(1);
+                transition: transform $mds-stepper-transition-timing;
+            }
+        }
+
+        // Active status on step with small-steps
+        .mds-stepper__step--active.mds-stepper__step--has-small-step & {
+            pointer-events: auto;
+
+            &:hover:before {
+                transform: scale(.6);
+            }
+
+            &:hover:after {
+                transform: scale(1.1);
+                transition: transform $mds-stepper-transition-timing;
+            }
+        }
+
+        // Complete Status
+        .mds-stepper__step--complete & {
+            border-width: 0;
+            height: $mds-stepper-size-indicator-complete;
+            pointer-events: auto;
+            // transition: width $mds-stepper-transition-timing, height $mds-stepper-transition-timing;
+            width: $mds-stepper-size-indicator-complete;
+
+            &:before {
+                background: $mds-stepper-color-complete;
+                transform: scale(1);
+            }
+
+            &:hover:before {
+                transform: scale(1.2);
+            }
+
+            // Hide border
+            &:after {
+                transform: scale(0);
+            }
+        }
+
+        // Substep indicator
+        .mds-stepper__step--small-step & {
+            background-color: $mds-stepper-color-progress-line;
+            border: 0;
+            flex-grow: 0;
+            flex-shrink: 0;
+            height: $mds-stepper-size-small-step-indicator;
+            pointer-events: none;
+            width: $mds-stepper-size-small-step-indicator;
+
+            &:before {
+                height: 100%;
+                transform: scale(0);
+                transition: transform $mds-stepper-transition-timing 0s;
+                width: 100%;
+            }
+
+            &:after {
+                background: transparent;
+                border: 0;
+                transform: scale(3);
+            }
+
+            .mds-container--black &,
+            .mds-container--dark-gray & {
+                background-color: $mds-stepper-color-progress-line-on-dark;
+            }
+        }
+
+        // Small step incomplete indicator within parent active indicator
+        .mds-stepper__step--active .mds-stepper__step--small-step & {
+            pointer-events: none;
+        }
+
+        // Substep complete indicator
+        .mds-stepper__step--complete.mds-stepper__step--small-step & {
+            pointer-events: auto;
+
+            &:before {
+                transform: scale(1);
+                transition: transform $mds-stepper-transition-timing / 2 0s;
+            }
+        }
+
+        // Substep active indicator
+        .mds-stepper__step--active.mds-stepper__step--small-step & {
+            &:before {
+                transform: scale(1);
+                transition: transform $mds-stepper-transition-timing $mds-stepper-transition-timing / 2;
+            }
+
+            &:after {
+                display: none; // no border ring
+            }
+        }
+    }
+
+
+    // Complete hover - only for <a>'s' not <span>'s'
+    .mds-stepper__step--complete.mds-stepper__step--small-step a.mds-stepper__step-indicator:hover {
+        &:before {
+            transform: scale(1.75);
+        }
+    }
+
+    // Suppress <span> based indicator behaviors
+    .mds-stepper__step.mds-stepper__step--small-step span.mds-stepper__step-indicator {
+        pointer-events: none;
+
+        &:focus {
+            box-shadow: none;
+        }
+
+        &:hover:before {
+            transform: scale(1);
+        }
+    }
+
+    .mds-stepper__step-label {
+        @include mds-accessibly-hidden;
+    }
+
+    .mds-stepper__step-complete-icon {
+        fill: $mds-color-white;
+        height: $mds-stepper-size-step-complete-icon;
+        left: 50%;
+        margin-left: -$mds-stepper-size-step-complete-icon / 2;
+        margin-top: -$mds-stepper-size-step-complete-icon / 2;
+        position: absolute;
+        top: 50%;
+        transform: scale(0);
+        transform-origin: center center;
+        transition: transform $mds-stepper-transition-timing linear;
+        width: $mds-stepper-size-step-complete-icon;
+        z-index: 2;
+
+        .mds-stepper__step--complete & {
+            transform: scale(1);
+        }
+
+        .mds-stepper__step--complete .mds-stepper__step-indicator:hover & {
+            transform: scale(1.3);
+            transition: transform $mds-stepper-transition-timing / 2 linear;
+        }
+    }
+
+    // Responsive summary section
+    .mds-stepper__active-step-summary {
+        bottom: $mds-space-2-x * 4.5;
+        left: 0;
+        position: absolute;
+        text-align: center;
+        width: 100%;
+    }
+
+    .mds-stepper__active-step-label {
+        @include mds-level-5-heading;
+        @include mds-text-color-primary;
+        display: block;
+        font-weight: $mds-font-weight-bold;
+
+        .mds-stepper--light-labels & {
+            color: $mds-text-color-primary-on-dark;
+        }
+    }
+
+    // Suppress small-step indicators
+    .mds-stepper--no-small-step-indicators {
+        .mds-stepper__step--small-step .mds-stepper__step-indicator {
+            display: none;
+        }
+    }
+
+    // Suppress animation when a step is clicked directly
+    .mds-stepper--no-animation {
+        .mds-stepper__step-progress-track:after,
+        .mds-stepper__small-steps .mds-stepper__step:first-child .mds-stepper__step-progress-track--small-step-left:after,
+        .mds-stepper__small-steps .mds-stepper__step:last-child .mds-stepper__step-progress-track--small-step-right:after,
+        .mds-stepper__small-steps .mds-stepper__step-progress-track--small-step-left:after,
+        .mds-stepper__small-steps .mds-stepper__step-progress-track--small-step-right:after {
+            transition: none;
+        }
+    }
+} // End of Export

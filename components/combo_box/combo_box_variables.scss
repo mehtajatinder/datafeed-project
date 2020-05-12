@@ -1,0 +1,26 @@
+@import '../../constants/constants';
+
+$mds-combo-box-box-shadow-focus: $mds-box-shadow-focus !default;
+$mds-combo-box__dropdown-background-color: $mds-background-color-white !default;
+
+$mds-combo-box-text-color: $mds-text-color-primary-on-light !default;
+$mds-combo-box-text-color-hover: $mds-text-color-link-on-light !default;
+$mds-combo-box-text-color-active: $mds-text-color-link-on-light !default;
+
+$mds-combo-box--small-height: $mds-size-element-height-s !default;
+$mds-combo-box--medium-height: $mds-size-element-height-m !default;
+$mds-combo-box--large-height: $mds-size-element-height-l !default;
+
+$mds-combo-box-color--placeholder: $mds-text-color-primary-default !default;
+$mds-combo-box-color-dark--placeholder: $mds-text-color-primary-on-dark !default;
+
+// Themer for multi select tags
+$mds-combo-box__tags-background-color: $mds-background-color-white !default;
+$mds-combo-box__tags-border: $mds-border-separator-on-light-gray !default;
+$mds-combo-box__tags-text-color: $mds-text-color-secondary-on-light !default;
+$mds-combo-box__tags--dark-gray-background-color: $mds-background-color-black !default;
+$mds-combo-box__tags--dark-gray-border-color: $mds-border-separator-color-on-dark-gray !default;
+$mds-combo-box__tags--dark-gray-text-color: $mds-text-color-secondary-on-dark !default;
+$mds-combo-box__tags--black-background-color: $mds-background-color-dark-gray !default;
+$mds-combo-box__tags--black-border-color: $mds-border-separator-color-on-black !default;
+$mds-combo-box__tags--black-text-color: $mds-text-color-secondary-on-dark !default;

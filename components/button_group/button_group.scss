@@ -1,0 +1,264 @@
+@import 'button_group_dependencies';
+
+@include mds-export-once('mds_button_group') {
+    .mds-button-group {
+        display: inline-block;
+        font-size: 0;
+    }
+
+    .mds-button-group .mds-button {
+        border-radius: 1px; // Hack to fix webkit rendering issue, border radius 0 with background-clip has a 1px box model bug
+
+        &:focus:after {
+            border-radius: 1px; // Hack to fix webkit rendering issue, border radius 0 with background-clip has a 1px box model bug
+        }
+
+        &:first-child,
+        &:first-child:focus:after {
+            border-radius: $mds-button-group-border-radius-button 0 0 $mds-button-group-border-radius-button;
+        }
+
+        &:last-child,
+        &:last-child:focus:after {
+            border-radius: 0 $mds-button-group-border-radius-button $mds-button-group-border-radius-button 0;
+        }
+
+        &:not(:first-child) {
+            border-left: 0;
+            margin-left: $mds-button-group-default-margin-offset;
+        }
+
+        // TODO: Deprecated, do not use, to be removed in 3.0.0
+        &.mds-button--primary {
+            &:not(:first-child) {
+                margin-left: $mds-button-group-primary-margin-offset;
+            }
+        }
+    }
+
+    // Icon-only buttons group
+    // TODO: Deprecated, do not use, to be removed in 3.0.0
+    .mds-button-group.mds-button-group--icon-only .mds-button {
+        &:focus:after {
+            border-radius: 0;
+        }
+
+        &:first-child,
+        &:first-child:focus:after {
+            border-radius: 0;
+        }
+
+        &:last-child,
+        &:last-child:focus:after {
+            border-radius: 0;
+        }
+
+        &:not(:first-child) {
+            margin-left: $mds-space-2-x;
+        }
+    }
+
+    // Radio button/checkboxes based button group
+    .mds-button-group .mds-button__input-outer-wrapper {
+
+        .mds-button {
+            border-radius: 0;
+            text-overflow: ellipsis;
+        }
+
+        .mds-button__input:focus + .mds-button {
+            &:after {
+                border-radius: 1px; // Hack to fix webkit rendering issue, border radius 0 with background-clip has a 1px box model bug
+            }
+        }
+
+        &:first-child {
+            .mds-button {
+                border-radius: $mds-button-group-border-radius-button 0 0 $mds-button-group-border-radius-button;
+            }
+
+            .mds-button__input:focus + .mds-button:after {
+                border-radius: $mds-button-group-border-radius-button 0 0 $mds-button-group-border-radius-button;
+            }
+        }
+
+        &:last-child {
+            .mds-button {
+                border-radius: 0 $mds-button-group-border-radius-button $mds-button-group-border-radius-button 0;
+            }
+
+            .mds-button__input:focus + .mds-button:after {
+                border-radius: 0 $mds-button-group-border-radius-button $mds-button-group-border-radius-button 0;
+            }
+        }
+    }
+
+    // TODO: Deprecated, do not use, to be removed in 3.0.0
+    .mds-button-group--flex {
+        align-items: stretch;
+        display: inline-flex;
+
+        .mds-button {
+            align-items: center;
+            display: inline-flex;
+            padding-bottom: $mds-button-group-vertical-padding-bottom;     // Space override - setting padding to adhere to flex display
+            padding-top: $mds-button-group-vertical-padding-top;          // Space override - setting padding to adhere to flex display
+
+            &.mds-button--small {
+                padding-bottom: $mds-button-group-small-vertical-padding;      // Space override - setting padding to adhere to flex display
+                padding-top: $mds-button-group-small-vertical-padding;         // Space override - setting padding to adhere to flex display
+            }
+        }
+
+        & .mds-button__input-outer-wrapper {
+            align-items: stretch;
+            display: flex;
+
+            .mds-button {
+                align-items: center;
+                display: flex;
+            }
+        }
+    }
+
+    // Radio button/checkboxes icon-only buttons group
+    .mds-button-group.mds-button-group--icon-only .mds-button__input-outer-wrapper {
+
+        .mds-button {
+            border-radius: 0;
+            text-overflow: ellipsis;
+        }
+
+        .mds-button__input:focus + .mds-button {
+            &:after {
+                border-radius: 0;
+            }
+        }
+
+        &:first-child {
+            .mds-button {
+                border-radius: 0;
+                margin-left: 0;
+            }
+
+            .mds-button__input:focus + .mds-button:after {
+                border-radius: 0;
+            }
+        }
+
+        &:last-child {
+            .mds-button {
+                border-radius: 0;
+            }
+
+            .mds-button__input:focus + .mds-button:after {
+                border-radius: 0;
+            }
+        }
+    }
+
+    // Full Width (for radio buttons/checkboxes based buttons group only)
+    .mds-button-group--justify {
+        border-collapse: separate;
+        display: flex;
+        width: 100%;
+
+        // Radio button/checkboxes based buttons group
+        .mds-button__input-outer-wrapper {
+            display: inherit;
+            flex: 1 1 0;
+
+            .mds-button {
+                flex: inherit;
+            }
+        }
+    }
+
+    // ----------------------------------------------------------------------------------------
+    // MDSWC Changes
+
+    mds-button-group {
+        display: inline-block;
+    }
+
+    // Secondary button groups
+    mds-button-group mds-button[variation='secondary'] {
+        &:not(:first-child) .mds-button,
+        &:not(:last-child) .mds-button,
+        &:not(:first-child) .mds-button__input-outer-wrapper .mds-button,
+        &:not(:last-child) .mds-button__input-outer-wrapper .mds-button {
+            border-radius: 0;
+            margin-left: $mds-button-group-default-margin-offset;
+        }
+
+        &:first-child .mds-button,
+        &:first-child .mds-button__input-outer-wrapper .mds-button {
+            border-radius: $mds-button-group-border-radius-button 0 0 $mds-button-group-border-radius-button;
+            margin-left: 0;
+        }
+
+        &:last-child .mds-button,
+        &:last-child .mds-button__input-outer-wrapper .mds-button {
+            border-radius: 0 $mds-button-group-border-radius-button $mds-button-group-border-radius-button 0;
+        }
+
+        // TODO: Deprecated, do not use, to be removed in 3.0.0
+        &:not(:first-child) {
+            .mds-button__input-outer-wrapper .mds-button--primary,
+            .mds-button__input-outer-wrapper .mds-button--primary:first-child,
+            .mds-button__input-outer-wrapper .mds-button--primary:last-child,
+            .mds-button--primary,
+            .mds-button--primary:first-child,
+            .mds-button--primary:last-child {
+                margin-left: $mds-button-group-primary-margin-offset;
+            }
+        }
+    }
+
+    // Icon only button groups
+    mds-button-group mds-button[variation='icon-only'] {
+        &:not(:first-child) {
+            margin-left: $mds-space-2-x;
+
+            .mds-button,
+            .mds-button__input-outer-wrapper .mds-button {
+                border-radius: 0;
+                margin-left: 0;
+            }
+        }
+
+        &:first-child { // needed to override first-child selectors in radio & checkbox based groups
+            .mds-button,
+            .mds-button__input-outer-wrapper .mds-button {
+                border-radius: 0;
+            }
+        }
+
+        &:last-child { // needed to override last-child selectors in radio & checkbox based groups
+            .mds-button,
+            .mds-button__input-outer-wrapper .mds-button {
+                border-radius: 0;
+            }
+        }
+    }
+
+    // Full width (for radio buttons/checkboxes based buttons group only)
+    mds-button-group[full-width] {
+        display: flex;
+        width: 100%;
+
+        .mds-button-group--justify {
+            display: inherit;
+
+            slot {
+                display: inherit;
+                width: 100%;
+
+                > mds-button {
+                    display: inherit;
+                    flex: 1 1 0;
+                }
+            }
+        }
+    }
+} // End of Export

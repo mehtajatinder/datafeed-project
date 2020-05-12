@@ -1,0 +1,9 @@
+@import '../../constants/constants';
+$mds-button-group-border-radius-button: $mds-border-radius-pill !default;
+
+$mds-button-group-default-margin-offset: -1px !default;
+$mds-button-group-primary-margin-offset: 1px !default; // Do not use - deprecate in 3.0.0
+
+$mds-button-group-small-vertical-padding: 3px !default;
+$mds-button-group-vertical-padding-bottom: 5px !default;
+$mds-button-group-vertical-padding-top: 4px !default;

@@ -1,0 +1,21 @@
+@import 'exhibit_dependencies';
+
+@include mds-export-once('mds_exhibit') {
+    .mds-exhibit {
+        margin: 0;
+
+        .mds-exhibit__content {
+            > img {
+                display: block;
+                width: 100%;
+            }
+        }
+
+        .mds-exhibit__caption {
+            @include mds-text-crop();
+            @include mds-body-text-s();
+            @include mds-text-color-secondary;
+            margin-top: $mds-space-1-x;
+        }
+    }
+}
